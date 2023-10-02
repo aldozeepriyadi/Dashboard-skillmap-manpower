@@ -10,5 +10,16 @@ $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-echo "Connected successfully";
+$conn->select_db("kyb_test");
+$q_res = $conn->query("SELECT * FROM karyawan");
+while ($row = $q_res->fetch_assoc()) {
+  echo "<script>console.log('".$row['name']."')</script>";
+}
+// echo "
+// <script>
+// console.log('connection successful');
+// console.log('$q_res')
+// </script>
+// "
+// echo "Connected successfully";
 ?>

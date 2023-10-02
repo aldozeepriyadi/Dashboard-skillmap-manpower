@@ -1,0 +1,73 @@
+:root {
+    --main-color: #0A0A5C;
+    --font-color-light: #FFFFFF;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.header-bar {
+    background-color: var(--main-color);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    padding: 0.5em;
+}
+
+.dashboard-title-container > p{
+    margin: 0px;
+    font-size: 4vh;
+    font-style: bold;
+    color: var(--font-color-light);
+}
+
+.flex-float-right {
+    margin-left: auto;
+}
+
+#page-title {
+    margin-top: 0.5rem;
+}
+
+.logo-container > img {
+    width: 16vh;
+    margin: -4.5vh;
+    margin-right: 0;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90vh;
+    width: 100vw;
+}
+
+#dept-overall-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 80vw;
+}
+
+.dept-stat-container {
+    background-color: var(--main-color);
+    border-radius: 15px;
+    margin-top: 1em;
+    width: 23vw;
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ds-title {
+    color: var(--font-color-light);
+    margin: 1rem;
+    font-weight: 600;
+}
+
