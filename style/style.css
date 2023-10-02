@@ -1,5 +1,6 @@
 :root {
     --main-color: #0A0A5C;
+    --main-color-highlited: #0f0f6d;
     --font-color-light: #FFFFFF;
 }
 
@@ -31,11 +32,14 @@ html, body {
 
 #page-title {
     margin-top: 0.5rem;
+    font-weight: 700;
+    font-size: 2rem;
 }
 
 .logo-container > img {
-    width: 16vh;
-    margin: -4.5vh;
+    width: 20vh;
+    /* margin: -4.5vh; */
+    padding: -4.5vh;
     margin-right: 0;
 }
 
@@ -63,6 +67,15 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
+    transition: all 0.5s;
+    /* transition-duration: 0.4s; */
+}
+
+.dept-stat-container:hover {
+    background-color: var(--main-color-highlited);
+    width: 25vw;
+    height: 57vh;
 }
 
 .ds-title {

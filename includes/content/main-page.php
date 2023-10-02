@@ -1,20 +1,23 @@
 <div id="content">
     <div id="page-title">
-        <h3>Overall Assessments</h3>
+        <p>Overall Assessments</p>
     </div>
     <div id="dept-overall-stats">
         <script>
             var ctx_list = {}
         </script>
         <?php
-        $depts = array(
-            'Production 1',
-            'Production 2',
-            'Production 3',
-            'Production 4',
-            'Production 5'
-        );
-        foreach ($depts as $dept) {
+        // $depts = array(
+        //     'Production 1',
+        //     'Production 2',
+        //     'Production 3',
+        //     'Production 4',
+        //     'Production 5'
+        // );
+        $q_res = $conn->query("SELECT * FROM department");
+        // foreach ($depts as $dept) {
+        while ($dept_row = $q_res->fetch_assoc()) {
+            $dept = $dept_row['dept_name'];
             $chart_id = str_replace(" ", "-", $dept);
             echo
                 "

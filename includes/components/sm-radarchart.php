@@ -14,7 +14,7 @@ echo "
         labels: ['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO'],
         datasets: [{
             label: 'average',
-            data: [1, 3, 3, 5, 2, 3],
+            data: [1.8, 3.2, 3.1, 4.6, 2.2, 3],
             borderWidth: 3
         }]
         },

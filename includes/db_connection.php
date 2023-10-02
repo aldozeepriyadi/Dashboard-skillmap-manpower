@@ -15,11 +15,4 @@ $q_res = $conn->query("SELECT * FROM karyawan");
 while ($row = $q_res->fetch_assoc()) {
   echo "<script>console.log('".$row['name']."')</script>";
 }
-// echo "
-// <script>
-// console.log('connection successful');
-// console.log('$q_res')
-// </script>
-// "
-// echo "Connected successfully";
 ?>
