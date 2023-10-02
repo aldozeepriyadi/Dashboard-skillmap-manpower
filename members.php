@@ -1,0 +1,14 @@
+<?php include("includes/db_connection.php"); ?>
+<?php include("includes/a_config.php");?>
+<!DOCTYPE html>
+<html>
+<head>
+	<?php include("includes/head-tag-contents.php");?>
+</head>
+<body>
+
+<?php include("includes/design-top.php");?>
+<?php include("includes/content/member-page.php");?>
+
+</body>
+</html>

@@ -7,21 +7,13 @@
             var ctx_list = {}
         </script>
         <?php
-        // $depts = array(
-        //     'Production 1',
-        //     'Production 2',
-        //     'Production 3',
-        //     'Production 4',
-        //     'Production 5'
-        // );
         $q_res = $conn->query("SELECT * FROM department");
-        // foreach ($depts as $dept) {
         while ($dept_row = $q_res->fetch_assoc()) {
             $dept = $dept_row['dept_name'];
             $chart_id = str_replace(" ", "-", $dept);
             echo
                 "
-                <div class='dept-stat-container'>
+                <a class='dept-stat-container' href='members.php'>
                     <div class='ds-title'>
                         <p>$dept</p>
                     </div>
@@ -30,7 +22,7 @@
                 include('includes/components/sm-radarchart.php');
                 echo  
                     "</div>
-                </div>
+                </a>
                 ";
         }
         ?>
