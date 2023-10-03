@@ -11,10 +11,10 @@ echo "
     new Chart(ctx_list['$chart_id'], {
         type: 'radar',
         data: {
-        labels: ['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO'],
+        labels: $labels,
         datasets: [{
             label: 'average',
-            data: [1.8, 3.2, 3.1, 4.6, 2.2, 3],
+            data: $datas,
             borderWidth: 3
         }]
         },
