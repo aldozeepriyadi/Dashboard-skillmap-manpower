@@ -29,6 +29,20 @@
         ?>
     </div>
     <div id="list-nav">
-        1 of 2
+        <?php
+        $q_res = $conn->query("SELECT * FROM karyawan WHERE dept_id = ".$dept_id);
+        $num_results = $q_res->num_rows;
+        $total_pages = ceil($num_results/4);
+
+        $current_url = explode("?", $_SERVER['REQUEST_URI']);
+
+        if ($page_num != 1) {
+            echo "<a href='$current_url[0]?q=$dept_id&p=".($page_num-1)."'><img src='img/arrow-left-solid.svg' class='move-member-page-icon'></img></a>";
+        }
+        echo "<p>Page ".$page_num." of ".$total_pages."</p>";
+        if ($page_num != $total_pages) {
+            echo "<a href='$current_url[0]?q=$dept_id&p=".($page_num+1)."'><img src='img/arrow-right-solid.svg' class='move-member-page-icon'></img></a>";
+        }
+        ?>
     </div>
 </div>

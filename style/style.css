@@ -156,3 +156,21 @@ html, body {
 .member-stats > div {
     height: 90%;
 }
+
+#list-nav {
+    margin-top: auto;
+    margin-bottom: 0.4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#list-nav p{
+    margin: 0px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.move-member-page-icon {
+    height: 1rem;
+}
