@@ -27,7 +27,7 @@
             </div>
             <div class="profile-table">
                 <div id="pt-tab-buttons">
-                    <input type="radio" id="chart-info" name="pt-tab" value="HTML" checked>
+                    <input type="radio" id="chart-info" name="pt-tab" value="chart-info" checked>
                     <div class="pt-tab-button pt-tab-left">
                         <label for="chart-info">
                             <p>
@@ -35,7 +35,7 @@
                             </p>
                         </label>
                     </div>
-                    <input type="radio" id="update-assessment" name="pt-tab" value="HTML">
+                    <input type="radio" id="update-assessment" name="pt-tab" value="update-assessment">
                     <div class="pt-tab-button pt-tab-right">
                         <label for="update-assessment">
                             <p>
@@ -43,7 +43,49 @@
                             </p>
                         </label>
                     </div>
-                </div>  
+                </div> 
+                <div class="pt-chart-info hidden">
+                </div> 
+                <div class="pt-update-assessment">
+                    <div id="biodata">
+                        <p>Nama: <?php echo $karyawan['name']?></p>
+                        <p>NPK: <?php echo $karyawan['id']?></p>
+                        <p>Work Station: <?php echo $karyawan['dept_name']?></p>
+                    </div>
+                    <div id="update-assessment">
+                        <?php 
+                            foreach ($mp_categories as $cat => $cat_name) {
+                                echo 
+                                "
+                                <div class='cat-update-container'>
+                                    <div class='cu-name'>
+                                        <p>$cat_name:</p>
+                                    </div>
+                                    <div class='cu-radiogroup'>
+                                ";
+                                for ($i = 1; $i <=5 ; $i++) {
+                                    echo 
+                                    "
+                                        <input type='radio' id='$cat-value-$i' class='update-assessment-button' name='$cat' value='$i'";
+                                    if ($karyawan[$cat] == $i) echo "checked";
+                                    echo
+                                        ">
+                                        <div class='cu-radio-button'>
+                                            <label for='$cat-value-$i'>
+                                            <div>
+                                                <p>$i</p>
+                                            </div>
+                                            </label>
+                                        </div>
+                                    ";
+                                }
+                                echo 
+                                    "</div>
+                                </div>";
+                            }
+                        ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
