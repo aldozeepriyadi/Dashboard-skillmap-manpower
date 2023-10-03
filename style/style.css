@@ -64,15 +64,16 @@ html, body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    width: 80vw;
+    width: 100vw;
+    margin: 0px;
 }
 
 .dept-stat-container {
     background-color: var(--main-color);
     border-radius: 15px;
-    margin-top: 1em;
-    width: 23vw;
-    height: 55vh;
+    margin-top: 0.5em;
+    width: 18vw;
+    height: 75vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,14 +85,18 @@ html, body {
 
 .dept-stat-container:hover {
     background-color: var(--main-color-highlited);
-    width: 25vw;
-    height: 57vh;
 }
 
 .ds-title {
     color: var(--font-color-light);
     margin: 1rem;
+    margin-top: 3rem;
+    font-size: 4vh;
     font-weight: 600;
+}
+
+.ds-content {
+    margin-top: 3vh;
 }
 
 /* ==============member page================= */
