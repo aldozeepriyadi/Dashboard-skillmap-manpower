@@ -19,6 +19,7 @@ echo "
         }]
         },
         options: {
+            responsive: true,
             scales: {
                 r: {
                     grid: {

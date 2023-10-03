@@ -25,7 +25,7 @@ echo "
         data: {
         labels: ".$labels.",
         datasets: [{
-            label: 'value',
+            label: 'score',
             data: ".$data.",
             borderWidth: 3
         }]

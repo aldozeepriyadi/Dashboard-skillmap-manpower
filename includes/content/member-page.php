@@ -10,16 +10,18 @@
         {
             echo
             "<div class='member-container'>".
-                "<div class='member-info'>".
-                    "<div class='member-info-texts'>".
-                        "<p>Name: ".$member['name']."</p>".
-                        "<p>NPK: ".$member['id']."</p>".
-                        "<p>Workstation: ".$current_dept."</p>".
+                "<a href='preview_member.php?q=".$member['id']."'>".
+                    "<div class='member-info'>".
+                        "<div class='member-info-texts'>".
+                            "<p>Name: ".$member['name']."</p>".
+                            "<p>NPK: ".$member['id']."</p>".
+                            "<p>Workstation: ".$current_dept."</p>".
+                        "</div>".
+                        "<div class='member-info-photo-container'>".
+                            "<img src='img/default-pp.jpg'></img>".
+                        "</div>".
                     "</div>".
-                    "<div class='member-info-photo-container'>".
-                        "<img src='img/default-pp.jpg'></img>".
-                    "</div>".
-                "</div>".
+                "</a>".
                 "<div class='member-stats'>";
             include('includes/components/personal-radarchart.php');
             echo
