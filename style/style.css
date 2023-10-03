@@ -45,7 +45,7 @@ html, body {
     text-align: left;
 }
 
-.logo-container > img {
+.logo-container img {
     width: 20vh;
     /* margin: -4.5vh; */
     padding: -4.5vh;
@@ -101,6 +101,7 @@ html, body {
     flex-wrap: wrap;
     justify-content: space-evenly;
     flex-direction: row;
+    width: 100%;
 }
 
 .member-container {

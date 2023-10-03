@@ -1,4 +1,3 @@
-<?php $current_dept = "Production 1"?>
 <div id="content">
     <div id="page-title" class="flex-title-float-left">
         <?php echo "<p>MP Assessments for ".$current_dept."</p>"?>
@@ -6,7 +5,7 @@
     </div>
     <div id="member-list"> 
         <?php
-        $q_res = $conn->query("SELECT * FROM karyawan WHERE dept_id = 1 ORDER BY name ASC LIMIT 0,4");
+        $q_res = $conn->query("SELECT * FROM karyawan WHERE dept_id = ".$dept_id." ORDER BY name ASC LIMIT ".intval(($page_num-1)*4).",4");
         while ($member = $q_res->fetch_assoc())
         {
             echo

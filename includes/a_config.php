@@ -4,8 +4,9 @@
 			$CURRENT_PAGE = "Dashboard"; 
 			$PAGE_TITLE = "Skill Map Man Power Dashboard";
 			break;
-		default:
+			default:
 			$CURRENT_PAGE = "Index";
 			$PAGE_TITLE = "Welcome to my homepage!";
-	}
+		}
+	$PAGE_TITLE = "Skill Map Man Power Dashboard";
 ?>

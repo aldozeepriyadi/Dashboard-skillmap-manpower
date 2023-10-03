@@ -8,7 +8,25 @@
 <body>
 
 <?php include("includes/design-top.php");?>
-<?php include("includes/content/member-page.php");?>
+
+<?php
+    $dept_id = $_REQUEST['q'];
+	$page_num = 1;
+	if (array_key_exists('p', $_REQUEST)) {
+	$page_num = $_REQUEST['p'];
+	}
+    
+    $q_res = $conn->query("SELECT dept_name FROM department WHERE id = ".$dept_id);
+	$num_results = $q_res->num_rows;
+    $row = $q_res->fetch_assoc();
+    $current_dept = $row['dept_name'];
+?>
+
+<?php 
+if ($num_results > 0)
+	include("includes/content/member-page.php");
+else include("includes/content/not-found-page.php");
+?>
 
 </body>
 </html>

@@ -10,10 +10,11 @@
         $q_res = $conn->query("SELECT * FROM department");
         while ($dept_row = $q_res->fetch_assoc()) {
             $dept = $dept_row['dept_name'];
+            $d_id = $dept_row['id'];
             $chart_id = str_replace(" ", "-", $dept);
             echo
                 "
-                <a class='dept-stat-container' href='members.php'>
+                <a class='dept-stat-container' href='members.php?q=$d_id&p=1'>
                     <div class='ds-title'>
                         <p>$dept</p>
                     </div>
