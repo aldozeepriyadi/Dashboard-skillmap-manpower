@@ -26,7 +26,8 @@
                 <input type="text" placeholder="Search NPK..."></input>
             </div>
             <div class="profile-table">
-                <div id="pt-tab-buttons">
+                <div id="pt-tab-buttons" class="fill-container">
+                    <form id="pt-tab-radio" class="fill-container d-flex-row">
                     <input type="radio" id="chart-info" name="pt-tab" value="chart-info" checked>
                     <div class="pt-tab-button pt-tab-left">
                         <label for="chart-info">
@@ -43,10 +44,11 @@
                             </p>
                         </label>
                     </div>
+                    </form>
                 </div> 
-                <div class="pt-chart-info hidden">
+                <div class="pt-tab pt-chart-info hidden">
                 </div> 
-                <div class="pt-update-assessment">
+                <div class="pt-tab pt-update-assessment">
                     <div id="biodata">
                         <p>Nama: <?php echo $karyawan['name']?></p>
                         <p>NPK: <?php echo $karyawan['id']?></p>
@@ -54,36 +56,39 @@
                     </div>
                     <div id="update-assessment">
                         <?php 
-                            foreach ($mp_categories as $cat => $cat_name) {
-                                echo 
-                                "
-                                <div class='cat-update-container'>
-                                    <div class='cu-name'>
-                                        <p>$cat_name:</p>
-                                    </div>
-                                    <div class='cu-radiogroup'>
-                                ";
-                                for ($i = 1; $i <=5 ; $i++) {
+                        echo "<form action='actions/update-assessment.php?q=".$karyawan['id']."' method='post'>";
+                                foreach ($mp_categories as $cat => $cat_name) {
                                     echo 
                                     "
-                                        <input type='radio' id='$cat-value-$i' class='update-assessment-button' name='$cat' value='$i'";
-                                    if ($karyawan[$cat] == $i) echo "checked";
-                                    echo
-                                        ">
-                                        <div class='cu-radio-button'>
-                                            <label for='$cat-value-$i'>
-                                            <div>
-                                                <p>$i</p>
-                                            </div>
-                                            </label>
+                                    <div class='cat-update-container'>
+                                        <div class='cu-name'>
+                                            <p>$cat_name:</p>
                                         </div>
+                                        <div class='cu-radiogroup'>
                                     ";
+                                    for ($i = 1; $i <=5 ; $i++) {
+                                        echo 
+                                        "
+                                            <input type='radio' id='$cat-value-$i' class='update-assessment-button' name='$cat' value='$i'";
+                                        if ($karyawan[$cat] == $i) echo "checked";
+                                        echo
+                                            ">
+                                            <div class='cu-radio-button'>
+                                                <label for='$cat-value-$i'>
+                                                <div>
+                                                    <p>$i</p>
+                                                </div>
+                                                </label>
+                                            </div>
+                                        ";
+                                    }
+                                    echo 
+                                        "</div>
+                                    </div>";
                                 }
-                                echo 
-                                    "</div>
-                                </div>";
-                            }
-                        ?>
+                            ?>
+                            <button type="submit">submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
