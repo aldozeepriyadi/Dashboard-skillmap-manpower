@@ -1,7 +1,10 @@
 :root {
     --main-color: #0A0A5C;
-    --main-color-highlited: #181899;
+    --main-color-highlighted: #0F0F8A;
+    --complement-color: #5C5C0A;
+    --complement-color-highlighted: #8A8A0F;
     --secondary-color: #FFFFFF;
+    --secondary-color-darken: #DDDDDD;
     --font-color-light: #FFFFFF;
     --font-color-dark: #000000;
 }
@@ -102,7 +105,7 @@ a {
 }
 
 .dept-stat-container:hover {
-    background-color: var(--main-color-highlited);
+    background-color: var(--main-color-highlighted);
 }
 
 .ds-title {
@@ -152,7 +155,7 @@ a {
 }
 
 .member-info:hover {
-    background-color: var(--main-color-highlited);
+    background-color: var(--main-color-highlighted);
 }
 
 .member-info-texts{
@@ -334,7 +337,7 @@ input[type="radio"] + div.pt-tab-button{
 }
 
 input[type="radio"]:checked + div.pt-tab-button{
-    background-color: var(--main-color-highlited);
+    background-color: var(--main-color-highlighted);
 }
 
 .pt-tab-button p {
@@ -412,15 +415,28 @@ input.update-assessment-button {
     text-align: center;
 }
 
-input[type="radio"]:checked + .cu-radio-button{
+.cu-radio-button {
+    cursor: pointer;
+}
+
+.cu-radio-button:hover {
+    background-color: var(--secondary-color-darken);
+}
+
+input[type="radio"]:checked + .cu-radio-button {
     background-color: var(--main-color);
     color: var(--font-color-light);
 }
 
-input[value='1'] + .cu-radio-button{
+input[value='1'] + .cu-radio-button {
     border-radius: 8px 0px 0px 8px;
 }
 
-input[value='5'] + .cu-radio-button{
+input[value='5'] + .cu-radio-button {
     border-radius: 0px 8px 8px 0px;
+}
+
+#cu-submit-btn {
+    margin-top: auto;
+    border: none !important;
 }
