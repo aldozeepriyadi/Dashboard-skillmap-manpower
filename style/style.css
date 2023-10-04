@@ -436,7 +436,19 @@ input[value='5'] + .cu-radio-button {
     border-radius: 0px 8px 8px 0px;
 }
 
+.cu-submit-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: right;
+}
+
 #cu-submit-btn {
     margin-top: auto;
     border: none !important;
+    background-color: var(--complement-color-highlighted);
+    border-radius: 16px;
+    padding: 0.5rem;
+    color: var(--font-color-light);
+    font-weight: 600;
+    cursor: pointer;
 }

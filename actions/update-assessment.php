@@ -1,14 +1,22 @@
 <?php 
+    include("../includes/a_config.php");
     include("../includes/db_connection.php");
+
+    $scores = array();
+    foreach ($mp_categories as $cat => $cat_name) {
+        if (isset($_POST[$cat])) $scores[$cat] = $_POST[$cat];
+        else $scores[$cat] = 1;
+    }
+
     $sql_query=
         "UPDATE `karyawan` ".
         "SET ".
-        "msk = ".$_POST['msk'].", ".
-        "kt = ".$_POST['kt'].", ".
-        "`pssp` = ".$_POST['pssp'].", ".
-        "`png` = ".$_POST['png'].", ".
-        "`fivejq` = ".$_POST['fivejq'].", ".
-        "`kao` = ".$_POST['kao']." ".
+        "msk = ".$scores['msk'].", ".
+        "kt = ".$scores['kt'].", ".
+        "`pssp` = ".$scores['pssp'].", ".
+        "`png` = ".$scores['png'].", ".
+        "`fivejq` = ".$scores['fivejq'].", ".
+        "`kao` = ".$scores['fivejq']." ".
         "WHERE `id` = ".$_GET['q'];
     $conn->query($sql_query);
 

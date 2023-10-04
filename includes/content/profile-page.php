@@ -56,38 +56,37 @@
                     </div>
                     <div id="update-assessment">
                         <?php 
-                        echo "<form action='actions/update-assessment.php?q=".$karyawan['id']."' method='post'>";
-                                foreach ($mp_categories as $cat => $cat_name) {
+                        echo 
+                        "<form action='actions/update-assessment.php?q=".$karyawan['id']."' method='post'>";
+                            if ($karyawan['member_type'] != 0) unset($mp_categories['kao']);
+                            foreach ($mp_categories as $cat => $cat_name) {
+                                echo 
+                                "<div class='cat-update-container'>
+                                    <div class='cu-name'>
+                                        <p>$cat_name:</p>
+                                    </div>
+                                    <div class='cu-radiogroup'>";
+                                for ($i = 1; $i <=5 ; $i++) {
                                     echo 
-                                    "
-                                    <div class='cat-update-container'>
-                                        <div class='cu-name'>
-                                            <p>$cat_name:</p>
+                                    "<input type='radio' id='$cat-value-$i' class='update-assessment-button' name='$cat' value='$i'";
+                                    if ($karyawan[$cat] == $i) echo "checked";
+                                    echo
+                                    "><div class='cu-radio-button'>
+                                        <label for='$cat-value-$i'>
+                                        <div>
+                                            <p>$i</p>
                                         </div>
-                                        <div class='cu-radiogroup'>
-                                    ";
-                                    for ($i = 1; $i <=5 ; $i++) {
-                                        echo 
-                                        "
-                                            <input type='radio' id='$cat-value-$i' class='update-assessment-button' name='$cat' value='$i'";
-                                        if ($karyawan[$cat] == $i) echo "checked";
-                                        echo
-                                            ">
-                                            <div class='cu-radio-button'>
-                                                <label for='$cat-value-$i'>
-                                                <div>
-                                                    <p>$i</p>
-                                                </div>
-                                                </label>
-                                            </div>
-                                        ";
-                                    }
-                                    echo 
-                                        "</div>
+                                        </label>
                                     </div>";
                                 }
-                            ?>
-                            <button type="submit">submit</button>
+                                echo 
+                                    "</div>
+                                </div>";
+                            }
+                        ?>
+                            <div class="cu-submit-wrapper">
+                                <button type="submit" id="cu-submit-btn">UPDATE</button>
+                            </div>
                         </form>
                     </div>
                 </div>

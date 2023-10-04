@@ -15,11 +15,17 @@
     
     $q_res = $conn->query("SELECT * FROM karyawan WHERE id = ".$npk);
 	$num_results = $q_res->num_rows;
-    $karyawan = $q_res->fetch_assoc();
-    $q_res = $conn->query("SELECT dept_name FROM department WHERE id = ".$karyawan['dept_id']);
-    $row = $q_res->fetch_assoc();
-    $karyawan['dept_name'] = $row['dept_name'];
 
+    if ($num_results == 0) {
+        echo "<script>alert('NPK tidak ditemukan');</script>";
+        // exit();
+    }
+    else {
+        $karyawan = $q_res->fetch_assoc();
+        $q_res = $conn->query("SELECT dept_name FROM department WHERE id = ".$karyawan['dept_id']);
+        $row = $q_res->fetch_assoc();
+        $karyawan['dept_name'] = $row['dept_name'];
+    }
 ?>
 
 <?php 
