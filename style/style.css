@@ -367,6 +367,20 @@ input[type="radio"]:checked + div.pt-tab-button{
     margin: 0px;
 }
 
+.pt-chart-info {
+    font-size: 1.25vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 65vh;
+    width: 100%;
+}
+
+.pt-chart-info > div {
+    width: 50%;
+    padding-left: 0.5vh;
+}
+
 .pt-update-assessment {
     display: flex;
     flex-direction: column;

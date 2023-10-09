@@ -50,6 +50,7 @@
                     </form>
                 </div> 
                 <div class="pt-tab pt-chart-info hidden">
+                    <?php include("includes/components/mp-table-info.php")?>
                 </div> 
                 <div class="pt-tab pt-update-assessment">
                     <div id="biodata">
