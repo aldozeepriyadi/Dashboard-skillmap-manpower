@@ -57,4 +57,15 @@
         }
         ?>
     </div>
+    <div id="admin-options">
+        <div id='ao-create-btn'>
+            <p class='p-1 m-0'>Add Profile</p>
+        </div>
+        <div id="npk-search-container" class="w-50">
+            <input id="npk-search" type="text" placeholder="Search NPK..."></input>
+            <button id="npk-search-btn">
+                <img src="img/search.svg" alt="Search">
+            </button>
+        </div>
+    </div>
 </div>

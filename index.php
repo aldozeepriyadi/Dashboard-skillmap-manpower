@@ -4,6 +4,7 @@
 <html>
 <head>
 	<?php include("includes/head-tag-contents.php");?>
+	<script src="js/search-npk.js"></script>
 </head>
 <body>
 

@@ -122,8 +122,8 @@ a {
 #dept-overall-stats {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    width: 100vw;
+    justify-content: space-between;
+    width: 97.5vw;
     margin: 0px;
 }
 
@@ -132,13 +132,14 @@ a {
     border-radius: 15px;
     margin-top: 0.5em;
     width: 18vw;
-    height: 75vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
     text-decoration: none !important;
     transition: all 0.5s;
+    justify-content: space-evenly;
     /* transition-duration: 0.4s; */
 }
 
@@ -149,13 +150,34 @@ a {
 .ds-title {
     color: var(--font-color-light);
     margin: 1rem;
-    margin-top: 3rem;
+    margin-bottom: 0px;
     font-size: 4vh;
     font-weight: 600;
 }
 
 .ds-content {
     margin-top: 3vh;
+}
+
+#admin-options {
+    margin-top: 1rem;
+    display: flex;
+    width: 97.5vw;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#ao-create-btn {
+    margin-top: auto;
+    border: none !important;
+    background-color: var(--complement-color-highlighted);
+    border-radius: 16px;
+    width: 10%;
+    padding: 0.5rem;
+    color: var(--font-color-light) !important;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
 }
 
 /* ==============member page================= */
