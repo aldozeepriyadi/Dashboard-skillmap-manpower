@@ -1,4 +1,25 @@
 <div id="content">
+    
+    <div class="popup hidden" id="update-popup">
+        <div class='popup-content-wrapper'>
+            <p>Are you sure you want to update <?php echo $karyawan['name']?>?</p>
+            <div class='d-flex-row'>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide('#update-popup')">Cancel</a>
+                <label for="cu-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup hidden" id="delete-popup">
+        <div class='popup-content-wrapper'>
+            <p>Are you sure you want to delete <?php echo $karyawan['name']?>?</p>
+            <div class='d-flex-row'>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide('#delete-popup')">Cancel</a>
+                <label for="cu-delete-btn" tabindex="0" class='cu-delete-btn m-1'>Confirm</label>
+            </div>
+        </div>
+    </div>
+
     <div id="profile-container">
         <div class="profile-left">
             <div class="p-title">
@@ -61,7 +82,7 @@
                     <div id="update-assessment">
                         <?php 
                         echo 
-                        "<form action='actions/update-assessment.php?q=".$karyawan['id']."' method='post'>";
+                        "<form id='update-assessment' action='actions/update-assessment.php?q=".$karyawan['id']."' method='post'>";
                             if ($karyawan['member_type'] != 0) unset($mp_categories['kao']);
                             foreach ($mp_categories as $cat => $cat_name) {
                                 echo 
@@ -89,7 +110,12 @@
                             }
                         ?>
                             <div class="cu-submit-wrapper">
-                                <button type="submit" id="cu-submit-btn">UPDATE</button>
+                                <a href="#" onclick="show('#delete-popup')" class="cu-delete-btn">DELETE</a>
+                                <a href="#" onclick="show('#update-popup')" class="cu-submit-btn">UPDATE</a>
+                                <div class="hidden">
+                                    <input type="submit" name="delete" id="cu-delete-btn">DELETE</input>
+                                    <input type="submit" name="update" id="cu-submit-btn">UPDATE</input>
+                                </div>
                             </div>
                         </form>
                     </div>

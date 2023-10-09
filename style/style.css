@@ -5,6 +5,8 @@
     --complement-color-highlighted: #8A8A0F;
     --secondary-color: #FFFFFF;
     --secondary-color-darken: #DDDDDD;
+    --overlay-background-color: rgba(0,0,0,0.5);
+    --delete-color: #8A0F0F;
     --font-color-light: #FFFFFF;
     --font-color-dark: #000000;
 }
@@ -16,6 +18,42 @@ html, body {
 
 a {
     text-decoration: none !important;
+}
+
+.popup:after {
+    position: fixed;
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: -2;
+}
+
+.popup:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: var(--secondary-color);
+    z-index: -1;
+    border-radius: 24px;
+}
+
+.popup {
+    position: fixed;
+    width: 35vw;
+    left: 50%;
+    margin-left: -17.5vw;
+    height: 20vh;
+    top: 50%;
+    margin-top: -10vh;
+    background: var(--secondary-color);
+    z-index: 20;
+    border-radius: 24px;
 }
 
 .hidden {
@@ -472,16 +510,45 @@ input[value='5'] + .cu-radio-button {
 .cu-submit-wrapper {
     display: flex;
     width: 100%;
-    justify-content: right;
+    justify-content: space-between;
 }
 
-#cu-submit-btn {
+.cu-submit-btn {
     margin-top: auto;
     border: none !important;
     background-color: var(--complement-color-highlighted);
     border-radius: 16px;
     padding: 0.5rem;
-    color: var(--font-color-light);
+    color: var(--font-color-light) !important;
     font-weight: 600;
     cursor: pointer;
+}
+
+.cu-delete-btn {
+    margin-top: auto;
+    border: none !important;
+    background-color: var(--delete-color);
+    border-radius: 16px;
+    padding: 0.5rem;
+    color: var(--font-color-light) !important;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cu-cancel-btn {
+    margin-top: auto;
+    border: none !important;
+    background-color: var(--main-color);
+    border-radius: 16px;
+    padding: 0.5rem;
+    color: var(--font-color-light) !important;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.popup-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
 }

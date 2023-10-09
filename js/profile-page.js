@@ -1,3 +1,10 @@
+var show = function(id) {
+	$(id).removeClass('hidden');
+}
+var hide = function(id) {
+	$(id).addClass('hidden');
+}
+
 function hide_tabs() {
     $(".pt-tab").each(function () {
         $(this).addClass("hidden");
