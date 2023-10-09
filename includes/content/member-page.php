@@ -8,6 +8,9 @@
         $q_res = $conn->query("SELECT * FROM karyawan WHERE dept_id = ".$dept_id." ORDER BY name ASC LIMIT ".intval(($page_num-1)*4).",4");
         while ($member = $q_res->fetch_assoc())
         {
+            $img_path = "img/profile_pictures/".$member['id'].".jpg";
+            if(!file_exists($img_path)) $img_path = "img/profile_pictures/default.jpg";
+
             echo
             "<div class='member-container'>".
                 "<a href='preview_member.php?q=".$member['id']."'>".
@@ -18,7 +21,7 @@
                             "<p>Workstation: ".$current_dept."</p>".
                         "</div>".
                         "<div class='member-info-photo-container'>".
-                            "<img src='img/default-pp.jpg'></img>".
+                            "<img src='".$img_path."'></img>".
                         "</div>".
                     "</div>".
                 "</a>".

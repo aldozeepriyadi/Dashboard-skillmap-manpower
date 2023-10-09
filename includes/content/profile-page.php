@@ -1,5 +1,4 @@
 <div id="content">
-    
     <div class="popup hidden" id="update-popup">
         <div class='popup-content-wrapper'>
             <p>Are you sure you want to update <?php echo $karyawan['name']?>?</p>
@@ -24,7 +23,13 @@
         <div class="profile-left">
             <div class="p-title">
                 <div class="p-picture-container">
-                    <img src="img/default-pp.jpg"></img>
+                    <img src="
+                        <?php 
+                            $img_path = "img/profile_pictures/".$karyawan['id'].".jpg";
+                            if(file_exists($img_path)) echo $img_path;
+                            else echo "img/profile_pictures/default.jpg";
+                        ?>
+                    "></img>
                 </div>
                 <div class="p-title-container">
                     <p class="p-title-text"> ASSESSMENT MP PRODUCTION </p>

@@ -212,7 +212,8 @@ a {
 }
 
 .member-info-photo-container > img {
-    height: 55%;
+    height: 16vh;
+    width: 12vh;
 }
 
 .member-stats{
