@@ -11,16 +11,16 @@
                     <label for="username">Username:</label>
                 </div>
                 <div class="w-100">
-                    <input type="text" name="username" id="username" required>
+                    <input class="login-input" type="text" name="username" id="username" required>
                 </div>
-                <div class="w-100">
+                <div class="w-100 mt-3">
                     <label for="password">Password:</label>
                 </div>
                 <div class="w-100">
-                    <input type="password" name="password" id="password" required>
+                    <input class="login-input" type="password" name="password" id="password" required>
                 </div>
-                <div class="w-100">
-                    <input type="submit" value="LOGIN">
+                <div class="w-100 mt-5">
+                    <input class='cu-submit-btn w-25' type="submit" value="LOGIN">
                 </div>
             </form>
     </div>
