@@ -7,13 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $npk = $workstation = $role = "";
 
     if (empty($_POST["name"])) {
-        $errMsg .= "Name is required\n";
+        $errMsg .= "Name is required\\n";
     } else {
         $name = $_POST["name"];
     }
 
     if (empty($_POST["npk"])) {
-        $errMsg .= "NPK is required\n";
+        $errMsg .= "NPK is required\\n";
     } else {
         $npk = $_POST["npk"];
     }
@@ -30,32 +30,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $target_dir = "../img/profile_pictures/";
     $target_file = $target_dir . $npk .'.jpg';
     $uploadOk = 1;
-    
-    if (move_uploaded_file($_FILES["ap-form-photo"]["tmp_name"], $target_file)) {
-    echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-    } 
-    else {
-    echo "Sorry, there was an error uploading your file.";
-    }
 
     $workstation = $_POST["workstation"];
     $role = $_POST["role"];
 
-    try {
-        $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, workspace_id, role) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssii", $npk, $name, $workstation, $role);
-        $stmt->execute();
-        $stmt->close();
-        echo "<script>window.location.replace('../index.php');</script>";  
-      } catch(Exception $e) {
-        if($conn->errno === 1062) $errMsg .= "NPK already exists\n";
-        else $errMsg .= "Error: " . $e->getMessage() . "\n";
-      }
-      echo "<script>alert('".$errMsg."');</script>";
-      if(isset($_SERVER["HTTP_REFERER"])) {
-        echo "<script>window.location.replace('".$_SERVER["HTTP_REFERER"]."');</script>";
-      } else {
-        echo "<script>window.location.replace('index.php');</script>";
-      }
+    $stmt = $conn->prepare("SELECT npk FROM karyawan WHERE npk = ?");
+    $stmt->bind_param("s", $npk);
+    $stmt->execute();
+    $stmt->bind_result($res);
+    $stmt->fetch();
+    $stmt->close();
+
+    if (isset($res) === false) {
+        if (!move_uploaded_file($_FILES["ap-form-photo"]["tmp_name"], $target_file)) {
+            $errMsg .= "Sorry, there was an error uploading your file.\\n";
+        }
+    } else {
+        $errMsg .= "NPK already exists.\\n";
+    }
+
+    if ($errMsg == '') 
+    {
+        try {
+            $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, workspace_id, role) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssii", $npk, $name, $workstation, $role);
+            $stmt->execute();
+            $stmt->close();
+    
+            echo "<script>window.location.replace('../index.php');</script>";  
+        } catch(Exception $e) {
+    
+        }
+    }
+    echo "<script>alert('".$errMsg."');</script>";
+    if(isset($_SERVER["HTTP_REFERER"])) {
+    echo "<script>window.location.replace('".$_SERVER["HTTP_REFERER"]."');</script>";
+    } else {
+    echo "<script>window.location.replace('index.php');</script>";
+    }
 }
 ?>
