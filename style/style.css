@@ -608,3 +608,18 @@ input[value='5'] + .cu-radio-button {
     width: 50%;
     border: solid 2px var(--font-color-dark);
 }
+
+/* ====================LOGIN============================ */
+
+#login-form-wrapper {
+    box-shadow: #000000 1px 1px 4px 1px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+#login-form-wrapper:first-child {
+    padding-top: 2vh;
+    text-align: center;
+    height: 10px;
+}

@@ -1,6 +1,7 @@
 <?php
 include("../includes/a_config.php");
 include("../includes/db_connection.php");
+include("includes/redirect_session.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errMsg = "";

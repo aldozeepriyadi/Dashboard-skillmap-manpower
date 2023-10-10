@@ -1,5 +1,6 @@
 <?php include("includes/db_connection.php"); ?>
 <?php include("includes/a_config.php");?>
+<?php include("includes/redirect_session.php");?>
 <!DOCTYPE html>
 <html>
 <head>
