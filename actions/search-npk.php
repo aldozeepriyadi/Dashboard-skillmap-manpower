@@ -2,7 +2,7 @@
 include("../includes/a_config.php");
 include("../includes/db_connection.php");
 
-$q_res = $conn->query("SELECT id FROM karyawan WHERE id = ".$_GET['q']);
+$q_res = $conn->query("SELECT npk FROM karyawan WHERE npk = '".$_GET['q']."'");
 $num_results = $q_res->num_rows;
 
 if ($num_results == 0) {
@@ -15,6 +15,6 @@ if ($num_results == 0) {
 }
 
 $karyawan = $q_res->fetch_assoc();
-$query_string = '?q='.$karyawan['id'];
+$query_string = '?q='.$karyawan['npk'];
 header("Location: ../preview_member.php$query_string");
 ?>

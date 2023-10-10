@@ -42,8 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = $_POST["role"];
 
     try {
-        $stmt = $conn->prepare("INSERT INTO karyawan (id, name, dept_id, member_type) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("isii", $npk, $name, $workstation, $role);
+        $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, workspace_id, role) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssii", $npk, $name, $workstation, $role);
         $stmt->execute();
         $stmt->close();
         echo "<script>window.location.replace('../index.php');</script>";  

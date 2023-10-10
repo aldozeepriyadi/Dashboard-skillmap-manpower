@@ -1,5 +1,5 @@
 <?php
-if ($member['member_type'] == 1) $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ']";
+if ($member['role'] == 1) $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ']";
 else $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO']";
 
 $data = "[".$member['msk'].",".
@@ -7,10 +7,10 @@ $data = "[".$member['msk'].",".
             $member['pssp'].",".
             $member['png'].",".
             $member['fivejq'].",";
-if ($member['member_type'] == 0) $data .= $member['kao'];
+if ($member['role'] == 0) $data .= $member['kao'];
 $data .= ']';
 
-$chart_id = "radar_".$member['id'];
+$chart_id = "radar_".$member['npk'];
 echo "
 <div>
     <canvas id=".$chart_id."></canvas>

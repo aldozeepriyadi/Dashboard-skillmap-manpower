@@ -6,28 +6,28 @@
         <div id="add-profile-form-container">
             <div class="ap-form-section">
                 <p>Nama:</p>
-                <input name="name" type="text">
+                <input class="ap-form-input-box" name="name" type="text">
             </div>
             <div class="ap-form-section">
                 <p>NPK:</p>
-                <input name="npk" type="text">
+                <input class="ap-form-input-box" name="npk" type="text">
             </div>
             <div class="ap-form-section">
                 <p>Workstation:</p>
-                <select id="ap-form-workstation" name="workstation">
+                <select class="ap-form-input-box" id="ap-form-workstation" name="workstation">
                     <?php 
                     $q_res = $conn->query("SELECT id, dept_name FROM department");
                     while ($dept_row = $q_res->fetch_assoc()) {
                         $dept = $dept_row['dept_name'];
-                        $dept_id = $dept_row['id'];
-                        echo "<option value='".$dept_id."'>$dept</option>";
+                        $workspace_id = $dept_row['id'];
+                        echo "<option value='".$workspace_id."'>$dept</option>";
                     }
                     ?>
                 </select>
             </div>
             <div class="ap-form-section">
                 <p>Role:</p>
-                <select id="ap-form-role" name="role">
+                <select class="ap-form-input-box" id="ap-form-role" name="role">
                     <?php 
                         $q_res = $conn->query("SELECT id, name FROM roles");
                         while ($role_row = $q_res->fetch_assoc()) {

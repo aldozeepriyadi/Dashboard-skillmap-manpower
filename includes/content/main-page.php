@@ -21,12 +21,12 @@
                 "fivejq"=>0.0
             );
             foreach($operator_mp_categories as $cat => $val) {
-                $res = $conn->query("SELECT AVG($cat) as average FROM karyawan WHERE dept_id = $d_id");
+                $res = $conn->query("SELECT AVG($cat) as average FROM karyawan WHERE workspace_id = $d_id");
                 $row = $res->fetch_assoc();
                 $avg_val = $row['average'];
                 $operator_mp_categories[$cat] = $avg_val;
             }
-            $res = $conn->query("SELECT AVG(kao) as average FROM karyawan WHERE dept_id = $d_id AND member_type = 0");
+            $res = $conn->query("SELECT AVG(kao) as average FROM karyawan WHERE workspace_id = $d_id AND role = 0");
             $row = $res->fetch_assoc();
             $avg_val = $row['average'];
             $operator_mp_categories["kao"] = $avg_val;
@@ -58,8 +58,12 @@
         ?>
     </div>
     <div id="admin-options">
-        <div id='ao-create-btn'>
-            <a href='add_profile.php' class='p-1 m-0'>Add Profile</a>
+        <div class='w-25'>
+            <a href='add_profile.php' class='p-1 m-0 w-100'>
+                <div id='ao-create-btn' class='w-100 h-100'>
+                    <p class='m-0'>Add Profile</p>
+                </div>
+            </a>
         </div>
         <div id="npk-search-container" class="w-50">
             <input id="npk-search" type="text" placeholder="Search NPK..."></input>

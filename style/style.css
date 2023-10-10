@@ -172,7 +172,6 @@ a {
     border: none !important;
     background-color: var(--complement-color-highlighted);
     border-radius: 16px;
-    width: 10%;
     padding: 1rem;
     color: var(--font-color-light) !important;
     font-weight: 600;
@@ -180,7 +179,7 @@ a {
     cursor: pointer;
 }
 
-#ao-create-btn > a{
+#ao-create-btn > p{
     color: var(--font-color-light) !important;
 }
 
@@ -596,4 +595,16 @@ input[value='5'] + .cu-radio-button {
     width: 40%;
     justify-content: space-between;
     margin-top: 1rem;
+}
+
+.ap-form-section > p{
+    margin: 0px;
+    font-size: 3.5vh;
+    font-weight: 600;
+}
+
+.ap-form-input-box {
+    border-radius: 12px;
+    width: 50%;
+    border: solid 2px var(--font-color-dark);
 }

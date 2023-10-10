@@ -15,11 +15,11 @@ if(isset($_POST['update']))
         "SET ".
         "msk = ".$scores['msk'].", ".
         "kt = ".$scores['kt'].", ".
-        "`pssp` = ".$scores['pssp'].", ".
-        "`png` = ".$scores['png'].", ".
-        "`fivejq` = ".$scores['fivejq'].", ".
-        "`kao` = ".$scores['fivejq']." ".
-        "WHERE `id` = ".$_GET['q'];
+        "pssp = ".$scores['pssp'].", ".
+        "png = ".$scores['png'].", ".
+        "fivejq = ".$scores['fivejq'].", ".
+        "kao = ".$scores['kao']." ".
+        "WHERE npk = '".$_GET['q']."'";
     $conn->query($sql_query);
 
     $query_string = '?q='.$_GET['q'];
@@ -27,7 +27,7 @@ if(isset($_POST['update']))
 } else if (isset($_POST['delete'])) {
     $sql_query=
         "DELETE FROM `karyawan` ".
-        "WHERE `id` = ".$_GET['q'];
+        "WHERE npk = '".$_GET['q']."'";
     $conn->query($sql_query);
     header("Location: ../index.php");
 }

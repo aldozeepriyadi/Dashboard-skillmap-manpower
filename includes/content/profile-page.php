@@ -25,7 +25,7 @@
                 <div class="p-picture-container">
                     <img src="
                         <?php 
-                            $img_path = "img/profile_pictures/".$karyawan['id'].".jpg";
+                            $img_path = "img/profile_pictures/".$karyawan['npk'].".jpg";
                             if(file_exists($img_path)) echo $img_path;
                             else echo "img/profile_pictures/default.jpg";
                         ?>
@@ -81,14 +81,14 @@
                 <div class="pt-tab pt-update-assessment">
                     <div id="biodata">
                         <p>Nama: <?php echo $karyawan['name']?></p>
-                        <p>NPK: <?php echo $karyawan['id']?></p>
+                        <p>NPK: <?php echo $karyawan['npk']?></p>
                         <p>Work Station: <?php echo $karyawan['dept_name']?></p>
                     </div>
                     <div id="update-assessment">
                         <?php 
                         echo 
-                        "<form id='update-assessment' action='actions/update-assessment.php?q=".$karyawan['id']."' method='post'>";
-                            if ($karyawan['member_type'] != 0) unset($mp_categories['kao']);
+                        "<form id='update-assessment' action='actions/update-assessment.php?q=".$karyawan['npk']."' method='post'>";
+                            if ($karyawan['role'] != 0) unset($mp_categories['kao']);
                             foreach ($mp_categories as $cat => $cat_name) {
                                 echo 
                                 "<div class='cat-update-container'>
