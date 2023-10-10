@@ -59,7 +59,7 @@
     </div>
     <div id="admin-options">
         <div id='ao-create-btn'>
-            <p class='p-1 m-0'>Add Profile</p>
+            <a href='add_profile.php' class='p-1 m-0'>Add Profile</a>
         </div>
         <div id="npk-search-container" class="w-50">
             <input id="npk-search" type="text" placeholder="Search NPK..."></input>
