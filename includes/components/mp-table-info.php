@@ -1,4 +1,21 @@
 <div>
+    <form id="show-mp-desc" class="fill-container d-flex-row">
+        <?php 
+        foreach ($mp_categories as $mp_name => $mp_label)
+        echo '
+            <input type="radio" id="show-'.$mp_name.'" value="desc-'.$mp_name.'" name="show-mp-desc">
+            <div class="mp-desc-toggle">
+                <label for="show-'.$mp_name.'" class="m-0">
+                    <p class="m-0">
+                        '.$mp_label.'
+                    </p>
+                </label>
+            </div>
+            ';
+        ?>
+    </form>
+</div>
+<div class="mp-desc" id="desc-msk">
     <p class="m-0">MSK</p>
     <ol class="mb-0">
         <li>Opr tidak menjalankan sesuai OM/IM</li>
@@ -9,7 +26,7 @@
     </ol>
 </div>
 
-<div>
+<div class="hidden mp-desc" id="desc-kt">
     <p class="m-0">KT</p>
     <ol>
         <li>Melakukan kerja tuntas dengan persentase 0%-60% dari total audit</li>
@@ -20,7 +37,7 @@
     </ol>
 </div>
 
-<div>
+<div class="hidden mp-desc" id="desc-pssp">
     <p class="m-0">PSSP</p>
     <ol>
         <li>Opr tidak menjalankan pemisahan part sebelum dan sesudah proses karena tidak mau</li>
@@ -31,7 +48,7 @@
     </ol>
 </div>
 
-<div>
+<div class="hidden mp-desc" id="desc-png">
     <p class="m-0">PNG</p>
     <ol>
         <li>Tidak melakukan Penangan Part NG (Karena tidak tersedia fasilitasnya)</li>
@@ -41,7 +58,7 @@
         <li>Melakukan penanganan part NG dengan baik dan fasilitas lengkap</li>
     </ol>
 </div>
-<div>
+<div class="hidden mp-desc" id="desc-fivejq">
     <p class="m-0">5JQ</p>
     Kondisi Operator melakukan pengecekan part dan mesin sebelum proses
     <ol>
@@ -57,7 +74,7 @@ Kondisi oprator menjaga hasil kerja untuk part yg sudah di proses
 <li>Menjaga hasil kerja sesuai dengan std yang telah ditetapkan.</li>
     </ol>
 </div>
-<div>
+<div class="hidden mp-desc" id="desc-kao">
     <p class="m-0">KAO</p>
     <ol>
         <li>Tidak update papan henkaten sama skali</li>

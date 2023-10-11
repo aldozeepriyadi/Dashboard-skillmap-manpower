@@ -11,6 +11,12 @@ function hide_tabs() {
     });
 }
 
+function hide_descs() {
+    $(".mp-desc").each(function () {
+        $(this).addClass("hidden");
+    });
+}
+
 $(function() {
     $('document').ready(function(){
         console.log($(".pt-tab"));
@@ -27,5 +33,13 @@ $(function() {
         };
 
         console.log(selected_value);
+    });
+
+    $('#show-mp-desc').change(function(){
+        selected_value = $("input[name='show-mp-desc']:checked").val();
+        hide_descs();
+        $("#"+selected_value).removeClass("hidden");
+
+        console.log("#"+selected_value);
     });
 });
