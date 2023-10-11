@@ -1,7 +1,7 @@
 <?php 
 include("../includes/a_config.php");
 include("../includes/db_connection.php");
-include("includes/redirect_session.php");
+include("../includes/redirect_session.php");
 
 $q_res = $conn->query("SELECT npk FROM karyawan WHERE npk = '".$_GET['q']."'");
 $num_results = $q_res->num_rows;

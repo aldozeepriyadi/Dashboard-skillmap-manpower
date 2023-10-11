@@ -1,7 +1,7 @@
 <?php 
 include("../includes/a_config.php");
 include("../includes/db_connection.php");
-include("includes/redirect_session.php");
+include("../includes/redirect_session.php");
 
 if(isset($_POST['update']))
 {
@@ -26,10 +26,16 @@ if(isset($_POST['update']))
     $query_string = '?q='.$_GET['q'];
     header("Location: ../preview_member.php$query_string");
 } else if (isset($_POST['delete'])) {
+    $npk = $_GET['q'];
+
     $sql_query=
         "DELETE FROM `karyawan` ".
-        "WHERE npk = '".$_GET['q']."'";
+        "WHERE npk = '".$npk."'";
     $conn->query($sql_query);
+
+    $target_dir = "../img/profile_pictures/";
+    $target_file = $target_dir . $npk .'.jpg';
+    unlink($target_file);
     header("Location: ../index.php");
 }
 ?>

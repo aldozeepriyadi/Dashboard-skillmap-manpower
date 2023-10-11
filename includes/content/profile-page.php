@@ -83,6 +83,7 @@
                         <p>Nama: <?php echo $karyawan['name']?></p>
                         <p>NPK: <?php echo $karyawan['npk']?></p>
                         <p>Work Station: <?php echo $karyawan['dept_name']?></p>
+                        <p>Role: <?php echo $karyawan['role_name']?></p>
                     </div>
                     <div id="update-assessment">
                         <?php 

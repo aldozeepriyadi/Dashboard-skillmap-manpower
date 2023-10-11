@@ -1,8 +1,8 @@
 <?php
 include("../includes/a_config.php");
 include("../includes/db_connection.php");
-include("includes/redirect_session.php");
-
+include("../includes/redirect_session.php");
+error_reporting(0);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errMsg = "";
     $name = $npk = $workstation = $role = "";

@@ -237,6 +237,7 @@ a {
 
 .member-info-texts > p {
     color: var(--font-color-light);
+    font-size: 2vh;
     margin: 0.5rem;
 }
 
@@ -247,8 +248,8 @@ a {
 }
 
 .member-info-photo-container > img {
-    height: 16vh;
-    width: 12vh;
+    height: 12vh;
+    width: 9vh;
 }
 
 .member-stats{
@@ -464,7 +465,9 @@ input[type="radio"]:checked + div.pt-tab-button{
 }
 
 #biodata p {
+    font-size: 2.5vh;
     margin-bottom: 0.5rem;
+    margin: 0px;
 }
 
 .cat-update-container {
@@ -477,10 +480,6 @@ input[type="radio"]:checked + div.pt-tab-button{
 
 input.update-assessment-button {
     display: none;
-}
-
-#biodata p{
-    margin: 0px;
 }
 
 .cu-name {

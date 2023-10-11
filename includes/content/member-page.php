@@ -5,7 +5,22 @@
     </div>
     <div id="member-list"> 
         <?php
-        $q_res = $conn->query("SELECT * FROM karyawan WHERE workspace_id = ".$workspace_id." ORDER BY name ASC LIMIT ".intval(($page_num-1)*4).",4");
+        $q_res = $conn->query("
+            SELECT 
+                karyawan.name as name,
+                karyawan.npk as npk,
+                karyawan.role as role,
+                karyawan.msk as msk,
+                karyawan.kt as kt,
+                karyawan.pssp as pssp,
+                karyawan.png as png,
+                karyawan.fivejq as fivejq,
+                karyawan.kao as kao,
+                roles.name as role_name 
+            FROM karyawan 
+            LEFT JOIN roles ON karyawan.role = roles.id
+            WHERE workspace_id = ".$workspace_id." 
+            ORDER BY name ASC LIMIT ".intval(($page_num-1)*4).",4");
         while ($member = $q_res->fetch_assoc())
         {
             $img_path = "img/profile_pictures/".$member['npk'].".jpg";
@@ -19,6 +34,7 @@
                             "<p>Name: ".$member['name']."</p>".
                             "<p>NPK: ".$member['npk']."</p>".
                             "<p>Workstation: ".$current_dept."</p>".
+                            "<p>Role: ".$member['role_name']."</p>".
                         "</div>".
                         "<div class='member-info-photo-container'>".
                             "<img src='".$img_path."'></img>".
@@ -35,7 +51,12 @@
     </div>
     <div id="list-nav">
         <?php
-        $q_res = $conn->query("SELECT * FROM karyawan WHERE workspace_id = ".$workspace_id);
+        $q_res = $conn->query("
+            SELECT 
+                name
+            FROM karyawan
+            WHERE workspace_id = ".$workspace_id
+        );
         $num_results = $q_res->num_rows;
         $total_pages = ceil($num_results/4);
 
