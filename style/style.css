@@ -20,6 +20,16 @@ a {
     text-decoration: none !important;
 }
 
+/* ==============general================= */
+
+.font-default-light {
+    color: var(--font-color-light) !important;
+}
+
+.font-default-dark {
+    color: var(--font-color-dark) !important;
+}
+
 .popup:after {
     position: fixed;
     content: "";
