@@ -1,2 +1,3 @@
 img/profile_pictures/*
 !img/profile_pictures/default.jpg
+*db_config.php

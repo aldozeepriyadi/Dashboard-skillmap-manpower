@@ -1,7 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "admin";
-$password = "admin123";
+include('db_config.php');
 
 // Create connection
 $conn = new mysqli($servername, $username, $password);
@@ -14,5 +12,5 @@ function console_log($message) {
   echo "<script>console.log('".$message."')</script>";
 }
 
-$conn->select_db("kyb_test");
+$conn->select_db($db_name);
 ?>
