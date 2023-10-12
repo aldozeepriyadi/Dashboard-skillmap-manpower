@@ -48,11 +48,8 @@
             </div>
         </div>
         <div class="profile-right">
-            <div id="npk-search-container">
-                <input id="npk-search" type="text" placeholder="Search NPK..."></input>
-                <button id="npk-search-btn">
-                    <img src="img/search.svg" alt="Search">
-                </button>
+            <div class='w-100'>
+                <?php include('includes/components/npk-search-bar.php');?>
             </div>
             <div class="profile-table">
                 <div id="pt-tab-buttons" class="fill-container">
