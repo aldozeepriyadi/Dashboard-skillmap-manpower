@@ -1,5 +1,5 @@
 <?php
-if ($member['role'] == 1) $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ']";
+if (!in_array($member['role'], $roles_with_kao)) $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ']";
 else $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO']";
 
 $data = "[".$member['msk'].",".
@@ -7,7 +7,7 @@ $data = "[".$member['msk'].",".
             $member['pssp'].",".
             $member['png'].",".
             $member['fivejq'].",";
-if ($member['role'] == 0) $data .= $member['kao'];
+if (in_array($member['role'], $roles_with_kao)) $data .= $member['kao'];
 $data .= ']';
 
 $chart_id = "radar_".$member['npk'];

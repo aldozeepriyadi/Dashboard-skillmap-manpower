@@ -10,4 +10,6 @@
         "fivejq"=>"5JQ",
         "kao"=>"KAO"
 	);
+
+	$roles_with_kao = array(0, 2)
 ?>

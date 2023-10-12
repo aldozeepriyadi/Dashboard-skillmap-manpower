@@ -21,12 +21,29 @@
                 "fivejq"=>0.0
             );
             foreach($operator_mp_categories as $cat => $val) {
-                $res = $conn->query("SELECT AVG($cat) as average FROM karyawan WHERE workspace_id = $d_id");
+                $res = $conn->query("
+                    SELECT AVG(IFNULL(mp_scores.$cat,0)) as average 
+                    FROM karyawan 
+                    LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
+                    WHERE workspace_id = $d_id
+                ");
                 $row = $res->fetch_assoc();
                 $avg_val = $row['average'];
                 $operator_mp_categories[$cat] = $avg_val;
             }
-            $res = $conn->query("SELECT AVG(kao) as average FROM karyawan WHERE workspace_id = $d_id AND role = 0");
+            $query_string = "
+                SELECT AVG(IFNULL(mp_scores.kao,0)) as average 
+                FROM karyawan
+                LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
+                WHERE workspace_id = $d_id AND (
+            ";
+            foreach($roles_with_kao as $role) {
+                $query_string .= "role = $role OR ";
+            }
+            if (count($roles_with_kao) > 0) $query_string = substr($query_string, 0, -4);
+            $query_string .= ")";
+
+            $res = $conn->query($query_string);
             $row = $res->fetch_assoc();
             $avg_val = $row['average'];
             $operator_mp_categories["kao"] = $avg_val;

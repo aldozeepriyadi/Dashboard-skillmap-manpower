@@ -89,7 +89,7 @@
                         <?php 
                         echo 
                         "<form id='update-assessment' action='actions/update-assessment.php?q=".$karyawan['npk']."' method='post'>";
-                            if ($karyawan['role'] != 0) unset($mp_categories['kao']);
+                            if (!in_array($karyawan['role'], $roles_with_kao)) unset($mp_categories['kao']);
                             foreach ($mp_categories as $cat => $cat_name) {
                                 echo 
                                 "<div class='cat-update-container'>

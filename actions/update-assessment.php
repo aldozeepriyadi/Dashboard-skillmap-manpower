@@ -12,15 +12,26 @@ if(isset($_POST['update']))
     }
 
     $sql_query=
-        "UPDATE `karyawan` ".
-        "SET ".
-        "msk = ".$scores['msk'].", ".
-        "kt = ".$scores['kt'].", ".
-        "pssp = ".$scores['pssp'].", ".
-        "png = ".$scores['png'].", ".
-        "fivejq = ".$scores['fivejq'].", ".
-        "kao = ".$scores['kao']." ".
-        "WHERE npk = '".$_GET['q']."'";
+        "
+        INSERT INTO `mp_scores` 
+        (npk, msk, kt, pssp, png, fivejq, kao)
+        VALUES (
+        '".$_GET['q']."',
+        ".$scores['msk'].", 
+        ".$scores['kt'].", 
+        ".$scores['pssp'].", 
+        ".$scores['png'].", 
+        ".$scores['fivejq'].", 
+        ".$scores['kao']." 
+        ) 
+        ON DUPLICATE KEY UPDATE 
+        msk = ".$scores['msk'].",
+        kt = ".$scores['kt'].",
+        pssp = ".$scores['pssp'].",
+        png = ".$scores['png'].",
+        fivejq = ".$scores['fivejq'].",
+        kao = ".$scores['kao']."
+        ";
     $conn->query($sql_query);
 
     $query_string = '?q='.$_GET['q'];
