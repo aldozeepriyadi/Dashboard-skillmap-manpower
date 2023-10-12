@@ -543,6 +543,11 @@ input.update-assessment-button {
     /* font-size: 3vh; */
 }
 
+#update-assessment-form {
+    display: flex;
+    flex-direction: column;
+}
+
 .cu-radiogroup label {
     margin: 0px;
     width: 100%;
@@ -582,6 +587,7 @@ input[value='5'] + .cu-radio-button {
     display: flex;
     width: 100%;
     justify-content: space-between;
+    margin-top: 5vh;
 }
 
 .cu-submit-btn {
@@ -591,7 +597,8 @@ input[value='5'] + .cu-radio-button {
     border-radius: 16px;
     padding: 0.5rem;
     color: var(--font-color-light) !important;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 2vh;
     cursor: pointer;
 }
 
@@ -602,7 +609,8 @@ input[value='5'] + .cu-radio-button {
     border-radius: 16px;
     padding: 0.5rem;
     color: var(--font-color-light) !important;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 2vh;
     cursor: pointer;
 }
 
@@ -626,6 +634,17 @@ input[value='5'] + .cu-radio-button {
 
 /* =====================ADD PROFILE======================== */
 
+#add-profile-page-container {
+    box-shadow: #000000 1px 1px 4px 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 2rem;
+    margin-top: 1rem;
+    border-radius: 12px;
+}
+
 #add-profile-form-container {
     display: flex;
     flex-direction: column;
@@ -637,7 +656,7 @@ input[value='5'] + .cu-radio-button {
 .ap-form-section {
     display: flex;
     flex-direction: row;
-    width: 40%;
+    width: 100%;
     justify-content: space-between;
     margin-top: 1rem;
 }
