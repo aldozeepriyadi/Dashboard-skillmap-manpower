@@ -358,7 +358,10 @@ a {
     border-radius: 24px;
     display: flex;
     flex-direction: row;
-
+    position: absolute;
+    left: 50%;
+    margin-top: -3vh;
+    margin-left: 50%;
 }
 
 #npk-search-container input {
@@ -378,7 +381,7 @@ a {
 }
 
 #npk-search-container img {
-    height: 4vh;
+    height: 3vh;
     padding: 0px;
     border: none;
     border-radius: 0px 24px 24px 0px;

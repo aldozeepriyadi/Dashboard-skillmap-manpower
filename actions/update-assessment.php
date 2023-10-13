@@ -46,7 +46,8 @@ if(isset($_POST['update']))
 
     $target_dir = "../img/profile_pictures/";
     $target_file = $target_dir . $npk .'.jpg';
-    unlink($target_file);
+    if (file_exists($target_file))
+        unlink($target_file);
     header("Location: ../index.php");
 }
 ?>

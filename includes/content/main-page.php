@@ -82,8 +82,5 @@
                 </div>
             </a>
         </div>
-        <div class='w-50'>
-            <?php include('includes/components/npk-search-bar.php'); ?>
-        </div>
     </div>
 </div>

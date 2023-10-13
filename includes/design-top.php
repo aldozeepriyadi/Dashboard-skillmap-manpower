@@ -2,7 +2,10 @@
 	<div class="dashboard-title-container">
 		<p class="h1">SKILL MAP FOR MAN POWER</p>
 	</div>
-	<div class="flex-float-right logo-container">
+	<div class='w-25'>
+		<?php include('includes/components/npk-search-bar.php'); ?>
+	</div>
+	<div class="logo-container">
 		<a href="index.php" class='mr-4 font-default-light'>
 			Home
 		</a>
