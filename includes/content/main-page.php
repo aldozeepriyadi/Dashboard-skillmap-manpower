@@ -60,7 +60,7 @@
 
             echo
                 "
-                <a class='dept-stat-container' href='members.php?q=$d_id&p=1'>
+                <a class='dept-stat-container' href='department_workstations.php?q=$d_id'>
                     <div class='ds-title'>
                         <p>$dept</p>
                     </div>

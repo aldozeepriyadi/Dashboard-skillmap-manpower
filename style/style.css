@@ -193,6 +193,37 @@ a {
     color: var(--font-color-light) !important;
 }
 
+/* ==============workstation================= */
+#ws-overall-stats {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    /* width: 97.5vw; */
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.ws-stat-container {
+    background-color: var(--main-color);
+    border-radius: 15px;
+    margin: 0.5em;
+    margin-top: 0.5em;
+    width: 18vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: all 0.5s;
+    justify-content: space-evenly;
+    /* transition-duration: 0.4s; */
+}
+
+.ws-stat-container:hover {
+    background-color: var(--main-color-highlighted);
+}
+
 /* ==============member page================= */
 
 #member-list {
