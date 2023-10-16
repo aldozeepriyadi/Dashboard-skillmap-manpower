@@ -7,17 +7,21 @@
         </div>
         <div class="w-100">
             <form action="actions/login.php" method="post">
-                <div class="w-100">
-                    <label for="username">Username:</label>
+                <div class='d-flex-row'>
+                    <div class="w-100">
+                        <label for="username">Username:</label>
+                    </div>
+                    <div class="w-100">
+                        <input class="login-input" type="text" name="username" id="username" required>
+                    </div>
                 </div>
-                <div class="w-100">
-                    <input class="login-input" type="text" name="username" id="username" required>
-                </div>
-                <div class="w-100 mt-3">
-                    <label for="password">Password:</label>
-                </div>
-                <div class="w-100">
-                    <input class="login-input" type="password" name="password" id="password" required>
+                <div class='d-flex-row pt-3'>
+                    <div class="w-100">
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="w-100">
+                        <input class="login-input" type="password" name="password" id="password" required>
+                    </div>
                 </div>
                 <div class="w-100 mt-5">
                     <input class='cu-submit-btn w-25' type="submit" value="LOGIN">

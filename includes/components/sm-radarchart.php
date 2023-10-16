@@ -44,6 +44,7 @@ echo "
             plugins: {
                 legend: {
                     labels: {
+                        boxWidth: 0,
                         color:lightCol
                     }
                 }

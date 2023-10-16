@@ -142,7 +142,7 @@ a {
     border-radius: 15px;
     margin-top: 0.5em;
     width: 18vw;
-    height: 60vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -353,7 +353,7 @@ a {
 }
 
 #npk-search-container {
-    width: 100%;
+    width: 30%;
     border: solid 4px var(--main-color);
     border-radius: 24px;
     display: flex;
@@ -361,7 +361,7 @@ a {
     position: absolute;
     left: 50%;
     margin-top: -3vh;
-    margin-left: 50%;
+    margin-left: -15%;
 }
 
 #npk-search-container input {
