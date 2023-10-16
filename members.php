@@ -11,13 +11,13 @@
 <?php include("includes/design-top.php");?>
 
 <?php
-    $workspace_id = $_REQUEST['q'];
+    $dept_id = $_REQUEST['q'];
 	$page_num = 1;
 	if (array_key_exists('p', $_REQUEST)) {
 	$page_num = $_REQUEST['p'];
 	}
     
-    $q_res = $conn->query("SELECT dept_name FROM department WHERE id = ".$workspace_id);
+    $q_res = $conn->query("SELECT dept_name FROM department WHERE id = ".$dept_id);
 	$num_results = $q_res->num_rows;
     $row = $q_res->fetch_assoc();
     $current_dept = $row['dept_name'];

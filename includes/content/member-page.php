@@ -20,7 +20,7 @@
             FROM karyawan 
             LEFT JOIN roles ON karyawan.role = roles.id
             LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
-            WHERE workspace_id = ".$workspace_id." 
+            WHERE dept_id = ".$dept_id." 
             ORDER BY name ASC LIMIT ".intval(($page_num-1)*4).",4");
         while ($member = $q_res->fetch_assoc())
         {
@@ -34,7 +34,7 @@
                         "<div class='member-info-texts'>".
                             "<p>Name: ".$member['name']."</p>".
                             "<p>NPK: ".$member['npk']."</p>".
-                            "<p>Workstation: ".$current_dept."</p>".
+                            "<p>Dept: ".$current_dept."</p>".
                             "<p>Role: ".$member['role_name']."</p>".
                         "</div>".
                         "<div class='member-info-photo-container'>".
@@ -56,7 +56,7 @@
             SELECT 
                 name
             FROM karyawan
-            WHERE workspace_id = ".$workspace_id
+            WHERE dept_id = ".$dept_id
         );
         $num_results = $q_res->num_rows;
         $total_pages = ceil($num_results/4);
@@ -64,11 +64,11 @@
         $current_url = explode("?", $_SERVER['REQUEST_URI']);
 
         if ($page_num != 1) {
-            echo "<a href='$current_url[0]?q=$workspace_id&p=".($page_num-1)."'><img src='img/arrow-left-solid.svg' class='move-member-page-icon'></img></a>";
+            echo "<a href='$current_url[0]?q=$dept_id&p=".($page_num-1)."'><img src='img/arrow-left-solid.svg' class='move-member-page-icon'></img></a>";
         }
         echo "<p>Page ".$page_num." of ".$total_pages."</p>";
         if ($page_num != $total_pages) {
-            echo "<a href='$current_url[0]?q=$workspace_id&p=".($page_num+1)."'><img src='img/arrow-right-solid.svg' class='move-member-page-icon'></img></a>";
+            echo "<a href='$current_url[0]?q=$dept_id&p=".($page_num+1)."'><img src='img/arrow-right-solid.svg' class='move-member-page-icon'></img></a>";
         }
         ?>
     </div>

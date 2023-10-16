@@ -25,7 +25,7 @@
                     SELECT AVG(IFNULL(mp_scores.$cat,0)) as average 
                     FROM karyawan 
                     LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
-                    WHERE workspace_id = $d_id
+                    WHERE dept_id = $d_id
                 ");
                 $row = $res->fetch_assoc();
                 $avg_val = $row['average'];
@@ -35,7 +35,7 @@
                 SELECT AVG(IFNULL(mp_scores.kao,0)) as average 
                 FROM karyawan
                 LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
-                WHERE workspace_id = $d_id AND (
+                WHERE dept_id = $d_id AND (
             ";
             foreach($roles_with_kao as $role) {
                 $query_string .= "role = $role OR ";
@@ -74,7 +74,7 @@
         }
         ?>
     </div>
-    <div id="admin-options">
+    <!-- <div id="admin-options">
         <div class='w-25'>
             <a href='add_profile.php' class='p-1 m-0 w-100'>
                 <div id='ao-create-btn' class='w-100 h-100'>
@@ -82,5 +82,5 @@
                 </div>
             </a>
         </div>
-    </div>
+    </div> -->
 </div>

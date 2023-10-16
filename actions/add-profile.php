@@ -5,7 +5,7 @@ include("../includes/redirect_session.php");
 error_reporting(0);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errMsg = "";
-    $name = $npk = $workstation = $role = "";
+    $name = $npk = $dept = $role = "";
 
     if (empty($_POST["name"])) {
         $errMsg .= "Name is required\\n";
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $target_file = $target_dir . $npk .'.jpg';
     $uploadOk = 1;
 
-    $workstation = $_POST["workstation"];
+    $dept = $_POST["dept"];
     $role = $_POST["role"];
 
     $stmt = $conn->prepare("SELECT npk FROM karyawan WHERE npk = ?");
@@ -53,8 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($errMsg == '') 
     {
         try {
-            $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, workspace_id, role) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssii", $npk, $name, $workstation, $role);
+            $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, dept_id, role) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssii", $npk, $name, $dept, $role);
             $stmt->execute();
             $stmt->close();
     

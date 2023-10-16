@@ -14,14 +14,14 @@
                     <input class="ap-form-input-box" name="npk" type="text">
                 </div>
                 <div class="ap-form-section">
-                    <p>Workstation:</p>
-                    <select class="ap-form-input-box" id="ap-form-workstation" name="workstation">
+                    <p>Dept:</p>
+                    <select class="ap-form-input-box" id="ap-form-dept" name="dept">
                         <?php 
                         $q_res = $conn->query("SELECT id, dept_name FROM department");
                         while ($dept_row = $q_res->fetch_assoc()) {
                             $dept = $dept_row['dept_name'];
-                            $workspace_id = $dept_row['id'];
-                            echo "<option value='".$workspace_id."'>$dept</option>";
+                            $dept_id = $dept_row['id'];
+                            echo "<option value='".$dept_id."'>$dept</option>";
                         }
                         ?>
                     </select>

@@ -28,7 +28,7 @@
             IFNULL(mp_scores.kao,0) as kao,
             roles.name as role_name
         FROM karyawan 
-        LEFT JOIN department ON karyawan.workspace_id = department.id 
+        LEFT JOIN department ON karyawan.dept_id = department.id 
         LEFT JOIN roles ON karyawan.role = roles.id
         LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
         WHERE karyawan.npk = '".$npk."'"
