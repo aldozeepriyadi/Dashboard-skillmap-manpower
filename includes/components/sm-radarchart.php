@@ -43,8 +43,8 @@ echo "
             },
             plugins: {
                 legend: {
+                    display: false,
                     labels: {
-                        boxWidth: 0,
                         color:lightCol
                     }
                 }

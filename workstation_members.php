@@ -15,8 +15,7 @@
 
     $q_res = $conn->query("SELECT name FROM workstations WHERE id = ".$ws_id);
 	$num_results = $q_res->num_rows;
-    $row = $q_res->fetch_assoc();
-    $current_dept = $row['dept_name'];
+    $current_ws = $q_res->fetch_assoc();
 ?>
 
 <?php 

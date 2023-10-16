@@ -24,8 +24,9 @@
                 $res = $conn->query("
                     SELECT AVG(IFNULL(mp_scores.$cat,0)) as average 
                     FROM karyawan 
+                    LEFT JOIN workstations ON karyawan.workstation_id = workstations.id
                     LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
-                    WHERE dept_id = $d_id
+                    WHERE workstations.dept_id = $d_id
                 ");
                 $row = $res->fetch_assoc();
                 $avg_val = $row['average'];
@@ -34,8 +35,9 @@
             $query_string = "
                 SELECT AVG(IFNULL(mp_scores.kao,0)) as average 
                 FROM karyawan
+                LEFT JOIN workstations ON karyawan.workstation_id = workstations.id
                 LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
-                WHERE dept_id = $d_id AND (
+                WHERE workstations.dept_id = $d_id AND (
             ";
             foreach($roles_with_kao as $role) {
                 $query_string .= "role = $role OR ";
