@@ -1,11 +1,35 @@
 <div id='content'>
     <div id="page-title" class="w-100">
-        <p>Overall Assessments</p>
+        <p><?php echo $current_ws?> Members</p>
     </div>
     <div class="w-100 pl-3">
-        <p class='m-0'>aa / bb / cc</p>
+        <?php 
+        $q_heiarchy = $conn->query("
+            SELECT 
+                department.id as dept_id,
+                department.dept_name as dept_name
+            FROM workstations
+            LEFT JOIN department ON workstations.dept_id = department.id
+            WHERE workstations.id = ".$ws_id."
+        ");
+        $current_heiarchy = $q_heiarchy->fetch_assoc();
+
+        echo "
+        <span>
+            <a href='index.php'>Home</a>
+        </span>
+        <span> / </span>
+        <span>
+            <a href='department_workstations.php?q=".$current_heiarchy['dept_id']."'>".$current_heiarchy['dept_name']."</a>
+        </span>
+        <span> / </span>
+        <span>
+            ".$current_ws."
+        </span>
+        ";
+        ?>
     </div>
-    <div class="w-100 p-3">
+    <!-- <div class="w-100 p-3"> -->
         <?php 
         $q_roles = $conn->query("SELECT name, id FROM roles");
         while ($role_row = $q_roles->fetch_assoc()) {
@@ -63,5 +87,5 @@
         </div>";
         }
             ?>
-    </div>
+    <!-- </div> -->
 </div>
