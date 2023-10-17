@@ -1,7 +1,7 @@
 <div id="content">
     <div id="add-profile-page-container">
         <div id="page-title">
-            <p>ADD PROFILE</p>
+            <p>ADD PROFILE TO <?php echo strtoupper($current_dept)?></p>
         </div>
         <form  class="w-100" action="actions/add-profile.php" method="post" enctype="multipart/form-data">
             <div id="add-profile-form-container">
@@ -14,14 +14,18 @@
                     <input class="ap-form-input-box" name="npk" type="text">
                 </div>
                 <div class="ap-form-section">
-                    <p>Dept:</p>
-                    <select class="ap-form-input-box" id="ap-form-dept" name="dept">
+                    <p>Workstation:</p>
+                    <select class="ap-form-input-box" id="ap-form-ws" name="ws">
                         <?php 
-                        $q_res = $conn->query("SELECT id, dept_name FROM department");
-                        while ($dept_row = $q_res->fetch_assoc()) {
-                            $dept = $dept_row['dept_name'];
-                            $dept_id = $dept_row['id'];
-                            echo "<option value='".$dept_id."'>$dept</option>";
+                        $q_res = $conn->query("
+                            SELECT id, name 
+                            FROM workstations
+                            WHERE workstations.dept_id = ".$dept_id."
+                            ");
+                        while ($ws_row = $q_res->fetch_assoc()) {
+                            $ws_name = $ws_row['name'];
+                            $ws_id = $ws_row['id'];
+                            echo "<option value='".$ws_id."'>$ws_name</option>";
                         }
                         ?>
                     </select>

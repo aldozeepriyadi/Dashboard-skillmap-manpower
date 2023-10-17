@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="w-25">
-            <a href='add_profile.php' class='p-1 m-0 w-100'>
+            <a href='add_profile.php?dept=<?php echo $dept_id?>' class='p-1 m-0 w-100'>
                 <div id='ao-create-btn' class='w-100'>
                     <p class='m-0'>Add Profile</p>
                 </div>

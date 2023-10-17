@@ -9,6 +9,15 @@
 </head>
 <body>
 
+<?php
+	$dept_id = $_REQUEST['dept'];
+
+	$q_res = $conn->query("SELECT dept_name FROM department WHERE id = ".$dept_id);
+	$num_results = $q_res->num_rows;
+	$row = $q_res->fetch_assoc();
+	$current_dept = $row['dept_name'];
+?>
+
 <?php include("includes/design-top.php");?>
 <?php include("includes/content/add-profile-page.php");?>
 

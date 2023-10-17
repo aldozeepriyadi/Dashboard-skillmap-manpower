@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $target_file = $target_dir . $npk .'.jpg';
     $uploadOk = 1;
 
-    $dept = $_POST["dept"];
+    $ws = $_POST["ws"];
     $role = $_POST["role"];
 
     $stmt = $conn->prepare("SELECT npk FROM karyawan WHERE npk = ?");
@@ -53,8 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($errMsg == '') 
     {
         try {
-            $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, dept_id, role) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssii", $npk, $name, $dept, $role);
+            $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, workstation_id, role) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssii", $npk, $name, $ws, $role);
             $stmt->execute();
             $stmt->close();
     
