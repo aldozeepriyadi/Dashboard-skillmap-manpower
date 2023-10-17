@@ -18,6 +18,9 @@
         SELECT 
             karyawan.name as name,
             karyawan.npk as npk,
+            workstations.id as ws_id,
+            workstations.name as ws_name,
+            department.id as dept_id,
             department.dept_name as dept_name,
             karyawan.role as role,
             IFNULL(mp_scores.msk,0) as msk,

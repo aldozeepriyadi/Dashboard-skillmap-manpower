@@ -21,6 +21,30 @@
 
     <div id="profile-container">
         <div class="profile-left">
+        <div id="page-title" class="w-100">
+            <p>Assessment Production MP</p>
+        </div>
+        <div class="w-100 pl-3 mb-1">
+            <?php 
+            echo "
+            <span>
+                <a href='index.php'>Home</a>
+            </span>
+            <span> / </span>
+            <span>
+                <a href='department_workstations.php?q=".$karyawan['dept_id']."'>".$karyawan['dept_name']."</a>
+            </span>
+            <span> / </span>
+            <span>
+                <a href='workstation_members.php?q=".$karyawan['ws_id']."'>".$karyawan['ws_name']."</a>
+            </span>
+            <span> / </span>
+            <span>
+                ".$karyawan['name']."
+            </span>
+            ";
+            ?>
+        </div>
             <div class="p-title">
                 <div class="p-picture-container">
                     <img src="
@@ -32,10 +56,10 @@
                     "></img>
                 </div>
                 <div class="p-title-container">
-                    <p class="p-title-text"> ASSESSMENT MP PRODUCTION </p>
-                    <p class="p-name-text">
-                        <?php echo $karyawan['name']?>
-                    </p>
+                    <p class="p-name-text">Nama: <?php echo $karyawan['name']?></p>
+                    <p class="p-name-text">NPK: <?php echo $karyawan['npk']?></p>
+                    <p class="p-name-text">Work Station: <?php echo $karyawan['dept_name']?></p>
+                    <p class="p-name-text">Role: <?php echo $karyawan['role_name']?></p>
                 </div>
             </div>
             <div class="p-stats">
@@ -74,10 +98,7 @@
                 </div> 
                 <div class="pt-tab pt-update-assessment">
                     <div id="biodata">
-                        <p>Nama: <?php echo $karyawan['name']?></p>
-                        <p>NPK: <?php echo $karyawan['npk']?></p>
-                        <p>Work Station: <?php echo $karyawan['dept_name']?></p>
-                        <p>Role: <?php echo $karyawan['role_name']?></p>
+                        
                     </div>
                     <div id="update-assessment">
                         <?php 
