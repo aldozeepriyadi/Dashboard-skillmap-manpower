@@ -1,6 +1,30 @@
 <div id="content">
-    <div id="page-title">
-        <p>Workstations for <?php echo $current_dept ?></p>
+    <div class='d-flex flex-row w-100 pr-2'>
+        <div class='w-75'>
+            <div id="page-title">
+                <p>Workstations for <?php echo $current_dept ?></p>
+            </div>
+            <div class="pl-3">
+                <?php 
+                echo "
+                <span>
+                    <a href='index.php'>Home</a>
+                </span>
+                <span> / </span>
+                <span>
+                    ".$current_dept."
+                </span>
+                ";
+                ?>
+            </div>
+        </div>
+        <div class="w-25">
+            <a href='add_profile.php' class='p-1 m-0 w-100'>
+                <div id='ao-create-btn' class='w-100'>
+                    <p class='m-0'>Add Profile</p>
+                </div>
+            </a>
+        </div>
     </div>
     <div class='w-100'>
         <div id="ws-overall-stats">

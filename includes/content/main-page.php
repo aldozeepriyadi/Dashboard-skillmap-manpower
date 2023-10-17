@@ -76,13 +76,4 @@
         }
         ?>
     </div>
-    <!-- <div id="admin-options">
-        <div class='w-25'>
-            <a href='add_profile.php' class='p-1 m-0 w-100'>
-                <div id='ao-create-btn' class='w-100 h-100'>
-                    <p class='m-0'>Add Profile</p>
-                </div>
-            </a>
-        </div>
-    </div> -->
 </div>
