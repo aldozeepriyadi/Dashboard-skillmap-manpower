@@ -123,7 +123,6 @@ a {
 
 .logo-container img {
     width: 20vh;
-    /* margin: -4.5vh; */
     padding: -4.5vh;
     margin-right: 0;
 }
@@ -157,7 +156,6 @@ a {
     text-decoration: none !important;
     transition: all 0.5s;
     justify-content: space-evenly;
-    /* transition-duration: 0.4s; */
 }
 
 .dept-stat-container:hover {
@@ -413,8 +411,6 @@ a {
     border-radius: 24px;
     display: flex;
     flex-direction: row;
-    /* left: 50%; */
-    /* margin-top: -3.5vh;*/
     margin-left: -20%;
 }
 
@@ -568,7 +564,6 @@ input[type="radio"]:checked + div.mp-desc-toggle{
     flex-direction: row;
     align-items: center;
     margin-bottom: 0.6rem;
-    /* justify-content: space-between;     */
 }
 
 input.update-assessment-button {
@@ -597,7 +592,6 @@ input.update-assessment-button {
 
 #update-assessment p {
     margin: 0px;
-    /* font-size: 3vh; */
 }
 
 #update-assessment-form {

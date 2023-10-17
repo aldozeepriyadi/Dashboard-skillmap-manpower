@@ -41,7 +41,6 @@
 
     if ($num_results == 0) {
         echo "<script>alert('NPK tidak ditemukan');</script>";
-        // exit();
     } else {
         $karyawan = $q_res->fetch_assoc();
     }

@@ -7,7 +7,6 @@ function search_npk(npk) {
 
 $(function() {
     $('document').ready(function(){
-        // Get the input field
         var input = document.getElementById("npk-search");
 
         // Execute a function when the user presses a key on the keyboard
