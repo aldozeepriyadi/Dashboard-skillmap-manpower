@@ -49,8 +49,7 @@
             WHERE karyawan.npk in (
                     SELECT karyawan_workstation.npk FROM karyawan_workstation
                     JOIN workstations on karyawan_workstation.workstation_id = workstations.id
-                    WHERE workstations.dept_id = $dept_id
-                )
+                    WHERE workstations.dept_id = $dept_id )
             AND role = 0
             ORDER BY name ASC");
             while ($member = $q_res->fetch_assoc()) {

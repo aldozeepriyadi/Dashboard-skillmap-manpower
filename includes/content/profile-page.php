@@ -65,8 +65,15 @@
             <div class="p-stats">
                 <div class="p-radar-container">
                     <?php 
-                        $member = $karyawan;
-                        include('includes/components/personal-radarchart.php');
+                    $member = $karyawan;
+                    include('includes/components/personal-radarchart.php');
+                    ?>
+                </div>
+                <div id="p-stats-numeric">
+                    <?php 
+                        foreach($mp_categories as $mp_name => $mp_label) {
+                            echo "<p class='p-name-text'>$mp_label: ".$karyawan[$mp_name]."</p>";
+                        }
                     ?>
                 </div>
             </div>
@@ -144,7 +151,7 @@
             </div>
             <div class='d-flex justify-content-center w-100 h-50 pt-2 pb-2'>
                 <div class='p-process-panel h-100'>
-                    tes
+                    
                 </div>
             </div>
         </div>
