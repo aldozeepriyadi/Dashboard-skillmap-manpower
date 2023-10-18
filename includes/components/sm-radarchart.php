@@ -27,7 +27,6 @@ echo "
                     },
                     angleLines: {
                         color: 'rgba(255,255,255,0)',
-
                     },
                     ticks: {
                         stepSize: 1,

@@ -53,8 +53,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($errMsg == '') 
     {
         try {
-            $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, workstation_id, role) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssii", $npk, $name, $ws, $role);
+            $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, role) VALUES (?, ?, ?)");
+            $stmt->bind_param("ssi", $npk, $name, $role);
+            $stmt->execute();
+            $stmt->close();
+            $stmt = $conn->prepare("INSERT INTO karyawan_workstation (npk, workstation_id) VALUES (?, ?)");
+            $stmt->bind_param("si", $npk, $ws);
             $stmt->execute();
             $stmt->close();
     

@@ -23,8 +23,9 @@
             foreach($operator_mp_categories as $cat => $val) {
                 $res = $conn->query("
                     SELECT AVG(IFNULL(mp_scores.$cat,0)) as average 
-                    FROM karyawan 
-                    LEFT JOIN workstations ON karyawan.workstation_id = workstations.id
+                    FROM karyawan
+                    LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                    LEFT JOIN workstations ON karyawan_workstation.workstation_id = workstations.id
                     LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
                     WHERE workstations.dept_id = $d_id
                 ");
@@ -35,7 +36,8 @@
             $query_string = "
                 SELECT AVG(IFNULL(mp_scores.kao,0)) as average 
                 FROM karyawan
-                LEFT JOIN workstations ON karyawan.workstation_id = workstations.id
+                LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                LEFT JOIN workstations ON karyawan_workstation.workstation_id = workstations.id
                 LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
                 WHERE workstations.dept_id = $d_id AND (
             ";

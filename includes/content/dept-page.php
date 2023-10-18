@@ -1,5 +1,5 @@
 <div id="content">
-    <div class='d-flex flex-row w-100 pr-2'>
+    <div class='d-flex flex-row justify-content-between w-100'>
         <div class='w-75'>
             <div id="page-title">
                 <p>Workstations for <?php echo $current_dept ?></p>
@@ -18,12 +18,65 @@
                 ?>
             </div>
         </div>
-        <div class="w-25">
-            <a href='add_profile.php?dept=<?php echo $dept_id?>' class='p-1 m-0 w-100'>
-                <div id='ao-create-btn' class='w-100'>
+        <div class="d-flex align-items-center justify-content-center pr-3">
+            <a href='add_profile.php?dept=<?php echo $dept_id?>' class='dp-create-btn-container'>
+                <div id='ao-create-btn' class='h-100 w-100'>
                     <p class='m-0'>Add Profile</p>
                 </div>
             </a>
+        </div>
+    </div>
+    <div class='w-100 pl-3 pr-3 mb-2 d-flex align-content-center justify-content-center'>
+        <div class='ws-role-section'>
+            <p class='m-0'>Foreman</p>
+            <div class='member-list-container'>
+            <?php
+            $q_res = $conn->query("
+                SELECT 
+                    karyawan.name as name,
+                    karyawan.npk as npk,
+                    karyawan.role as role,
+                    IFNULL(mp_scores.msk,0) as msk,
+                    IFNULL(mp_scores.kt,0) as kt,
+                    IFNULL(mp_scores.pssp,0) as pssp,
+                    IFNULL(mp_scores.png,0) as png,
+                    IFNULL(mp_scores.fivejq,0) as fivejq,
+                    IFNULL(mp_scores.kao,0) as kao,
+                    roles.name as role_name 
+                FROM karyawan 
+                LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                LEFT JOIN workstations ON karyawan_workstation.workstation_id = workstations.id
+                LEFT JOIN department ON workstations.dept_id = department.id
+                LEFT JOIN roles ON karyawan.role = roles.id
+                LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
+                WHERE workstations.id = ".$dept_id." AND role = 0
+                ORDER BY name ASC");
+            while ($member = $q_res->fetch_assoc()) {
+                $img_path = "img/profile_pictures/".$member['npk'].".jpg";
+                if(!file_exists($img_path)) $img_path = "img/profile_pictures/default.jpg";
+                echo
+                "<div class='d-inline-block'>
+                    <div class='member-container mr-3'>
+                        <a href='preview_member.php?q=".$member['npk']."'>
+                            <div class='member-info'>
+                                <div class='member-info-texts'>
+                                    <p>Name: ".$member['name']."</p>
+                                    <p>NPK: ".$member['npk']."</p>
+                                </div>
+                                <div class='member-info-photo-container'>
+                                    <img src='".$img_path."'></img>
+                                </div>
+                            </div>
+                        </a>
+                        <div class='member-stats'>";
+                            include('includes/components/personal-radarchart.php');
+                        echo
+                        "</div>
+                    </div>
+                </div>";
+            }
+            ?>
+            </div>
         </div>
     </div>
     <div class='w-100'>
@@ -48,7 +101,8 @@
                 foreach($operator_mp_categories as $cat => $val) {
                     $res = $conn->query("
                         SELECT AVG(IFNULL(mp_scores.$cat,0)) as average 
-                        FROM karyawan 
+                        FROM karyawan
+                        LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
                         LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
                         WHERE workstation_id = $ws_id
                     ");
@@ -59,6 +113,7 @@
                 $query_string = "
                     SELECT AVG(IFNULL(mp_scores.kao,0)) as average 
                     FROM karyawan
+                    LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
                     LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
                     WHERE workstation_id = $ws_id AND (
                 ";
@@ -89,7 +144,7 @@
                         <div class='ds-title'>
                             <p>$ws_name</p>
                         </div>
-                        <div class='ds-content'>
+                        <div class='ws-content'>
                     ";
                     include('includes/components/sm-radarchart.php');
                     echo  

@@ -183,12 +183,22 @@ a {
     justify-content: space-between;
 }
 
+.dp-create-btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+}
+
 #ao-create-btn {
     margin-top: auto;
     border: none !important;
     background-color: var(--complement-color-highlighted);
     border-radius: 16px;
-    padding: 1rem;
+    padding: 0.5rem;
+    margin: 0px;
     color: var(--font-color-light) !important;
     font-weight: 600;
     text-align: center;
@@ -211,23 +221,24 @@ a {
     box-shadow: #000000 1px 1px 4px 1px;    
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    width: 95%;
+    width: 100%;
     margin-top: 1rem;
     border-radius: 12px;
 }
 
 .ws-role-section > p{
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .ws-stat-container {
     background-color: var(--main-color);
     border-radius: 15px;
-    margin: 0.5em;
-    margin-top: 0.5em;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.2rem;
     width: 18vw;
-    height: 70vh;
+    height: 40vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -235,11 +246,15 @@ a {
     text-decoration: none !important;
     transition: all 0.5s;
     justify-content: space-evenly;
-    /* transition-duration: 0.4s; */
 }
 
 .ws-stat-container:hover {
     background-color: var(--main-color-highlighted);
+}
+
+.ws-content {
+    margin-top: 1vh;
+    width: 70%;
 }
 
 /* ==============member page================= */

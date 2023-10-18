@@ -36,7 +36,8 @@
         $role_id = $role_row['id'];
 
         echo 
-    "<div class='ws-role-section'>
+    "<div class='w-100 pl-3 pr-3'>
+    <div class='ws-role-section'>
         <p class='m-0'>".$role."</p>
         <div class='member-list-container'>";
 
@@ -53,7 +54,8 @@
                 IFNULL(mp_scores.kao,0) as kao,
                 roles.name as role_name 
             FROM karyawan 
-            LEFT JOIN workstations ON karyawan.workstation_id = workstations.id
+            LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+            LEFT JOIN workstations ON karyawan_workstation.workstation_id = workstations.id
             LEFT JOIN roles ON karyawan.role = roles.id
             LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
             WHERE workstations.id = ".$ws_id." AND role = $role_id
@@ -83,6 +85,7 @@
             </div>";
         }
         echo "</div>
+    </div>
     </div>";
     }
     ?>
