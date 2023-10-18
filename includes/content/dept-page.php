@@ -32,25 +32,27 @@
             <div class='member-list-container'>
             <?php
             $q_res = $conn->query("
-                SELECT 
-                    karyawan.name as name,
-                    karyawan.npk as npk,
-                    karyawan.role as role,
-                    IFNULL(mp_scores.msk,0) as msk,
-                    IFNULL(mp_scores.kt,0) as kt,
-                    IFNULL(mp_scores.pssp,0) as pssp,
-                    IFNULL(mp_scores.png,0) as png,
-                    IFNULL(mp_scores.fivejq,0) as fivejq,
-                    IFNULL(mp_scores.kao,0) as kao,
-                    roles.name as role_name 
-                FROM karyawan 
-                LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
-                LEFT JOIN workstations ON karyawan_workstation.workstation_id = workstations.id
-                LEFT JOIN department ON workstations.dept_id = department.id
+            SELECT
+                karyawan.name as name,	
+                karyawan.npk as npk,
+                karyawan.role as role,
+                IFNULL(mp_scores.msk,0) as msk,
+                IFNULL(mp_scores.kt,0) as kt,
+                IFNULL(mp_scores.pssp,0) as pssp,
+                IFNULL(mp_scores.png,0) as png,
+                IFNULL(mp_scores.fivejq,0) as fivejq,
+                IFNULL(mp_scores.kao,0) as kao,
+                roles.name as role_name 
+            FROM karyawan
                 LEFT JOIN roles ON karyawan.role = roles.id
                 LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
-                WHERE workstations.id = ".$dept_id." AND role = 0
-                ORDER BY name ASC");
+            WHERE karyawan.npk in (
+                    SELECT karyawan_workstation.npk FROM karyawan_workstation
+                    JOIN workstations on karyawan_workstation.workstation_id = workstations.id
+                    WHERE workstations.dept_id = $dept_id
+                )
+            AND role = 0
+            ORDER BY name ASC");
             while ($member = $q_res->fetch_assoc()) {
                 $img_path = "img/profile_pictures/".$member['npk'].".jpg";
                 if(!file_exists($img_path)) $img_path = "img/profile_pictures/default.jpg";

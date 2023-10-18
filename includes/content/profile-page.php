@@ -142,6 +142,11 @@
                     </div>
                 </div>
             </div>
+            <div class='d-flex justify-content-center w-100 h-50 pt-2 pb-2'>
+                <div class='p-process-panel h-100'>
+                    tes
+                </div>
+            </div>
         </div>
     </div>
 </div>

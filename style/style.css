@@ -455,7 +455,7 @@ a {
 .profile-table {
     width: 90%;
     margin-top: 2.5vh;
-    height: 90%;
+    height: 65%;
     border: solid 4px var(--main-color);
     border-radius: 16px;
 }
@@ -524,6 +524,13 @@ input[type="radio"]:checked + div.pt-tab-button{
 .pt-chart-info > div {
     width: 70%;
     padding-left: 0.5vh;
+}
+
+.p-process-panel {
+    /* border: var(--main-color) solid 4px; */
+    background-color: var(--main-color);
+    border-radius: 12px;
+    width: 90%;
 }
 
 #show-mp-desc {
@@ -653,7 +660,7 @@ input[value='5'] + .cu-radio-button {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    margin-top: 3vh;
+    margin-top: 0.5rem;
 }
 
 .cu-submit-btn {
