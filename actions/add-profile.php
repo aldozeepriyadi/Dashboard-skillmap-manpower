@@ -52,16 +52,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($errMsg == '') 
     {
+        $ws = trim($ws);
+        $ws_arr = explode(" ", $ws);
         try {
             $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, role) VALUES (?, ?, ?)");
             $stmt->bind_param("ssi", $npk, $name, $role);
             $stmt->execute();
             $stmt->close();
-            $stmt = $conn->prepare("INSERT INTO karyawan_workstation (npk, workstation_id) VALUES (?, ?)");
-            $stmt->bind_param("si", $npk, $ws);
-            $stmt->execute();
-            $stmt->close();
-    
+
+            foreach($ws_arr as $ws)
+            {
+                $stmt = $conn->prepare("INSERT INTO karyawan_workstation (npk, workstation_id) VALUES (?, ?)");
+                $stmt->bind_param("si", $npk, $ws);
+                $stmt->execute();
+                $stmt->close();
+            }
             echo "<script>window.location.replace('../index.php');</script>";  
         } catch(Exception $e) {
     

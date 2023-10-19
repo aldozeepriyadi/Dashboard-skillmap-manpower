@@ -7,17 +7,17 @@
         </div>
         <div class="w-100">
             <form action="actions/login.php" method="post">
-                <div class='d-flex-row'>
+                <div class='d-flex-row align-items-center'>
                     <div class="w-100">
-                        <label for="username">Username:</label>
+                        <label class='m-0' for="username">Username:</label>
                     </div>
                     <div class="w-100">
                         <input class="login-input" type="text" name="username" id="username" required>
                     </div>
                 </div>
-                <div class='d-flex-row pt-3'>
+                <div class='d-flex-row pt-3 align-items-center'>
                     <div class="w-100">
-                        <label for="password">Password:</label>
+                        <label class='m-0' for="password">Password:</label>
                     </div>
                     <div class="w-100">
                         <input class="login-input" type="password" name="password" id="password" required>

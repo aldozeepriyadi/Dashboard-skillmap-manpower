@@ -6,6 +6,7 @@
 <head>
 	<?php include("includes/head-tag-contents.php");?>
 	<script src="js/search-npk.js"></script>
+	<script src="js/add-profile-form.js"></script>
 </head>
 <body>
 

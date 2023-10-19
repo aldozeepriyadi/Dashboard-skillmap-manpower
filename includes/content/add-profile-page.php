@@ -14,8 +14,21 @@
                     <input class="ap-form-input-box" name="npk" type="text">
                 </div>
                 <div class="ap-form-section">
+                    <p>Role:</p>
+                    <select class="ap-form-input-box" id="ap-form-role" name="role">
+                        <?php 
+                            $q_res = $conn->query("SELECT id, name FROM roles");
+                            while ($role_row = $q_res->fetch_assoc()) {
+                                $role = $role_row['name'];
+                                $role_id = $role_row['id'];
+                                echo "<option value='".$role_id."'>$role</option>";
+                            }
+                            ?>
+                    </select>
+                </div>
+                <div class="ap-form-section">
                     <p>Workstation:</p>
-                    <select class="ap-form-input-box" id="ap-form-ws" name="ws">
+                    <select class="ap-form-input-box" id="ap-form-ws" multiple>
                         <?php 
                         $q_res = $conn->query("
                             SELECT id, name 
@@ -29,19 +42,7 @@
                         }
                         ?>
                     </select>
-                </div>
-                <div class="ap-form-section">
-                    <p>Role:</p>
-                    <select class="ap-form-input-box" id="ap-form-role" name="role">
-                        <?php 
-                            $q_res = $conn->query("SELECT id, name FROM roles");
-                            while ($role_row = $q_res->fetch_assoc()) {
-                                $role = $role_row['name'];
-                                $role_id = $role_row['id'];
-                                echo "<option value='".$role_id."'>$role</option>";
-                            }
-                            ?>
-                    </select>
+                    <input type="text" name="ws" id="ap-form-ws-val" value='' hidden>
                 </div>
                 <div class="ap-form-section">
                     <p>Profile Picture:</p>
