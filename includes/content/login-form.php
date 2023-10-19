@@ -27,5 +27,6 @@
                     <input class='cu-submit-btn w-25' type="submit" value="LOGIN">
                 </div>
             </form>
+        </div>
     </div>
 </div>

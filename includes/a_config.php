@@ -11,5 +11,5 @@
         "kao"=>"KAO"
 	);
 
-	$roles_with_kao = array(0, 2)
+	$roles_with_kao = array(0, 1)
 ?>

@@ -24,10 +24,12 @@
                 $res = $conn->query("
                     SELECT AVG(IFNULL(mp_scores.$cat,0)) as average 
                     FROM karyawan
-                    LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
-                    LEFT JOIN workstations ON karyawan_workstation.workstation_id = workstations.id
                     LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
-                    WHERE workstations.dept_id = $d_id
+                    WHERE karyawan.npk in (
+                        SELECT karyawan_workstation.npk FROM karyawan_workstation 
+                        JOIN workstations on karyawan_workstation.workstation_id = workstations.id
+                        WHERE workstations.dept_id = $d_id
+                    )
                 ");
                 $row = $res->fetch_assoc();
                 $avg_val = $row['average'];
