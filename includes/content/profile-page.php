@@ -56,13 +56,41 @@
                     "></img>
                 </div>
                 <div class="p-title-container">
-                    <p class="p-name-text">Nama: <?php echo $karyawan['name']?></p>
-                    <p class="p-name-text">NPK: <?php echo $karyawan['npk']?></p>
-                    <p class="p-name-text">Work Station: <?php echo $karyawan['dept_name']?></p>
-                    <p class="p-name-text">Role: <?php echo $karyawan['role_name']?></p>
+                    <div class='d-flex-row p-name-text'>
+                        <span class='w-25'>
+                            <p>Nama</p>
+                        </span>
+                        <span class='w-75'>
+                            <p>: <?php echo $karyawan['name']?></p>
+                        </span>
+                    </div>
+                    <div class='d-flex-row p-name-text'>
+                        <span class='w-25'>
+                            <p>NPK</p>
+                        </span>
+                        <span class='w-75'>
+                            <p>: <?php echo $karyawan['npk']?></p>
+                        </span>
+                    </div>
+                    <div class='d-flex-row p-name-text'>
+                        <span class='w-25'>
+                            <p>Department</p>
+                        </span>
+                        <span class='w-75'>
+                            <p>: <?php echo $karyawan['dept_name']?></p>
+                        </span>
+                    </div>
+                    <div class='d-flex-row p-name-text'>
+                        <span class='w-25'>
+                            <p>Role</p>
+                        </span>
+                        <span class='w-75'>
+                            <p>: <?php echo $karyawan['role_name']?></p>
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="p-stats">
+            <div class="p-stats m-3 p-4">
                 <div class="p-radar-container">
                     <?php 
                     $member = $karyawan;
@@ -72,7 +100,15 @@
                 <div id="p-stats-numeric">
                     <?php 
                         foreach($mp_categories as $mp_name => $mp_label) {
-                            echo "<p class='p-name-text'>$mp_label: ".$karyawan[$mp_name]."</p>";
+                            echo "
+                            <div class='d-flex-row p-name-text m-1'>
+                                <span class='w-75'>
+                                    <p class='m-0'>$mp_label</p>
+                                </span>
+                                <span class='w-25'>
+                                    <p class='m-0'>: ".$karyawan[$mp_name]."</p>
+                                </span>
+                            </div>";
                         }
                     ?>
                 </div>
@@ -104,9 +140,6 @@
                     <?php include("includes/components/mp-table-info.php")?>
                 </div> 
                 <div class="pt-tab pt-update-assessment">
-                    <div id="biodata">
-                        
-                    </div>
                     <div id="update-assessment">
                         <?php 
                         echo 
@@ -150,8 +183,29 @@
                 </div>
             </div>
             <div class='d-flex justify-content-center w-100 h-50 pt-2 pb-2'>
-                <div class='p-process-panel h-100'>
-                    
+                <div class='p-process-panel d-flex flex-column align-items-center h-100 p-1'>
+                    <div class='p-process-panel-text'>
+                        <p class='m-1'>Process Qualification</p>
+                    </div>
+                    <div class="w-100 h-100 p-1">
+                        <div class='p-process-panel-list w-100 h-100 d-flex flex-column flex-wrap'>
+                            <?php
+                            $q_res = $conn->query("
+                                SELECT process.name as name FROM karyawan
+                                JOIN qualifications ON karyawan.npk = qualifications.npk
+                                JOIN process ON qualifications.process_id = process.id
+                                WHERE karyawan.npk = '".$karyawan['npk']."'
+                            ");
+                            while ($q_row = $q_res->fetch_assoc()) {
+                                echo "
+                                <div class='p-process-panel-list-item p-1 mb-1'>
+                                    <p class='m-0'>".$q_row['name']."</p>
+                                </div>
+                                ";
+                            }
+                            ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

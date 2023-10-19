@@ -7,7 +7,7 @@
 	<?php include("includes/head-tag-contents.php");?>
     <script src="js/profile-page.js"></script>
 </head>
-<body>
+<body style='margin: 0; height: 100%; overflow: hidden'>
 
 <?php include("includes/design-top.php");?>
 
