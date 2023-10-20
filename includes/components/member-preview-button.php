@@ -7,7 +7,7 @@ function member_preview_button($member){
         <div class='member-container mr-3'>
             <a href='preview_member.php?q=".$member['npk']."'>
                 <div class='member-info'>
-                    <div class='member-info-texts'>
+                    <div class='member-info-texts pl-2 pt-1'>
                         <div class='d-flex-row'>
                             <span class='w-25'>
                                 <p>Name</p>

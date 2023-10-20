@@ -7,11 +7,11 @@
             <div id="add-profile-form-container">
                 <div class="ap-form-section">
                     <p>Nama:</p>
-                    <input class="ap-form-input-box" name="name" type="text">
+                    <input class="ap-form-input-box" name="name" type="text" maxlength='32'>
                 </div>
                 <div class="ap-form-section">
                     <p>NPK:</p>
-                    <input class="ap-form-input-box" name="npk" type="text">
+                    <input class="ap-form-input-box" name="npk" type="text" maxlength="11">
                 </div>
                 <div class="ap-form-section">
                     <p>Role:</p>

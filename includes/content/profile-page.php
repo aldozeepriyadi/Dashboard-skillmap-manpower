@@ -2,7 +2,7 @@
     <div class="popup hidden" id="update-popup">
         <div class='popup-content-wrapper'>
             <p>Are you sure you want to update <?php echo $karyawan['name']?>?</p>
-            <div class='d-flex-row'>
+            <div class='d-flex-row justify-content-between w-100'>
                 <a href="#" class="cu-cancel-btn m-1" onclick="hide('#update-popup')">Cancel</a>
                 <label for="cu-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
             </div>
@@ -12,9 +12,21 @@
     <div class="popup hidden" id="delete-popup">
         <div class='popup-content-wrapper'>
             <p>Are you sure you want to delete <?php echo $karyawan['name']?>?</p>
-            <div class='d-flex-row'>
+            <div class='d-flex-row justify-content-between w-100'>
                 <a href="#" class="cu-cancel-btn m-1" onclick="hide('#delete-popup')">Cancel</a>
                 <label for="cu-delete-btn" tabindex="0" class='cu-delete-btn m-1'>Confirm</label>
+            </div>
+        </div>
+    </div>
+
+    <div class='popup hidden' id='edit-process-popup'>
+        <div class='popup-content-wrapper h-100'>
+            <p>Edit Process Qualification for <?php echo $karyawan['name']?></p>
+            <?php include('includes/components/process-edit-panel.php');?>
+            <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide('#edit-process-popup')">Cancel</a>
+                <a href="#" class="cu-submit-btn m-1" onclick="hide('#edit-process-popup')">Confirm</a>
+                <!-- <label for="cu-delete-btn" tabindex="0" class='cu-delete-btn m-1'>Confirm</label> -->
             </div>
         </div>
     </div>
@@ -182,13 +194,16 @@
                     </div>
                 </div>
             </div>
-            <div class='d-flex justify-content-center w-100 h-50 pt-2 pb-2'>
+            <div class='d-flex justify-content-center w-100 pt-2 pb-2'>
                 <div class='p-process-panel d-flex flex-column align-items-center h-100 p-1'>
-                    <div class='p-process-panel-text'>
-                        <p class='m-1'>Process Qualification</p>
+                    <div class='p-process-panel-text d-flex flex-row justify-content-between w-100 pl-1 pr-1'>
+                        <p class='m-0'>Process Qualification</p>
+                        <a href='#' onclick='show("#edit-process-popup")' id='process-edit-btn' class='d-flex justify-content-center align-items-center'>
+                            <p class='m-0'>EDIT</p>
+                        </a>
                     </div>
                     <div class="w-100 h-100 p-1">
-                        <div class='p-process-panel-list w-100 h-100 p-2'>
+                        <div class='p-process-panel-list w-100'>
                             <?php
                             $q_res = $conn->query("
                                 SELECT process.name as name FROM karyawan

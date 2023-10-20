@@ -7,6 +7,7 @@
     --secondary-color-darken: #DDDDDD;
     --overlay-background-color: rgba(0,0,0,0.5);
     --delete-color: #8A0F0F;
+    --delete-color-highlighted: #B81414;
     --font-color-light: #FFFFFF;
     --font-color-dark: #000000;
 }
@@ -55,12 +56,12 @@ a {
 
 .popup {
     position: fixed;
-    width: 35vw;
+    width: 50%;
     left: 50%;
-    margin-left: -17.5vw;
-    height: 20vh;
+    margin-left: -25%;
+    height: 50vh;
     top: 50%;
-    margin-top: -10vh;
+    margin-top: -25vh;
     background: var(--secondary-color);
     z-index: 20;
     border-radius: 24px;
@@ -103,6 +104,10 @@ a {
 
 .flex-float-right {
     margin-left: auto;
+}
+
+.flex-float-bottom {
+    margin-top: auto;
 }
 
 #page-title {
@@ -418,7 +423,7 @@ a {
     margin-left: -5vw;
     /* border: var(--main-color) solid 2px; */
     border-radius: 12px;
-    width: 7rem;
+    width: 10rem;
     padding: 0.5rem;
 }
 
@@ -549,11 +554,46 @@ input[type="radio"]:checked + div.pt-tab-button{
     max-height: 26vh;
 }
 
+#process-edit-btn {
+    background-color: var(--complement-color);
+    transition: all 0.3s;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 3rem;
+}
+
+#process-edit-btn:hover {
+    background-color: var(--complement-color-highlighted);
+
+}
+#process-edit-btn p {
+    text-decoration: none !important;
+    color: var(--font-color-light);
+}
+
+.p-process-panel-list {
+    display: block;
+    overflow: auto;
+    height: 20vh;
+}
+
 .p-process-panel-list-item {
     background-color: var(--secondary-color);
     color: var(--font-color-dark);
     width: 100%;
     height: 2rem;
+}
+
+input[type="checkbox"] {
+    width: 5%;
+}
+
+.process-edit-checkbox-button {
+    width: 95%;
+}
+
+input[type="checkbox"]:checked + label{
+    background-color: var(--secondary-color-darken);
 }
 
 #show-mp-desc {
@@ -694,7 +734,8 @@ input[value='5'] + .cu-radio-button {
 .cu-submit-btn {
     margin-top: auto;
     border: none !important;
-    background-color: var(--complement-color-highlighted);
+    background-color: var(--complement-color);
+    transition: all 0.3s;
     border-radius: 16px;
     padding: 0.5rem;
     color: var(--font-color-light) !important;
@@ -703,16 +744,25 @@ input[value='5'] + .cu-radio-button {
     cursor: pointer;
 }
 
+.cu-submit-btn:hover {
+    background-color: var(--complement-color-highlighted);
+}
+
 .cu-delete-btn {
     margin-top: auto;
     border: none !important;
     background-color: var(--delete-color);
+    transition: all 0.3s;
     border-radius: 16px;
     padding: 0.5rem;
     color: var(--font-color-light) !important;
     font-weight: 500;
     font-size: 2vh;
     cursor: pointer;
+}
+
+.cu-delete-btn:hover {
+    background-color: var(--delete-color-highlighted);
 }
 
 .cu-cancel-btn {
