@@ -304,21 +304,23 @@ a {
     width: 100%;
 }
 
-.member-info-texts > p {
+.member-info-texts p {
     color: var(--font-color-light);
     font-size: 2vh;
-    margin: 0.5rem;
+    margin: 0rem;
 }
 
 .member-info-photo-container {
     height: 100%;
     display: flex;
     justify-content: center;
+    padding: 1rem;
 }
 
 .member-info-photo-container > img {
     height: 12vh;
     width: 9vh;
+    margin-top: auto;
 }
 
 .member-stats{
@@ -550,7 +552,7 @@ input[type="radio"]:checked + div.pt-tab-button{
 .p-process-panel-list-item {
     background-color: var(--secondary-color);
     color: var(--font-color-dark);
-    width: 30%;
+    width: 100%;
     height: 2rem;
 }
 

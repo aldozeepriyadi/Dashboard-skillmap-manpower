@@ -1,4 +1,5 @@
 <?php
+include('includes/a_config.php');
 if (!in_array($member['role'], $roles_with_kao)) $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ']";
 else $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO']";
 

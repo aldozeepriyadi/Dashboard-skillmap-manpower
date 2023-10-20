@@ -22,6 +22,7 @@ $(function() {
         console.log($(".pt-tab"));
         $(".pt-update-assessment").addClass("hidden");
         $(".pt-chart-info").removeClass("hidden");
+        $("#show-msk").prop('checked', true)
     });
     $('#pt-tab-radio').change(function(){
         selected_value = $("input[name='pt-tab']:checked").val();

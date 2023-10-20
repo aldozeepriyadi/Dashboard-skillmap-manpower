@@ -188,7 +188,7 @@
                         <p class='m-1'>Process Qualification</p>
                     </div>
                     <div class="w-100 h-100 p-1">
-                        <div class='p-process-panel-list w-100 h-100 d-flex flex-column flex-wrap'>
+                        <div class='p-process-panel-list w-100 h-100 p-2'>
                             <?php
                             $q_res = $conn->query("
                                 SELECT process.name as name FROM karyawan
