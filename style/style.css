@@ -680,6 +680,23 @@ input.update-assessment-button {
     justify-items: center;
 }
 
+.mp-file-img-container{
+    margin-left: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.mp-file-img-container:hover{
+    background-color: var(--secondary-color-darken);
+}
+
+.mp-file-img-container img{
+    height: 3vh;
+}
+
 #update-assessment p {
     margin: 0px;
 }
@@ -849,4 +866,20 @@ input[value='5'] + .cu-radio-button {
     border: none;
     height: 5vh;
     padding: 0.5rem;
+}
+
+/* ========= Files ============== */
+#upload-file-section {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px 12px 12px 0px;
+    box-shadow: #000000 1px 1px 4px 1px;
+}
+
+#files-preview {
+    display: flex;
+    flex-direction: column;
+    border-radius:  12px 0px 0px 12px;
+    align-items: center;
+    box-shadow: #000000 1px 1px 4px 1px;
 }

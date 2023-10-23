@@ -177,8 +177,12 @@
                                     </div>";
                                 }
                                 echo 
-                                    "</div>
-                                </div>";
+                                    "</div>";
+                                echo "<a href='preview_mp_file.php?q=".$karyawan['npk']."&cat=".$cat."' class='mp-file-img-container'>";
+                                echo "<img src='img/file-import-solid.svg'></img>";
+                                echo "</a>";
+                                echo
+                                "</div>";
                             }
                         ?>
                             <div class="cu-submit-wrapper">

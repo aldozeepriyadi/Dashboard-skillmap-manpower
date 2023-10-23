@@ -4,6 +4,7 @@
         "SELECT
             process.id as process_id,
             process.name as process_name,
+            workstations.name as workstation_name,
             IF(
                 process.id IN 
                     (SELECT qualifications.process_id FROM qualifications WHERE qualifications.npk = '".$karyawan['npk']."')
@@ -12,7 +13,8 @@
         FROM process
         LEFT JOIN workstations ON workstations.id = process.workstation_id
         LEFT JOIN karyawan_workstation ON karyawan_workstation.workstation_id = workstations.id
-        WHERE karyawan_workstation.npk = '".$karyawan['npk']."' AND process.name != ''"
+        WHERE karyawan_workstation.npk = '".$karyawan['npk']."' AND process.name != ''
+        ORDER BY process.name ASC, workstations.name ASC"
     );
 
     echo "
@@ -25,7 +27,7 @@
         if ($p['qualified'] == 'yes') echo "checked";
         echo ">";
         echo "<label class='process-edit-checkbox-button m-0' for='p-".$p['process_id']."'>";
-        echo "<p class='m-0'>".$p['process_name']."</p>";
+        echo "<p class='m-0'>".$p['process_name'].' ('.$p['workstation_name'].")</p>";
         echo "</label><br>";
         echo "</div>";
     }
