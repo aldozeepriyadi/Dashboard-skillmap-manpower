@@ -1,8 +1,8 @@
 <div id="content">
     <div class="popup hidden" id="update-popup">
-        <div class='popup-content-wrapper'>
+        <div class='popup-content-wrapper h-100'>
             <p>Are you sure you want to update <?php echo $karyawan['name']?>?</p>
-            <div class='d-flex-row justify-content-between w-100'>
+            <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
                 <a href="#" class="cu-cancel-btn m-1" onclick="hide('#update-popup')">Cancel</a>
                 <label for="cu-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
             </div>
@@ -10,9 +10,9 @@
     </div>
 
     <div class="popup hidden" id="delete-popup">
-        <div class='popup-content-wrapper'>
+        <div class='popup-content-wrapper h-100'>
             <p>Are you sure you want to delete <?php echo $karyawan['name']?>?</p>
-            <div class='d-flex-row justify-content-between w-100'>
+            <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
                 <a href="#" class="cu-cancel-btn m-1" onclick="hide('#delete-popup')">Cancel</a>
                 <label for="cu-delete-btn" tabindex="0" class='cu-delete-btn m-1'>Confirm</label>
             </div>
@@ -25,8 +25,7 @@
             <?php include('includes/components/process-edit-panel.php');?>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
                 <a href="#" class="cu-cancel-btn m-1" onclick="hide('#edit-process-popup')">Cancel</a>
-                <a href="#" class="cu-submit-btn m-1" onclick="hide('#edit-process-popup')">Confirm</a>
-                <!-- <label for="cu-delete-btn" tabindex="0" class='cu-delete-btn m-1'>Confirm</label> -->
+                <label for="q-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
             </div>
         </div>
     </div>

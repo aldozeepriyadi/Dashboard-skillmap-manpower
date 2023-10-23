@@ -1,3 +1,4 @@
+<script src='js/edit-qualification-form.js'></script>
 <?php
     $q_process = $conn->query(
         "SELECT
@@ -15,11 +16,12 @@
     );
 
     echo "
-    <form action='' class='w-100 d-block overflow-auto'>
+    <form action='actions/update-qualifications.php?q=".$karyawan['npk']."' method='post' class='w-100 h-75 d-block overflow-auto'>
     ";
+    echo "<div class='d-block h-100' style='overflow: auto'>";
     while($p = $q_process->fetch_assoc()) {
         echo "<div class='d-flex flex-row align-items-center'>";
-        echo "<input type='checkbox'  id='p-".$p['process_id']."' name='edit-process-checkbox' value='".$p['process_id']."'";
+        echo "<input type='checkbox'  id='p-".$p['process_id']."' class='edit-process-checkbox' value='".$p['process_id']."'";
         if ($p['qualified'] == 'yes') echo "checked";
         echo ">";
         echo "<label class='process-edit-checkbox-button m-0' for='p-".$p['process_id']."'>";
@@ -27,6 +29,9 @@
         echo "</label><br>";
         echo "</div>";
     }
+    echo "</div>";
+    echo "<input type='text' name='qualifications' id='ap-form-qualification-val' value='' hidden>";
+    echo "<div class='hidden'> <input type='submit' name='update' id='q-submit-btn'>CONFIRM</input> </div>";
     echo "
     </form>
     ";
