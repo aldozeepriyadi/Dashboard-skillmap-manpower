@@ -14,12 +14,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $filename = date('YmdHis').$npk.'.'.$ext;
     $target_file = $target_dir . $filename;
 
+    if (isset($_POST['mp-file-name']) && $_POST['mp-file-name'] != ""){
+        $file_display_name = $_POST['mp-file-name'].'.'.$ext;
+    } else {
+        $file_display_name = $filename;
+    }
+
     if (!move_uploaded_file($_FILES["mp-file-input"]["tmp_name"], $target_file)) {
         $errMsg .= "Sorry, there was an error uploading your file.\\n";
     }
 
     $conn->query(
-        "INSERT INTO mp_file_proof (npk, mp_category, filename) VALUES ('".$npk."', '".$cat."', '".$filename."')"
+        "INSERT INTO mp_file_proof (npk, mp_category, filename, name, description) VALUES ('".$npk."', '".$cat."', '".$filename."', '".$file_display_name."', '".$_POST['mp-file-desc']."')"
     );
 
     if(isset($_SERVER["HTTP_REFERER"])) {

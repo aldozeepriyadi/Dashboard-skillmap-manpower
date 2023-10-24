@@ -32,10 +32,12 @@
     <div class='w-100 d-flex align-items-center justify-content-center flex-row' style='height: 87.5%'>
         <div class='w-75 h-100 p-3'>
             <div id='files-preview' class='w-100 h-100'>
-                <p class='mt-3'>Current Files</p>
+                <div class='w-100 d-flex align-items-center justify-content-center'>
+                    <p class='mt-3 small-title'>Current Files</p>
+                </div>
                 <?php 
                 $q_res = $conn->query("
-                    SELECT filename 
+                    SELECT id, filename, name, description, posted_time
                     FROM mp_file_proof 
                     WHERE mp_category = '".$_GET['cat']."' AND npk = '".$_GET['q']."'
                     ");
@@ -46,9 +48,14 @@
                     while ($file_row = $q_res->fetch_assoc()) {
                         $filename = $file_row['filename'];
                         echo "
-                        <div class='file-preview-container'>
+                        <div class='file-preview-container w-100 p-3'>
+                            <p>".$file_row['posted_time']."</p>
                             <a href='files/".$filename."' target='_blank'>
-                                <p>".$filename."</p>
+                                <p>".$file_row['name']."</p>
+                            </a>
+                            <p>".$file_row['description']."</p>
+                            <a href='actions/delete-file.php?q=".$file_row['id']."'>
+                                <button class='cu-submit-btn'>Delete</button>
                             </a>
                         </div>
                         ";
@@ -59,9 +66,11 @@
         </div>
         <div class='w-25 h-100 p-3'>
             <div id='upload-file-section' class='w-100 h-100 p-3'>
-                <p>Add New Files</p>
+                <p class='small-title'>Add New Files</p>
                 <form action="actions/add-file.php?q=<?php echo $_GET['q'].'&cat='.$_GET['cat'];?>" class='w-100 h-100 d-flex flex-column justify-content-center align-content-center' method='post' enctype='multipart/form-data'>
                     <input type="file" id="mp-file-input" name="mp-file-input">
+                    <input class='mt-4' type="text" name="mp-file-name" placeholder="File Name" maxlength='16'>
+                    <textarea class='mt-4' type="text" name="mp-file-desc" placeholder="File Description" maxlength='64'></textarea>
                     <input type="submit" name="update" class="cu-submit-btn"></input>
                 </form>
             </div>

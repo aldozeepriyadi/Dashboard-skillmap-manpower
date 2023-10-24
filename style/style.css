@@ -21,6 +21,11 @@ a {
     text-decoration: none !important;
 }
 
+.small-title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
 /* ==============general================= */
 
 .font-default-light {
@@ -877,9 +882,12 @@ input[value='5'] + .cu-radio-button {
 }
 
 #files-preview {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    overflow: auto;
     border-radius:  12px 0px 0px 12px;
-    align-items: center;
     box-shadow: #000000 1px 1px 4px 1px;
+}
+
+.file-preview-container {
+    border-bottom: #000000 1px dashed;
 }
