@@ -1,40 +1,50 @@
 <div id='content'>
-    <div id="page-title" class="w-100">
-        <p><?php echo $current_ws?> Members</p>
-    </div>
-    <div class="w-100 pl-3">
-        <?php 
-        $q_heiarchy = $conn->query("
-            SELECT 
-                department.id as dept_id,
-                department.dept_name as dept_name,
-                workstations.id as ws_id,
-                workstations.name as ws_name
-            FROM sub_workstations
-            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
-            LEFT JOIN department ON workstations.dept_id = department.id
-            WHERE sub_workstations.id = ".$ws_id."
-        ");
-        $current_heiarchy = $q_heiarchy->fetch_assoc();
-
-        echo "
-        <span>
-            <a href='index.php'>Home</a>
-        </span>
-        <span> / </span>
-        <span>
-            <a href='department_workstations.php?q=".$current_heiarchy['dept_id']."'>".$current_heiarchy['dept_name']."</a>
-        </span>";
-        if ($current_heiarchy['ws_name'] != $current_ws)
-            echo "<span> / </span>
-            <span>
-                <a href='workstation_members.php?q=".$current_heiarchy['ws_id']."'>".$current_heiarchy['ws_name']."</a>
-            </span>";
-        echo "<span> / </span>
-        <span>
-            ".$current_ws."
-        </span>";
-        ?>
+    <div class='w-100 d-flex flex-row justify-content-between pr-3'>
+        <div class='w-75'>
+            <div id="page-title" class="w-100">
+                <p><?php echo $current_ws?> Members</p>
+            </div>
+            <div class="w-100 pl-3">
+                <?php
+                $q_heiarchy = $conn->query("
+                    SELECT
+                        department.id as dept_id,
+                        department.dept_name as dept_name,
+                        workstations.id as ws_id,
+                        workstations.name as ws_name
+                    FROM sub_workstations
+                    LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
+                    LEFT JOIN department ON workstations.dept_id = department.id
+                    WHERE sub_workstations.id = ".$ws_id."
+                ");
+                $current_heiarchy = $q_heiarchy->fetch_assoc();
+                echo "
+                <span>
+                    <a href='index.php'>Home</a>
+                </span>
+                <span> / </span>
+                <span>
+                    <a href='department_workstations.php?q=".$current_heiarchy['dept_id']."'>".$current_heiarchy['dept_name']."</a>
+                </span>";
+                if ($current_heiarchy['ws_name'] != $current_ws)
+                    echo "<span> / </span>
+                    <span>
+                        <a href='workstation_members.php?q=".$current_heiarchy['ws_id']."'>".$current_heiarchy['ws_name']."</a>
+                    </span>";
+                echo "<span> / </span>
+                <span>
+                    ".$current_ws."
+                </span>";
+                ?>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center pr-3">
+                <a href='add_profile.php?dept=<?php echo $current_heiarchy['dept_id']?>' class='dp-create-btn-container'>
+                    <div id='ao-create-btn' class='h-100 w-100'>
+                        <p class='m-0'>Add Profile</p>
+                    </div>
+                </a>
+        </div>
     </div>
     <?php 
     include('includes/components/member-preview-button.php');

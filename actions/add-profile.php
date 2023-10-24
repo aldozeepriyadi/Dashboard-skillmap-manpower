@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->execute();
                 $stmt->close();
             }
-            echo "<script>window.location.replace('../index.php');</script>";  
+            echo "<script>window.location.replace('../preview_member.php?q=$npk');</script>";  
         } catch(Exception $e) {
     
         }

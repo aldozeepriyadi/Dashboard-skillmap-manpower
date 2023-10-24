@@ -1,33 +1,43 @@
 <div id='content'>
-    <div id="page-title" class="w-100">
-        <p><?php echo $current_ws?> Members</p>
-    </div>
-    <div class="w-100 pl-3">
-        <?php 
-        $q_heiarchy = $conn->query("
-            SELECT 
-                department.id as dept_id,
-                department.dept_name as dept_name
-            FROM workstations
-            LEFT JOIN department ON workstations.dept_id = department.id
-            WHERE workstations.id = ".$ws_id."
-        ");
-        $current_heiarchy = $q_heiarchy->fetch_assoc();
-
-        echo "
-        <span>
-            <a href='index.php'>Home</a>
-        </span>
-        <span> / </span>
-        <span>
-            <a href='department_workstations.php?q=".$current_heiarchy['dept_id']."'>".$current_heiarchy['dept_name']."</a>
-        </span>
-        <span> / </span>
-        <span>
-            ".$current_ws."
-        </span>
-        ";
-        ?>
+    <div class='w-100 d-flex flex-row justify-content-between pr-3'>
+        <div class='w-75'>
+            <div id="page-title" class="w-100">
+                <p><?php echo $current_ws?> Sub Workstations</p>
+            </div>
+            <div class="w-100 pl-3">
+                <?php
+                $q_heiarchy = $conn->query("
+                    SELECT
+                        department.id as dept_id,
+                        department.dept_name as dept_name
+                    FROM workstations
+                    LEFT JOIN department ON workstations.dept_id = department.id
+                    WHERE workstations.id = ".$ws_id."
+                ");
+                $current_heiarchy = $q_heiarchy->fetch_assoc();
+                echo "
+                <span>
+                    <a href='index.php'>Home</a>
+                </span>
+                <span> / </span>
+                <span>
+                    <a href='department_workstations.php?q=".$current_heiarchy['dept_id']."'>".$current_heiarchy['dept_name']."</a>
+                </span>
+                <span> / </span>
+                <span>
+                    ".$current_ws."
+                </span>
+                ";
+                ?>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center pr-3">
+            <a href='add_profile.php?dept=<?php echo $current_heiarchy['dept_id']?>' class='dp-create-btn-container'>
+                <div id='ao-create-btn' class='h-100 w-100'>
+                    <p class='m-0'>Add Profile</p>
+                </div>
+            </a>
+        </div>
     </div>
     <div class='w-100'>
         <div id="ws-overall-stats">

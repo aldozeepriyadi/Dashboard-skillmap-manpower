@@ -62,7 +62,13 @@
                     <input type="file" id="ap-form-photo" name="ap-form-photo" accept="image/*">
                 </div>
                 <div class="ap-form-section">
-                    <a href="index.php" class="cu-cancel-btn">Cancel</a>
+                    <a href="<?php 
+                        if (isset($_SERVER['HTTP_REFERER'])) {
+                            echo $_SERVER['HTTP_REFERER'];
+                        } else {
+                            echo "index.php";
+                        }
+                    ?>" class="cu-cancel-btn">Cancel</a>
                     <button id="ap-form-submit" name="submit" class="cu-submit-btn">Submit</button>
                 </div>
             </div>
