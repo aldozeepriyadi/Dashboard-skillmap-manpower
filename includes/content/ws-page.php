@@ -29,46 +29,82 @@
         ";
         ?>
     </div>
-    <?php 
-    include('includes/components/member-preview-button.php');
-    $q_roles = $conn->query("SELECT name, id FROM roles");
-    while ($role_row = $q_roles->fetch_assoc()) {
-        $role = $role_row['name'];
-        $role_id = $role_row['id'];
+    <div class='w-100'>
+        <div id="ws-overall-stats">
+            <script>
+                var ctx_list = {}
+            </script>
+            <?php
+            $q_res = $conn->query("SELECT * FROM sub_workstations WHERE workstation_id = ".$ws_id);
+            while ($ws_row = $q_res->fetch_assoc()) {
+                $ws_name = $ws_row['name'];
+                $ws_id = $ws_row['id'];
+                $chart_id = str_replace(" ", "-", $ws_name);
 
-        echo 
-    "<div class='w-100 pl-3 pr-3'>
-    <div class='ws-role-section'>
-        <p class='m-0'>".$role."</p>
-        <div class='member-list-container'>";
+                $operator_mp_categories = array(
+                    "msk"=>0.0,
+                    "kt"=>0.0,
+                    "pssp"=>0.0,
+                    "png"=>0.0,
+                    "fivejq"=>0.0
+                );
+                foreach($operator_mp_categories as $cat => $val) {
+                    $res = $conn->query("
+                        SELECT AVG(IFNULL(mp_scores.$cat,0)) as average 
+                        FROM karyawan
+                        LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                        LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                        LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
+                        WHERE sub_workstations.id = $ws_id
+                    ");
+                    $row = $res->fetch_assoc();
+                    $avg_val = $row['average'];
+                    $operator_mp_categories[$cat] = $avg_val;
+                }
+                $query_string = "
+                    SELECT AVG(IFNULL(mp_scores.kao,0)) as average 
+                    FROM karyawan
+                    LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                    LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                    LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
+                    WHERE sub_workstations.id = $ws_id AND (
+                ";
+                foreach($roles_with_kao as $role) {
+                    $query_string .= "role = $role OR ";
+                }
+                if (count($roles_with_kao) > 0) $query_string = substr($query_string, 0, -4);
+                $query_string .= ")";
 
-        $q_res = $conn->query("
-            SELECT 
-                karyawan.name as name,
-                karyawan.npk as npk,
-                karyawan.role as role,
-                IFNULL(mp_scores.msk,0) as msk,
-                IFNULL(mp_scores.kt,0) as kt,
-                IFNULL(mp_scores.pssp,0) as pssp,
-                IFNULL(mp_scores.png,0) as png,
-                IFNULL(mp_scores.fivejq,0) as fivejq,
-                IFNULL(mp_scores.kao,0) as kao,
-                roles.name as role_name 
-            FROM karyawan 
-            LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
-            LEFT JOIN workstations ON karyawan_workstation.workstation_id = workstations.id
-            LEFT JOIN roles ON karyawan.role = roles.id
-            LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
-            WHERE workstations.id = ".$ws_id." AND role = $role_id
-            ORDER BY name ASC");
+                $res = $conn->query($query_string);
+                $row = $res->fetch_assoc();
+                $avg_val = $row['average'];
+                $operator_mp_categories["kao"] = $avg_val;
 
-        
-        while ($member = $q_res->fetch_assoc()) {
-            member_preview_button($member);
-        }
-        echo "</div>
+                $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO']";
+                $datas = "[".
+                        $operator_mp_categories['msk'].",".
+                        $operator_mp_categories['kt'].",".
+                        $operator_mp_categories['pssp'].",".
+                        $operator_mp_categories['png'].",".
+                        $operator_mp_categories['fivejq'].",".
+                        $operator_mp_categories['kao'].
+                        "]";
+
+                echo
+                    "
+                    <a class='ws-stat-container' href='sub_workstation_members.php?q=$ws_id'>
+                        <div class='ds-title'>
+                            <p>$ws_name</p>
+                        </div>
+                        <div class='ws-content'>
+                    ";
+                    include('includes/components/sm-radarchart.php');
+                    echo  
+                        "</div>
+                    </a>
+                    ";
+            }
+            ?>
+        </div>
     </div>
-    </div>";
-    }
-    ?>
 </div>

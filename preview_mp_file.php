@@ -13,6 +13,8 @@
         SELECT 
             karyawan.name as name,
             karyawan.npk as npk,
+            sub_workstations.id as sub_ws_id,
+            sub_workstations.name as sub_ws_name,
             workstations.id as ws_id,
             workstations.name as ws_name,
             department.id as dept_id,
@@ -27,7 +29,8 @@
             roles.name as role_name
         FROM karyawan 
         LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk 
-        LEFT JOIN workstations ON karyawan_workstation.workstation_id = workstations.id 
+        LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+        LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
         LEFT JOIN department ON workstations.dept_id = department.id 
         LEFT JOIN roles ON karyawan.role = roles.id
         LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk

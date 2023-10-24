@@ -4,17 +4,17 @@
         "SELECT
             process.id as process_id,
             process.name as process_name,
-            workstations.name as workstation_name,
+            sub_workstations.name as workstation_name,
             IF(
                 process.id IN 
                     (SELECT qualifications.process_id FROM qualifications WHERE qualifications.npk = '".$karyawan['npk']."')
                 , 'yes', 'no'
             ) as qualified
         FROM process
-        LEFT JOIN workstations ON workstations.id = process.workstation_id
-        LEFT JOIN karyawan_workstation ON karyawan_workstation.workstation_id = workstations.id
+        LEFT JOIN sub_workstations ON sub_workstations.id = process.workstation_id
+        LEFT JOIN karyawan_workstation ON karyawan_workstation.workstation_id = sub_workstations.id
         WHERE karyawan_workstation.npk = '".$karyawan['npk']."' AND process.name != ''
-        ORDER BY process.name ASC, workstations.name ASC"
+        ORDER BY process.name ASC, sub_workstations.name ASC"
     );
 
     echo "

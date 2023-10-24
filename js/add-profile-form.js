@@ -16,6 +16,7 @@ $(function() {
 $('document').ready(function(){
     $("#ap-form-ws").val($("#ap-form-ws option:first").val());
     update_form_ws_val();
+
     $('#ap-form-ws option').mousedown(function(e) {
         e.preventDefault();
         var originalScrollTop = $(this).parent().scrollTop();
@@ -31,6 +32,12 @@ $('document').ready(function(){
         console.log($("#ap-form-ws option:first").val());
         console.log($("#ap-form-ws-val").val());
         return false;
+    });
+
+    $('select#ap-form-ws').on('change', function() {
+        update_form_ws_val();
+        console.log($("#ap-form-ws option:first").val());
+        console.log($("#ap-form-ws-val").val());
     });
 
     $('select#ap-form-role').on('change', function() {

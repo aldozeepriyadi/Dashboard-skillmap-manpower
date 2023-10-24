@@ -27,7 +27,8 @@
                     LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
                     WHERE karyawan.npk in (
                         SELECT karyawan_workstation.npk FROM karyawan_workstation 
-                        JOIN workstations on karyawan_workstation.workstation_id = workstations.id
+                        LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                        LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
                         WHERE workstations.dept_id = $d_id
                     )
                 ");
@@ -39,7 +40,8 @@
                 SELECT AVG(IFNULL(mp_scores.kao,0)) as average 
                 FROM karyawan
                 LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
-                LEFT JOIN workstations ON karyawan_workstation.workstation_id = workstations.id
+                LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
                 LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
                 WHERE workstations.dept_id = $d_id AND (
             ";

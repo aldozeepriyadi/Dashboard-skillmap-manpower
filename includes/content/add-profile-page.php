@@ -31,14 +31,27 @@
                     <select class="ap-form-input-box" id="ap-form-ws" multiple>
                         <?php 
                         $q_res = $conn->query("
-                            SELECT id, name 
-                            FROM workstations
+                            SELECT 
+                                sub_workstations.id as id, 
+                                sub_workstations.name as name,
+                                workstations.name as ws_name
+                            FROM sub_workstations
+                            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
                             WHERE workstations.dept_id = ".$dept_id."
+                            ORDER BY workstations.id, sub_workstations.id
                             ");
+
+                        $current_group = '';
+
                         while ($ws_row = $q_res->fetch_assoc()) {
-                            $ws_name = $ws_row['name'];
+                            $sub_ws_name = $ws_row['name'];
+                            $ws_name = $ws_row['ws_name'];
                             $ws_id = $ws_row['id'];
-                            echo "<option value='".$ws_id."'>$ws_name</option>";
+                            if ($ws_name != $current_group) {
+                                echo "<optgroup label='$ws_name'>";
+                                $current_group = $ws_name;
+                            }
+                            echo "<option value='".$ws_id."'>$sub_ws_name</option>";
                         }
                         ?>
                     </select>

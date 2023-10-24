@@ -13,22 +13,15 @@
 <?php
     $ws_id = $_REQUEST['q'];
 
-    $q_res = $conn->query("SELECT name FROM workstations WHERE id = ".$ws_id);
+    $q_res = $conn->query("SELECT name FROM sub_workstations WHERE id = ".$ws_id);
 	$num_results = $q_res->num_rows;
     $current_ws = $q_res->fetch_assoc();
     $current_ws = $current_ws['name'];
-
-    $sub_q_res = $conn->query("SELECT id, name FROM sub_workstations WHERE workstation_id = ".$ws_id);
-    $sub_num_results = $sub_q_res->num_rows;
-    if ($sub_num_results == 1) {
-        $sub_ws = $sub_q_res->fetch_assoc();
-        echo "<script>window.location.replace('sub_workstation_members.php?q=".$sub_ws['id']."');</script>";
-    }
 ?>
 
-<?php
+<?php 
 if ($num_results > 0)
-	include("includes/content/ws-page.php");
+	include("includes/content/sub-ws-page.php");
 else include("includes/content/not-found-page.php");
 ?>
 

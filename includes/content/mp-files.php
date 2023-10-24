@@ -12,10 +12,15 @@
             <span> / </span>
             <span>
                 <a href='department_workstations.php?q=".$karyawan['dept_id']."'>".$karyawan['dept_name']."</a>
-            </span>
-            <span> / </span>
+            </span>";
+            if ($karyawan['ws_name'] != $karyawan['sub_ws_name'])
+            echo "<span> / </span>
             <span>
                 <a href='workstation_members.php?q=".$karyawan['ws_id']."'>".$karyawan['ws_name']."</a>
+            </span>";
+            echo "<span> / </span>
+            <span>
+                <a href='sub_workstation_members.php?q=".$karyawan['sub_ws_id']."'>".$karyawan['sub_ws_name']."</a>
             </span>
             <span> / </span>
             <span>
