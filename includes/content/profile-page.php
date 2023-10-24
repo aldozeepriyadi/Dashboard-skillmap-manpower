@@ -1,5 +1,5 @@
 <div id="content">
-    <div class="popup hidden" id="update-popup">
+    <div class="popup popup-small popup hidden" id="update-popup">
         <div class='popup-content-wrapper h-100'>
             <p>Are you sure you want to update <?php echo $karyawan['name']?>?</p>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="popup hidden" id="delete-popup">
+    <div class="popup popup-small hidden" id="delete-popup">
         <div class='popup-content-wrapper h-100'>
             <p>Are you sure you want to delete <?php echo $karyawan['name']?>?</p>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>

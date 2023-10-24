@@ -72,6 +72,19 @@ a {
     border-radius: 24px;
 }
 
+.popup-small {
+    position: fixed;
+    width: 25%;
+    left: 50%;
+    margin-left: -12.5%;
+    height: 25vh;
+    top: 50%;
+    margin-top: -12.5vh;
+    background: var(--secondary-color);
+    z-index: 20;
+    border-radius: 24px;
+}
+
 .hidden {
     display: none !important;
 }
