@@ -13,6 +13,5 @@ $('document').ready(function(){
     update_form_qualification_val();
     $('input.edit-process-checkbox').change(function() {
         var s = update_form_qualification_val();
-        console.log($("#ap-form-qualification-val").val())
     });
 })});

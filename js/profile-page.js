@@ -32,15 +32,11 @@ $(function() {
         } else if (selected_value == "update-assessment") {
             $(".pt-update-assessment").removeClass("hidden");
         };
-
-        console.log(selected_value);
     });
 
     $('#show-mp-desc').change(function(){
         selected_value = $("input[name='show-mp-desc']:checked").val();
         hide_descs();
         $("#"+selected_value).removeClass("hidden");
-
-        console.log("#"+selected_value);
     });
 });

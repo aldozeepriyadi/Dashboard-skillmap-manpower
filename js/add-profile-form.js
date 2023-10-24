@@ -29,15 +29,11 @@ $('document').ready(function(){
 
         update_form_ws_val();
         
-        console.log($("#ap-form-ws option:first").val());
-        console.log($("#ap-form-ws-val").val());
         return false;
     });
 
     $('select#ap-form-ws').on('change', function() {
         update_form_ws_val();
-        console.log($("#ap-form-ws option:first").val());
-        console.log($("#ap-form-ws-val").val());
     });
 
     $('select#ap-form-role').on('change', function() {
@@ -45,13 +41,11 @@ $('document').ready(function(){
             $('#ap-form-ws').attr('multiple', 'multiple');
             $("#ap-form-ws").val($("#ap-form-ws option:first").val());
             update_form_ws_val();
-            console.log($("#ap-form-ws-val").val());
         }
         else {
             $('#ap-form-ws').removeAttr('multiple');
             $("#ap-form-ws").val($("#ap-form-ws option:first").val());
             update_form_ws_val();
-            console.log($("#ap-form-ws-val").val());
         }
       });
 })});
