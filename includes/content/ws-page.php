@@ -39,11 +39,11 @@
             </a>
         </div>
     </div>
-    <div class='w-100'>
+    <div class='w-100 pt-3'>
+        <script>
+            var ctx_list = {}
+        </script>
         <div id="ws-overall-stats">
-            <script>
-                var ctx_list = {}
-            </script>
             <?php
             $q_res = $conn->query("SELECT * FROM sub_workstations WHERE workstation_id = ".$ws_id);
             while ($ws_row = $q_res->fetch_assoc()) {
@@ -103,7 +103,7 @@
                 echo
                     "
                     <a class='ws-stat-container' href='sub_workstation_members.php?q=$ws_id'>
-                        <div class='ds-title'>
+                        <div class='ws-title'>
                             <p>$ws_name</p>
                         </div>
                         <div class='ws-content'>

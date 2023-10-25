@@ -48,7 +48,7 @@
                     ");
                 $num_results = $q_res->num_rows;
                 if ($num_results == 0) {
-                    echo "<p>No files found.</p>";
+                    echo "<p class='ml-3'>No files found.</p>";
                 } else {
                     while ($file_row = $q_res->fetch_assoc()) {
                         $filename = $file_row['filename'];

@@ -127,7 +127,7 @@
                 echo
                     "
                     <a class='ws-stat-container' href='workstation_members.php?q=$ws_id'>
-                        <div class='ds-title'>
+                        <div class='ws-title'>
                             <p>$ws_name</p>
                         </div>
                         <div class='ws-content'>

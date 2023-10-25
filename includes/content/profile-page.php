@@ -108,7 +108,7 @@
                     </div>
                 </div>
             </div>
-            <div class="p-stats m-3 p-4">
+            <div class="p-stats m-3 p-4 background-light">
                 <div class="p-radar-container">
                     <?php 
                     $member = $karyawan;
@@ -133,7 +133,7 @@
             </div>
         </div>
         <div class="profile-right">
-            <div class="profile-table">
+            <div class="profile-table background-light">
                 <div id="pt-tab-buttons" class="fill-container">
                     <form id="pt-tab-radio" class="fill-container d-flex-row">
                     <input type="radio" id="chart-info" name="pt-tab" value="chart-info" checked>
@@ -186,14 +186,14 @@
                                 echo 
                                     "</div>";
                                 echo "<a href='preview_mp_file.php?q=".$karyawan['npk']."&cat=".$cat."' class='mp-file-img-container'>";
-                                echo "<img src='img/file-import-solid.svg'></img>";
+                                echo "<img src='img/file-import-solid.png'></img>";
                                 echo "</a>";
                                 echo
                                 "</div>";
                             }
                         ?>
                             <div class="cu-submit-wrapper">
-                                <a href="#" onclick="show('#delete-popup')" class="cu-delete-btn">DELETE</a>
+                                <a href="#" onclick="show('#delete-popup')" class="cu-delete-btn mr-2">DELETE</a>
                                 <a href="#" onclick="show('#update-popup')" class="cu-submit-btn">UPDATE</a>
                                 <div class="hidden">
                                     <input type="submit" name="delete" id="cu-delete-btn">DELETE</input>

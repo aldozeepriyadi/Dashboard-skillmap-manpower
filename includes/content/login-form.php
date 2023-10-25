@@ -1,5 +1,5 @@
-<div id='content'>
-    <div id='login-form-wrapper' class="w-50 h-50 m-5">
+<div class='d-flex justify-content-center align-items-center h-100 w-100'>
+    <div id='login-form-wrapper' class="w-25 h-50 m-5">
         <div class="w-100">
             <p>
                 LOGIN
@@ -8,7 +8,7 @@
         <div class="w-100">
             <form action="actions/login.php" method="post">
                 <div class='d-flex-row align-items-center'>
-                    <div class="w-100">
+                    <div class="w-50">
                         <label class='m-0' for="username">Username:</label>
                     </div>
                     <div class="w-100">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class='d-flex-row pt-3 align-items-center'>
-                    <div class="w-100">
+                    <div class="w-50">
                         <label class='m-0' for="password">Password:</label>
                     </div>
                     <div class="w-100">
