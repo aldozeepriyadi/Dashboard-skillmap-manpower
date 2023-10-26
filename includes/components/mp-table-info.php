@@ -15,7 +15,7 @@
         ?>
     </form>
 </div>
-<div class='mp-desc-container w-100 d-flex justify-content-center'>
+<div class='mp-desc-container w-100 pl-3'>
     <div class="mp-desc" id="desc-msk">
         <p class="m-0">MSK</p>
         <ol class="mb-0">
@@ -76,7 +76,7 @@
     <li>Menjaga hasil kerja sesuai dengan std yang telah ditetapkan.</li>
         </ol>
     </div>
-    
+
     <div class="hidden mp-desc" id="desc-kao">
         <p class="m-0">KAO</p>
         <ol>

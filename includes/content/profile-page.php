@@ -103,12 +103,29 @@
                             <p>Role</p>
                         </span>
                         <span class='w-75'>
-                            <p>: <?php echo $karyawan['role_name']?></p>
+                            <p>: <?php 
+                            echo $karyawan['role_name'];
+                            if ($is_foreman) {
+                                $workstations_query = $conn->query("
+                                    SELECT sub_workstations.name as name 
+                                    FROM karyawan_workstation
+                                    JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                                    WHERE karyawan_workstation.npk = '".$karyawan['npk']."'
+                                ");
+                                echo ' (';
+                                $workstations_string = '';
+                                while ($workstations_row = $workstations_query->fetch_assoc()) {
+                                    $workstations_string .= $workstations_row['name'].', ';
+                                }
+                                echo substr($workstations_string, 0, -2);
+                                echo ')';
+                            }
+                            ?></p>
                         </span>
                     </div>
                 </div>
             </div>
-            <div class="p-stats m-3 p-4 background-light">
+            <div class="p-stats m-3 p-4 background-light" style='flex: 1;'>
                 <div class="p-radar-container">
                     <?php 
                     $member = $karyawan;
@@ -133,7 +150,7 @@
             </div>
         </div>
         <div class="profile-right">
-            <div class="profile-table background-light">
+            <div class="profile-table background-light mb-3 d-inline-flex flex-column">
                 <div id="pt-tab-buttons" class="fill-container">
                     <form id="pt-tab-radio" class="fill-container d-flex-row">
                     <input type="radio" id="chart-info" name="pt-tab" value="chart-info" checked>
@@ -158,10 +175,10 @@
                     <?php include("includes/components/mp-table-info.php")?>
                 </div> 
                 <div class="pt-tab pt-update-assessment">
-                    <div id="update-assessment">
+                    <div id="update-assessment" class='h-100'>
                         <?php 
                         echo 
-                        "<form id='update-assessment-form' action='actions/update-assessment.php?q=".$karyawan['npk']."' method='post'>";
+                        "<form id='update-assessment-form' class='d-flex flex-column h-100' action='actions/update-assessment.php?q=".$karyawan['npk']."' method='post'>";
                             if (!in_array($karyawan['role'], $roles_with_kao)) unset($mp_categories['kao']);
                             foreach ($mp_categories as $cat => $cat_name) {
                                 echo 
@@ -192,7 +209,7 @@
                                 "</div>";
                             }
                         ?>
-                            <div class="cu-submit-wrapper">
+                            <div class="cu-submit-wrapper flex-float-bottom">
                                 <a href="#" onclick="show('#delete-popup')" class="cu-delete-btn mr-2">DELETE</a>
                                 <a href="#" onclick="show('#update-popup')" class="cu-submit-btn">UPDATE</a>
                                 <div class="hidden">
@@ -204,35 +221,11 @@
                     </div>
                 </div>
             </div>
-            <div class='d-flex justify-content-center w-100 pt-2 pb-2'>
-                <div class='p-process-panel d-flex flex-column align-items-center h-100 p-1'>
-                    <div class='p-process-panel-text d-flex flex-row justify-content-between w-100 pl-1 pr-1'>
-                        <p class='m-0'>Process Qualification</p>
-                        <a href='#' onclick='show("#edit-process-popup")' id='process-edit-btn' class='d-flex justify-content-center align-items-center'>
-                            <p class='m-0'>EDIT</p>
-                        </a>
-                    </div>
-                    <div class="w-100 h-100 p-1">
-                        <div class='p-process-panel-list w-100'>
-                            <?php
-                            $q_res = $conn->query("
-                                SELECT process.name as name FROM karyawan
-                                JOIN qualifications ON karyawan.npk = qualifications.npk
-                                JOIN process ON qualifications.process_id = process.id
-                                WHERE karyawan.npk = '".$karyawan['npk']."'
-                            ");
-                            while ($q_row = $q_res->fetch_assoc()) {
-                                echo "
-                                <div class='p-process-panel-list-item p-1 mb-1'>
-                                    <p class='m-0'>".$q_row['name']."</p>
-                                </div>
-                                ";
-                            }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+            if (!$is_foreman) {
+                include("includes/components/member-qualification-panel.php");
+            }
+            ?>
         </div>
     </div>
 </div>

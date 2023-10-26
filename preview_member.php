@@ -46,6 +46,7 @@
         echo "<script>alert('NPK tidak ditemukan');</script>";
     } else {
         $karyawan = $q_res->fetch_assoc();
+        $is_foreman = ($karyawan['role_name'] == 'Foreman');
     }
 ?>
 
