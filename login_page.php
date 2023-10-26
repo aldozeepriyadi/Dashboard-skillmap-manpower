@@ -5,9 +5,8 @@
 <head>
 	<?php include("includes/head-tag-contents.php");?>
 </head>
-<body class='background-light h-100'>
+<body class='h-100'>
 
-<!-- <?php include("includes/design-top.php");?> -->
 <?php include("includes/content/login-form.php");?>
 
 </body>
