@@ -1,7 +1,7 @@
 <div id='content'>
     <div class='w-100' style='height: 12.5%'>
         <div id="page-title" class="w-100">
-            <p>Files for <?php echo $mp_categories[$_GET['cat']];?></p>
+            <p>Files for <?php echo $karyawan['name'];?></p>
         </div>
         <div class="w-100 pl-3 mb-1">
             <?php 
@@ -28,7 +28,7 @@
             </span>
             <span> / </span>
             <span>
-                ".$mp_categories[$_GET['cat']]."
+                Files
             </span>
             ";
             ?>
@@ -36,15 +36,15 @@
     </div>
     <div class='w-100 d-flex align-items-center justify-content-center flex-row' style='height: 87.5%'>
         <div class='w-75 h-100 p-3'>
-            <div id='files-preview' class='w-100 h-100'>
+            <div id='files-preview' class='w-100 h-100 background-light'>
                 <div class='w-100 d-flex align-items-center justify-content-center'>
                     <p class='mt-3 small-title'>Current Files</p>
                 </div>
                 <?php 
                 $q_res = $conn->query("
-                    SELECT id, filename, name, description, posted_time
-                    FROM mp_file_proof 
-                    WHERE mp_category = '".$_GET['cat']."' AND npk = '".$_GET['q']."'
+                    SELECT id, filename, name, description, posted_time, mp_category
+                    FROM mp_file_proof
+                    WHERE npk = '".$_GET['q']."'
                     ");
                 $num_results = $q_res->num_rows;
                 if ($num_results == 0) {
@@ -55,10 +55,11 @@
                         echo "
                         <div class='file-preview-container w-100 p-3'>
                             <p>".$file_row['posted_time']."</p>
+                            <p class='font-weight-bold'>MP Evaluation: ".$mp_categories[$file_row['mp_category']]."</p>
                             <a href='files/".$filename."' target='_blank'>
                                 <p>".$file_row['name']."</p>
                             </a>
-                            <p>".$file_row['description']."</p>
+                            <p>Description: ".$file_row['description']."</p>
                             <a href='actions/delete-file.php?q=".$file_row['id']."'>
                                 <button class='cu-submit-btn'>Delete</button>
                             </a>
@@ -70,12 +71,24 @@
             </div>
         </div>
         <div class='w-25 h-100 p-3'>
-            <div id='upload-file-section' class='w-100 h-100 p-3'>
+            <div id='upload-file-section' class='w-100 h-100 p-3 background-light'>
                 <p class='small-title'>Add New Files</p>
-                <form action="actions/add-file.php?q=<?php echo $_GET['q'].'&cat='.$_GET['cat'];?>" class='w-100 h-100 d-flex flex-column justify-content-center align-content-center' method='post' enctype='multipart/form-data'>
+                <form action="actions/add-file.php?q=<?php echo $_GET['q'];?>" class='w-100 h-100 d-flex flex-column justify-content-center align-content-center' method='post' enctype='multipart/form-data'>
                     <input type="file" id="mp-file-input" name="mp-file-input">
                     <input class='mt-4' type="text" name="mp-file-name" placeholder="File Name" maxlength='16'>
                     <textarea class='mt-4' type="text" name="mp-file-desc" placeholder="File Description" maxlength='64'></textarea>
+                    <div class='w-100 d-flex flex-row mt-4'>
+                        <div class='w-50'>
+                            <p class='m-0'>MP Evaluation:</p>
+                        </div>
+                        <select name='cat' class='w-50'>
+                            <?php 
+                            foreach ($mp_categories as $key => $value) {
+                                echo "<option value='".$key."'>".$value."</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
                     <input type="submit" name="update" class="cu-submit-btn"></input>
                 </form>
             </div>

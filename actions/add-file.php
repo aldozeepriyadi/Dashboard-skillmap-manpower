@@ -5,7 +5,7 @@ include("../includes/redirect_session.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $npk = $_GET['q'];
-    $cat = $_GET['cat'];
+    $cat = $_POST['cat'];
 
     $path = $_FILES['mp-file-input']['name'];
     $ext = pathinfo($path, PATHINFO_EXTENSION);

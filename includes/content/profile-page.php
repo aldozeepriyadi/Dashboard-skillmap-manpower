@@ -202,19 +202,24 @@
                                 }
                                 echo 
                                     "</div>";
-                                echo "<a href='preview_mp_file.php?q=".$karyawan['npk']."&cat=".$cat."' class='mp-file-img-container'>";
-                                echo "<img src='img/file-import-solid.png'></img>";
-                                echo "</a>";
                                 echo
                                 "</div>";
                             }
                         ?>
-                            <div class="cu-submit-wrapper flex-float-bottom">
-                                <a href="#" onclick="show('#delete-popup')" class="cu-delete-btn mr-2">DELETE</a>
-                                <a href="#" onclick="show('#update-popup')" class="cu-submit-btn">UPDATE</a>
-                                <div class="hidden">
-                                    <input type="submit" name="delete" id="cu-delete-btn">DELETE</input>
-                                    <input type="submit" name="update" id="cu-submit-btn">UPDATE</input>
+                            <div class="d-flex w-100 flex-float-bottom d-flex-row">
+                                <div>
+                                    <a href='preview_mp_file.php?q=<?php echo $karyawan['npk'];?>' class='cu-cancel-btn mp-file-img-container d-flex flex-row align-items-center'>
+                                        <p>UPLOAD FILE</p>
+                                        <img class="ml-1" src='img/file-import-solid-white.png'></img>
+                                    </a>
+                                </div>
+                                <div class='ml-auto'>
+                                    <a href="#" onclick="show('#delete-popup')" class="cu-delete-btn mr-2">DELETE</a>
+                                    <a href="#" onclick="show('#update-popup')" class="cu-submit-btn">UPDATE</a>
+                                    <div class="hidden">
+                                        <input type="submit" name="delete" id="cu-delete-btn">DELETE</input>
+                                        <input type="submit" name="update" id="cu-submit-btn">UPDATE</input>
+                                    </div>
                                 </div>
                             </div>
                         </form>

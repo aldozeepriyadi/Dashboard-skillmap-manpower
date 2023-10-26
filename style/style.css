@@ -721,19 +721,6 @@ input.update-assessment-button {
     justify-items: center;
 }
 
-.mp-file-img-container{
-    margin-left: 1rem;
-    padding: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.mp-file-img-container:hover{
-    background-color: var(--secondary-color-darken);
-}
-
 .mp-file-img-container img{
     height: 3vh;
 }
@@ -830,11 +817,17 @@ input[value='5'] + .cu-radio-button {
     margin-top: auto;
     border: none !important;
     background-color: var(--main-color);
+    transition: all 0.3s;
     border-radius: 16px;
     padding: 0.5rem;
     color: var(--font-color-light) !important;
     font-weight: 600;
+    font-size: 2vh;
     cursor: pointer;
+}
+
+.cu-cancel-btn:hover {
+    background-color: var(--main-color-highlighted);
 }
 
 .popup-content-wrapper {
