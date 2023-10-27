@@ -4,6 +4,15 @@ include("../includes/db_connection.php");
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $status = '';
+    if (isset($_POST['captcha']) || ($_POST['captcha']!="") ) {
+        if(strcasecmp($_SESSION['captcha'], $_POST['captcha']) != 0) {
+            echo "<script>alert('Captcha salah. Silakan coba lagi!')</script>";
+            echo "<script>window.location.replace('../login_page.php');</script>";  
+        }
+    }
+
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = hash('sha256', $_POST['password']); // Hash the input password using SHA-256
     

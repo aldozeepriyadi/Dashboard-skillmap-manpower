@@ -248,13 +248,13 @@ a {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     border-radius: 12px;
     background-color: var(--secondary-color);
 }
 
 .ws-role-section > p{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
 }
 
@@ -893,7 +893,7 @@ input[value='5'] + .cu-radio-button {
     height: 10px;
 }
 
-#login-form-wrapper p {
+#login-form-wrapper > div > p {
     font-size: 1.3rem;
     font-weight: 600;
 }

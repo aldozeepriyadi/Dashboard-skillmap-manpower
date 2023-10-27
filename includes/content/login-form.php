@@ -3,8 +3,8 @@
         <div class='w-100'>
             <img class='w-50' src="img/kyb-merah.png" alt="">
         </div>
-        <div class="w-100 mt-2 mb-4">
-            <p>
+        <div class="w-100">
+            <p class='m-0'>
                 Skill Map Man Power Dashboard
             </p>
         </div>
@@ -15,7 +15,7 @@
                         <label class='m-0' for="username">Username:</label>
                     </div>
                     <div class="w-100">
-                        <input class="login-input" type="text" name="username" id="username" required>
+                        <input class="login-input" placeholder='NPK' type="text" name="username" id="username" required>
                     </div>
                 </div>
                 <div class='d-flex-row pt-3 align-items-center'>
@@ -23,8 +23,15 @@
                         <label class='m-0' for="password">Password:</label>
                     </div>
                     <div class="w-100">
-                        <input class="login-input" type="password" name="password" id="password" required>
+                        <input class="login-input" placeholder='Password' type="password" name="password" id="password" required>
                     </div>
+                </div>
+                <div class='mt-3 d-flex flex-row align-items-center justify-content-center'>                    
+                    <img src="captcha.php?rand=<?php echo rand(); ?>" id='captcha_image'>
+                    <input type="text" name="captcha" placeholder="Captcha" />
+                </div>
+                <div>
+                    <p>Captcha tidak terbaca? Refresh <a href='javascript: refreshCaptcha();'>di sini</a></p>
                 </div>
                 <div class="w-100 flex-float-bottom mb-3">
                     <input class='cu-submit-btn w-25' type="submit" value="LOGIN">
@@ -33,3 +40,9 @@
         </div>
     </div>
 </div>
+<script>
+function refreshCaptcha(){
+    var img = document.images['captcha_image'];
+    img.src = img.src.substring(0,img.src.lastIndexOf("?"))+"?rand="+Math.random()*1000;
+}
+</script>
