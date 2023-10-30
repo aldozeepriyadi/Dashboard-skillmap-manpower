@@ -48,17 +48,19 @@
     </div>
     <?php 
     include('includes/components/member-preview-button.php');
+    include('includes/components/member-preview-button-chartless.php');
     $q_roles = $conn->query("SELECT name, id FROM roles");
     while ($role_row = $q_roles->fetch_assoc()) {
         $role = $role_row['name'];
         $role_id = $role_row['id'];
-
+        
+        if ($role != 'Operator')
+            {
         echo 
     "<div class='w-100 pl-3 pr-3'>
     <div class='ws-role-section'>
         <p class='m-0'>".$role."</p>
-        <div class='member-list-container'>";
-
+        <div class='member-list-container overflow-x'>";
         $q_res = $conn->query("
             SELECT 
                 karyawan.name as name,
@@ -82,11 +84,44 @@
 
         
         while ($member = $q_res->fetch_assoc()) {
-            member_preview_button($member);
+                member_preview_button($member, $conn);
         }
         echo "</div>
     </div>
     </div>";
+}
+    else {
+        echo 
+    "<div class='w-100 pl-3 pr-3'>
+    <div class='ws-role-section'>
+        <p class='m-0'>".$role."</p>
+        <div class='member-list-container overflow-y'>
+        <div class='member-list-container-grid'>";
+        $q_res = $conn->query("
+            SELECT 
+                karyawan.name as name,
+                karyawan.npk as npk,
+                karyawan.role as role,
+                roles.name as role_name 
+            FROM karyawan 
+            LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+            LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
+            LEFT JOIN roles ON karyawan.role = roles.id
+            WHERE sub_workstations.id = ".$ws_id." AND role = $role_id
+            ORDER BY name ASC");
+
+
+        while ($member = $q_res->fetch_assoc()) {
+            echo "<div class='w-100 h-100 d-flex justify-content-center align-items-center'>";
+            member_preview_button_chartless($member, $conn);
+            echo "</div>";
+        }
+        echo "</div>
+    </div>
+    </div>
+    </div>";
+    }
     }
     ?>
 </div>

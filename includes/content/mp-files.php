@@ -52,10 +52,13 @@
                 } else {
                     while ($file_row = $q_res->fetch_assoc()) {
                         $filename = $file_row['filename'];
+                        $mp_eval = $mp_categories[$file_row['mp_category']];
+                        if ($mp_categories[$file_row['mp_category']] == '')
+                            $mp_eval = 'OTHER';
                         echo "
                         <div class='file-preview-container w-100 p-3'>
                             <p>".$file_row['posted_time']."</p>
-                            <p class='font-weight-bold'>MP Evaluation: ".$mp_categories[$file_row['mp_category']]."</p>
+                            <p class='font-weight-bold'>MP Evaluation: ".$mp_eval."</p>
                             <a href='files/".$filename."' target='_blank'>
                                 <p>".$file_row['name']."</p>
                             </a>
@@ -74,7 +77,7 @@
             <div id='upload-file-section' class='w-100 h-100 p-3 background-light'>
                 <p class='small-title'>Add New Files</p>
                 <form action="actions/add-file.php?q=<?php echo $_GET['q'];?>" class='w-100 h-100 d-flex flex-column justify-content-center align-content-center' method='post' enctype='multipart/form-data'>
-                    <input type="file" id="mp-file-input" name="mp-file-input">
+                    <input type="file" id="mp-file-input" name="mp-file-input" accept=".pdf">
                     <input class='mt-4' type="text" name="mp-file-name" placeholder="File Name" maxlength='16'>
                     <textarea class='mt-4' type="text" name="mp-file-desc" placeholder="File Description" maxlength='64'></textarea>
                     <div class='w-100 d-flex flex-row mt-4'>
@@ -86,6 +89,7 @@
                             foreach ($mp_categories as $key => $value) {
                                 echo "<option value='".$key."'>".$value."</option>";
                             }
+                            echo "<option value='other'>OTHER</option>";
                             ?>
                         </select>
                     </div>

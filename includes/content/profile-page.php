@@ -105,24 +105,34 @@
                         <span class='w-75'>
                             <p>: <?php 
                             echo $karyawan['role_name'];
-                            if ($is_foreman) {
-                                $workstations_query = $conn->query("
-                                    SELECT sub_workstations.name as name 
-                                    FROM karyawan_workstation
-                                    JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-                                    WHERE karyawan_workstation.npk = '".$karyawan['npk']."'
-                                ");
-                                echo ' (';
-                                $workstations_string = '';
-                                while ($workstations_row = $workstations_query->fetch_assoc()) {
-                                    $workstations_string .= $workstations_row['name'].', ';
-                                }
-                                echo substr($workstations_string, 0, -2);
-                                echo ')';
-                            }
+                            
                             ?></p>
                         </span>
                     </div>
+                    <?php
+                    if ($is_foreman) {
+                        $workstations_query = $conn->query("
+                            SELECT sub_workstations.name as name 
+                            FROM karyawan_workstation
+                            JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                            WHERE karyawan_workstation.npk = '".$karyawan['npk']."'
+                        ");
+                        $workstations_string = '';
+                        while ($workstations_row = $workstations_query->fetch_assoc()) {
+                            $workstations_string .= $workstations_row['name'].', ';
+                        }
+                        echo "
+                    <div class='d-flex-row p-name-text'>
+                        <span class='w-25'>
+                            <p>Workstations</p>
+                        </span>
+                        <span class='w-75'>
+                            <p>: ".substr($workstations_string, 0, -2)."</p>
+                        </span>
+                    </div>
+                            ";
+                    }
+                    ?>
                 </div>
             </div>
             <div class="p-stats m-3 p-4 background-light" style='flex: 1;'>

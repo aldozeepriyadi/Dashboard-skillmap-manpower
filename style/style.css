@@ -30,6 +30,22 @@ a {
     font-weight: 700;
 }
 
+.overflow-auto {
+    overflow: auto;
+}
+
+.overflow-y {
+    overflow-y: auto !important;
+}
+
+.overflow-x {
+    overflow-x: auto !important;
+}
+
+.overflow-ellipsis {
+    text-overflow: ellipsis;
+}
+
 .background-light {
     background-image: none;
     background-color: var(--secondary-color) !important;
@@ -322,9 +338,23 @@ a {
     width: 66%;
 }
 
+.member-container-small {
+    border: solid 4px var(--main-color);
+    border-radius: 12px;
+    width: 20vw;
+    height: 15vh;
+    display: flex;
+}
+
 .member-list-container {
-    overflow: auto;
+    overflow: hidden;
     white-space: nowrap;
+    height: 21vh;
+}
+
+.member-list-container-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
 }
 
 .member-info {
@@ -344,11 +374,12 @@ a {
 .member-info-texts{
     white-space: wrap;
     word-wrap: break-word;
+    padding-right: 0.1rem;
 }
 
 .member-info-texts p {
     color: var(--font-color-light);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     margin: 0rem;
 }
 

@@ -1,18 +1,18 @@
 <?php
-function member_preview_button($member, $conn){
+function member_preview_button_chartless($member, $conn){
     $img_path = "img/profile_pictures/".$member['npk'].".jpg";
     if(!file_exists($img_path)) $img_path = "img/profile_pictures/default.jpg";
     echo
     "<div class='d-inline-block'>
-        <div class='member-container mr-2 mb-2'>
-            <a href='preview_member.php?q=".$member['npk']."'>
+        <div class='member-container-small mr-2 mb-2'>
+            <a href='preview_member.php?q=".$member['npk']."' class='w-100'>
                 <div class='member-info'>
                     <div class='h-100'>
                         <div class='member-info-photo-container'>
                             <img src='".$img_path."'></img>
                         </div>
                     </div>
-                    <div class='member-info-texts pl-1 pt-1 w-75 overflow-ellipsis'>
+                    <div class='member-info-texts pl-1 pt-1 w-75'>
                         <div class='d-flex-row'>
                             <span class='w-25'>
                                 <p>Name</p>
@@ -64,10 +64,6 @@ function member_preview_button($member, $conn){
                     </div>
                 </div>
             </a>
-            <div class='member-stats'>";
-                include('includes/components/personal-radarchart-small.php');
-            echo
-            "</div>
         </div>
     </div>";
 }

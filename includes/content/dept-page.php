@@ -29,7 +29,7 @@
     <div class='w-100 pl-3 pr-3 mb-2 d-flex align-content-center justify-content-center'>
         <div class='ws-role-section'>
             <p class='m-0'>Foreman</p>
-            <div class='member-list-container'>
+            <div class='member-list-container overflow-x'>
             <?php
             $q_res = $conn->query("
             SELECT
@@ -55,7 +55,7 @@
             ORDER BY name ASC");
             include('includes/components/member-preview-button.php');
             while ($member = $q_res->fetch_assoc()) {
-                member_preview_button($member);
+                member_preview_button($member, $conn);
             }
             ?>
             </div>
