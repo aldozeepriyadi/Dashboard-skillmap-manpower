@@ -307,6 +307,7 @@ a {
     margin-bottom: 0px;
     font-size: 1.1rem;
     font-weight: 600;
+    text-align: center;
 }
 
 .ws-content {
@@ -328,7 +329,7 @@ a {
     border: solid 4px var(--main-color);
     border-radius: 12px;
     width: 28rem;
-    height: 8.5rem;
+    height: 8rem;
     display: flex;
 }
 
@@ -447,7 +448,6 @@ a {
 .p-title {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     height: 20vh;
 }
 
@@ -464,7 +464,7 @@ a {
 
 .p-title-container {
     margin: 0.4rem;
-    width: 60%;
+    width: 75%;
 }
 
 .p-title-container p{

@@ -78,32 +78,44 @@
                         <span class='w-25'>
                             <p>Nama</p>
                         </span>
-                        <span class='w-75'>
-                            <p>: <?php echo $karyawan['name']?></p>
+                        <span>
+                            <p>:</p>
+                        </span>
+                        <span class='w-75 pl-1'>
+                            <p><?php echo $karyawan['name']?></p>
                         </span>
                     </div>
                     <div class='d-flex-row p-name-text'>
                         <span class='w-25'>
                             <p>NPK</p>
                         </span>
-                        <span class='w-75'>
-                            <p>: <?php echo $karyawan['npk']?></p>
+                        <span>
+                            <p>:</p>
+                        </span>
+                        <span class='w-75 pl-1'>
+                            <p><?php echo $karyawan['npk']?></p>
                         </span>
                     </div>
                     <div class='d-flex-row p-name-text'>
                         <span class='w-25'>
                             <p>Department</p>
                         </span>
-                        <span class='w-75'>
-                            <p>: <?php echo $karyawan['dept_name']?></p>
+                        <span>
+                            <p>:</p>
+                        </span>
+                        <span class='w-75 pl-1'>
+                            <p><?php echo $karyawan['dept_name']?></p>
                         </span>
                     </div>
                     <div class='d-flex-row p-name-text'>
                         <span class='w-25'>
                             <p>Role</p>
                         </span>
-                        <span class='w-75'>
-                            <p>: <?php 
+                        <span>
+                            <p>:</p>
+                        </span>
+                        <span class='w-75 pl-1'>
+                            <p><?php 
                             echo $karyawan['role_name'];
                             
                             ?></p>
@@ -126,8 +138,11 @@
                         <span class='w-25'>
                             <p>Workstations</p>
                         </span>
-                        <span class='w-75'>
-                            <p>: ".substr($workstations_string, 0, -2)."</p>
+                        <span>
+                            <p>:</p>
+                        </span>
+                        <span class='w-75 pl-1'>
+                            <p>".substr($workstations_string, 0, -2)."</p>
                         </span>
                     </div>
                             ";
