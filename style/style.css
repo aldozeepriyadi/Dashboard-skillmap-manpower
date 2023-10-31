@@ -17,6 +17,12 @@ html, body {
     overflow-x: hidden;
     background-image: linear-gradient(var(--secondary-color), var(--secondary-color-darken));    
     background-repeat: no-repeat;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 a {
@@ -128,12 +134,12 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10vh;
+    height: 5rem;
 }
 
 .dashboard-title-container > p{
     margin: 0px;
-    font-size: 4vh;
+    font-size: 2rem;
     font-style: bold;
     color: var(--font-color-light);
 }
@@ -163,8 +169,8 @@ a {
 }
 
 .logo-container img {
-    width: 20vh;
-    padding: -4.5vh;
+    width: 10rem;
+    padding: -1rem;
     margin-right: 0;
 }
 
@@ -172,8 +178,8 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 90vh;
     width: 100%;
+    flex: 1 1 auto;
 }
 
 #dept-overall-stats {
@@ -189,7 +195,7 @@ a {
     border-radius: 15px;
     margin-top: 0.5em;
     width: 18vw;
-    height: 70vh;
+    height: 32.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -212,16 +218,8 @@ a {
 }
 
 .ds-content {
-    margin-top: 3vh;
+    margin-top: 2rem;
     width: 90%;
-}
-
-#admin-options {
-    margin-top: 1rem;
-    display: flex;
-    width: 97.5vw;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .dp-create-btn-container {
@@ -281,7 +279,7 @@ a {
     margin-right: 0.2rem;
     margin-bottom: 1rem;
     margin-top: 0.2rem;
-    height: 40vh;
+    height: 20rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -312,7 +310,7 @@ a {
 }
 
 .ws-content {
-    margin-top: 1vh;
+    margin-top: 1rem;
     width: 100%;
 }
 
@@ -329,8 +327,8 @@ a {
 .member-container {
     border: solid 4px var(--main-color);
     border-radius: 12px;
-    width: 25vw;
-    height: 18vh;
+    width: 28rem;
+    height: 8.5rem;
     display: flex;
 }
 
@@ -341,9 +339,13 @@ a {
 .member-container-small {
     border: solid 4px var(--main-color);
     border-radius: 12px;
-    width: 20vw;
-    height: 15vh;
+    width: 20rem;
+    height: 7rem;
     display: flex;
+}
+
+.member-container-small p{
+    font-size: 0.8rem !important;
 }
 
 .member-list-container {
@@ -354,7 +356,9 @@ a {
 
 .member-list-container-grid {
     display: grid;
-    grid-template-columns: repeat(4, 25%);
+    flex: 1;
+    /* grid-template-columns: repeat(4, 25%); */
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 21rem));
 }
 
 .member-info {
@@ -391,8 +395,8 @@ a {
 }
 
 .member-info-photo-container > img {
-    height: 12vh;
-    width: 9vh;
+    height: 6rem;
+    width: 4.5rem;
     margin-bottom: auto;
 }
 
@@ -468,12 +472,12 @@ a {
 }
 
 .p-title-text {
-    font-size: 3vh;
+    font-size: 2rem;
     font-weight: 650;
 }
 
 .p-name-text {
-    font-size: 2vh;
+    font-size: 1rem;
     font-weight: 500;
 }
 
@@ -536,7 +540,7 @@ a {
 
 .profile-table {
     width: 90%;
-    margin-top: 2.5vh;
+    margin-top: 1rem;
     height: 100%;
     border: solid 4px var(--main-color);
     border-radius: 16px;
@@ -590,13 +594,13 @@ input[type="radio"]:checked + div.pt-tab-button{
 .pt-tab-button p {
     text-align: center;
     color: var(--font-color-light);
-    font-size: 3.5vh;
+    font-size: 1.7rem;
     font-weight: 600;
     margin: 0px;
 }
 
 .pt-chart-info {
-    font-size: 2vh;
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -608,7 +612,7 @@ input[type="radio"]:checked + div.pt-tab-button{
 
 .pt-chart-info > div {
     width: 70%;
-    padding-left: 0.5vh;
+    padding-left: 0.3rem;
 }
 
 .p-process-panel {
@@ -682,7 +686,7 @@ input[type="checkbox"]:checked + label{
     background-color: var(--main-color);
     color: var(--font-color-light);
     width: 15%;
-    height: 5vh;
+    height: 2.5rem;
     border-radius: 12px;
     display: flex;
     justify-content: center;
@@ -708,11 +712,11 @@ input[type="radio"]:checked + div.mp-desc-toggle{
     flex: 1;
     padding: 1rem;
     font-weight: 600;
-    font-size: 3vh;
+    font-size: 1.5rem;
 }
 
 #biodata p {
-    font-size: 2.5vh;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
     margin: 0px;
 }
@@ -742,7 +746,7 @@ input.update-assessment-button {
     display: flex;
     flex-direction: row;
     width: 20vw;
-    height: 5vh;
+    height: 2.5rem;
 }
 
 .cu-radiogroup > div {
@@ -819,7 +823,7 @@ input[value='5'] + .cu-radio-button {
     padding: 0.5rem;
     color: var(--font-color-light) !important;
     font-weight: 500;
-    font-size: 2vh;
+    font-size: 1rem;
     cursor: pointer;
 }
 
@@ -836,7 +840,7 @@ input[value='5'] + .cu-radio-button {
     padding: 0.5rem;
     color: var(--font-color-light) !important;
     font-weight: 500;
-    font-size: 2vh;
+    font-size: 1rem;
     cursor: pointer;
 }
 
@@ -853,7 +857,7 @@ input[value='5'] + .cu-radio-button {
     padding: 0.5rem;
     color: var(--font-color-light) !important;
     font-weight: 600;
-    font-size: 2vh;
+    font-size: 1rem;
     cursor: pointer;
 }
 
@@ -899,7 +903,7 @@ input[value='5'] + .cu-radio-button {
 
 .ap-form-section > p{
     margin: 0px;
-    font-size: 3.5vh;
+    font-size: 1.75rem;
     font-weight: 600;
 }
 
@@ -919,7 +923,7 @@ input[value='5'] + .cu-radio-button {
 }
 
 #login-form-wrapper:first-child {
-    padding-top: 2vh;
+    padding-top: 1rem;
     text-align: center;
     height: 10px;
 }
@@ -932,7 +936,7 @@ input[value='5'] + .cu-radio-button {
 .login-input {
     border-radius: 8px;
     border: none;
-    height: 5vh;
+    height: 2.4rem;
     padding: 0.5rem;
 }
 
