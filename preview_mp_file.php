@@ -20,20 +20,13 @@
             department.id as dept_id,
             department.dept_name as dept_name,
             karyawan.role as role,
-            IFNULL(mp_scores.msk,0) as msk,
-            IFNULL(mp_scores.kt,0) as kt,
-            IFNULL(mp_scores.pssp,0) as pssp,
-            IFNULL(mp_scores.png,0) as png,
-            IFNULL(mp_scores.fivejq,0) as fivejq,
-            IFNULL(mp_scores.kao,0) as kao,
             roles.name as role_name
         FROM karyawan 
-        LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk 
-        LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-        LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
-        LEFT JOIN department ON workstations.dept_id = department.id 
-        LEFT JOIN roles ON karyawan.role = roles.id
-        LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
+            LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk 
+            LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
+            LEFT JOIN department ON workstations.dept_id = department.id 
+            LEFT JOIN roles ON karyawan.role = roles.id
         WHERE karyawan.npk = '".$_GET['q']."'"
     );
 

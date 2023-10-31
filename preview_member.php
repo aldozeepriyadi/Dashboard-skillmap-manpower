@@ -33,12 +33,12 @@
             IFNULL(mp_scores.kao,0) as kao,
             roles.name as role_name
         FROM karyawan 
-        LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk 
-        LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-        LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
-        LEFT JOIN department ON workstations.dept_id = department.id 
-        LEFT JOIN roles ON karyawan.role = roles.id
-        LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
+            LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk 
+            LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
+            LEFT JOIN department ON workstations.dept_id = department.id 
+            LEFT JOIN roles ON karyawan.role = roles.id
+            LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
         WHERE karyawan.npk = '".$npk."'"
     );
 	$num_results = $q_res->num_rows;

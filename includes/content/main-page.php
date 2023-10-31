@@ -58,19 +58,16 @@
                         $operator_mp_categories[$d_id]['fivejq'].",".
                         $operator_mp_categories[$d_id]['kao'].
                         "]";
-                echo
-                    "
-                    <a class='dept-stat-container' href='department_workstations.php?q=$d_id'>
-                        <div class='ds-title'>
-                            <p>$d_name</p>
-                        </div>
-                        <div class='ds-content'>
-                    ";
+                echo "
+            <a class='dept-stat-container' href='department_workstations.php?q=$d_id'>
+                <div class='ds-title'>
+                    <p>$d_name</p>
+                </div>
+                <div class='ds-content'>";
                     include('includes/components/sm-radarchart.php');
-                    echo
-                        "</div>
-                    </a>
-                    ";
+                echo "
+                </div>
+            </a>";
             }
             ?>
         </div>

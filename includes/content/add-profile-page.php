@@ -36,7 +36,7 @@
                                 sub_workstations.name as name,
                                 workstations.name as ws_name
                             FROM sub_workstations
-                            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
+                                LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
                             WHERE workstations.dept_id = ".$dept_id."
                             ORDER BY workstations.id, sub_workstations.id
                             ");

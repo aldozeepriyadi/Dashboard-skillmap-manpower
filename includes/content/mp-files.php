@@ -48,7 +48,8 @@
                     ");
                 $num_results = $q_res->num_rows;
                 if ($num_results == 0) {
-                    echo "<p class='ml-3'>No files found.</p>";
+                    echo "
+                <p class='ml-3'>No files found.</p>";
                 } else {
                     while ($file_row = $q_res->fetch_assoc()) {
                         $filename = $file_row['filename'];
@@ -56,17 +57,17 @@
                         if ($mp_categories[$file_row['mp_category']] == '')
                             $mp_eval = 'OTHER';
                         echo "
-                        <div class='file-preview-container w-100 p-3'>
-                            <p>".$file_row['posted_time']."</p>
-                            <p class='font-weight-bold'>MP Evaluation: ".$mp_eval."</p>
-                            <a href='files/".$filename."' target='_blank'>
-                                <p>".$file_row['name']."</p>
-                            </a>
-                            <p>Description: ".$file_row['description']."</p>
-                            <a href='actions/delete-file.php?q=".$file_row['id']."'>
-                                <button class='cu-submit-btn'>Delete</button>
-                            </a>
-                        </div>
+                <div class='file-preview-container w-100 p-3'>
+                    <p>".$file_row['posted_time']."</p>
+                    <p class='font-weight-bold'>MP Evaluation: ".$mp_eval."</p>
+                    <a href='files/".$filename."' target='_blank'>
+                        <p>".$file_row['name']."</p>
+                    </a>
+                    <p>Description: ".$file_row['description']."</p>
+                    <a href='actions/delete-file.php?q=".$file_row['id']."'>
+                        <button class='cu-submit-btn'>Delete</button>
+                    </a>
+                </div>
                         ";
                     }
                 }

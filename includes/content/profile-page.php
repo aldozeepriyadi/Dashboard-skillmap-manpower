@@ -32,37 +32,37 @@
 
     <div id="profile-container">
         <div class="profile-left">
-        <div id="page-title" class="w-100">
-            <p>Assessment Production MP</p>
-        </div>
-        <div class="w-100 pl-3 mb-1">
-            <?php 
-            echo "
-            <span>
-                <a href='index.php'>Home</a>
-            </span>
-            <span> / </span>
-            <span>
-                <a href='department_workstations.php?q=".$karyawan['dept_id']."'>".$karyawan['dept_name']."</a>
-            </span>";
-
-            if ($karyawan['ws_name'] != $karyawan['sub_ws_name'])
-            echo "<span> / </span>
-            <span>
-                <a href='workstation_members.php?q=".$karyawan['ws_id']."'>".$karyawan['ws_name']."</a>
-            </span>";
-
-            echo "<span> / </span>
-            <span>
-                <a href='sub_workstation_members.php?q=".$karyawan['sub_ws_id']."'>".$karyawan['sub_ws_name']."</a>
-            </span>
-            <span> / </span>
-            <span>
-                ".$karyawan['name']."
-            </span>
-            ";
-            ?>
-        </div>
+            <div id="page-title" class="w-100">
+                <p>Assessment Production MP</p>
+            </div>
+            <div class="w-100 pl-3 mb-1">
+                <?php 
+                echo "
+                <span>
+                    <a href='index.php'>Home</a>
+                </span>
+                <span> / </span>
+                <span>
+                    <a href='department_workstations.php?q=".$karyawan['dept_id']."'>".$karyawan['dept_name']."</a>
+                </span>";
+                if ($karyawan['ws_name'] != $karyawan['sub_ws_name'])
+                echo "
+                <span> / </span>
+                <span>
+                    <a href='workstation_members.php?q=".$karyawan['ws_id']."'>".$karyawan['ws_name']."</a>
+                </span>";
+                echo "
+                <span> / </span>
+                <span>
+                    <a href='sub_workstation_members.php?q=".$karyawan['sub_ws_id']."'>".$karyawan['sub_ws_name']."</a>
+                </span>
+                <span> / </span>
+                <span>
+                    ".$karyawan['name']."
+                </span>
+                ";
+                ?>
+            </div>
             <div class="p-title">
                 <div class="p-picture-container">
                     <img src="
@@ -166,17 +166,13 @@
                     <input type="radio" id="chart-info" name="pt-tab" value="chart-info" checked>
                     <div class="pt-tab-button pt-tab-left">
                         <label for="chart-info">
-                            <p>
-                                CHART INFO
-                            </p>
+                            <p>CHART INFO</p>
                         </label>
                     </div>
                     <input type="radio" id="update-assessment" name="pt-tab" value="update-assessment">
                     <div class="pt-tab-button pt-tab-right">
                         <label for="update-assessment">
-                            <p>
-                                UPDATE ASSESSMENT
-                            </p>
+                            <p>UPDATE ASSESSMENT</p>
                         </label>
                     </div>
                     </form>
@@ -191,29 +187,29 @@
                         "<form id='update-assessment-form' class='d-flex flex-column h-100' action='actions/update-assessment.php?q=".$karyawan['npk']."' method='post'>";
                             if (!in_array($karyawan['role'], $roles_with_kao)) unset($mp_categories['kao']);
                             foreach ($mp_categories as $cat => $cat_name) {
-                                echo 
-                                "<div class='cat-update-container'>
-                                    <div class='cu-name'>
-                                        <p>$cat_name:</p>
-                                    </div>
-                                    <div class='cu-radiogroup'>";
+                                echo "
+                            <div class='cat-update-container'>
+                                <div class='cu-name'>
+                                    <p>$cat_name:</p>
+                                </div>
+                                <div class='cu-radiogroup'>";
                                 for ($i = 1; $i <=5 ; $i++) {
-                                    echo 
-                                    "<input type='radio' id='$cat-value-$i' class='update-assessment-button' name='$cat' value='$i'";
+                                    echo "
+                                    <input type='radio' id='$cat-value-$i' class='update-assessment-button' name='$cat' value='$i'";
                                     if ($karyawan[$cat] == $i) echo "checked";
                                     echo
-                                    "><div class='cu-radio-button'>
+                                    ">
+                                    <div class='cu-radio-button'>
                                         <label for='$cat-value-$i'>
-                                        <div>
-                                            <p>$i</p>
-                                        </div>
+                                            <div>
+                                                <p>$i</p>
+                                            </div>
                                         </label>
                                     </div>";
                                 }
-                                echo 
-                                    "</div>";
-                                echo
-                                "</div>";
+                                echo"
+                                </div>
+                            </div>";
                             }
                         ?>
                             <div class="d-flex w-100 flex-float-bottom d-flex-row">

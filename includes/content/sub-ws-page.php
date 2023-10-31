@@ -13,8 +13,8 @@
                         workstations.id as ws_id,
                         workstations.name as ws_name
                     FROM sub_workstations
-                    LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
-                    LEFT JOIN department ON workstations.dept_id = department.id
+                        LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
+                        LEFT JOIN department ON workstations.dept_id = department.id
                     WHERE sub_workstations.id = ".$ws_id."
                 ");
                 $current_heiarchy = $q_heiarchy->fetch_assoc();
@@ -27,11 +27,13 @@
                     <a href='department_workstations.php?q=".$current_heiarchy['dept_id']."'>".$current_heiarchy['dept_name']."</a>
                 </span>";
                 if ($current_heiarchy['ws_name'] != $current_ws)
-                    echo "<span> / </span>
-                    <span>
-                        <a href='workstation_members.php?q=".$current_heiarchy['ws_id']."'>".$current_heiarchy['ws_name']."</a>
-                    </span>";
-                echo "<span> / </span>
+                    echo "
+                <span> / </span>
+                <span>
+                    <a href='workstation_members.php?q=".$current_heiarchy['ws_id']."'>".$current_heiarchy['ws_name']."</a>
+                </span>";
+                echo "
+                <span> / </span>
                 <span>
                     ".$current_ws."
                 </span>";
@@ -56,11 +58,11 @@
         
         if ($role != 'Operator')
             {
-        echo 
-    "<div class='w-100 pl-3 pr-3'>
-    <div class='ws-role-section'>
-        <p class='m-0'>".$role."</p>
-        <div class='member-list-container overflow-x'>";
+        echo "
+    <div class='w-100 pl-3 pr-3'>
+        <div class='ws-role-section'>
+            <p class='m-0'>".$role."</p>
+            <div class='member-list-container overflow-x'>";
         $q_res = $conn->query("
             SELECT 
                 karyawan.name as name,
@@ -86,17 +88,12 @@
         while ($member = $q_res->fetch_assoc()) {
                 member_preview_button($member, $conn);
         }
-        echo "</div>
-    </div>
+        echo "
+            </div>
+        </div>
     </div>";
 }
     else {
-        echo 
-    "<div class='w-100 pl-3 pr-3'>
-    <div class='ws-role-section'>
-        <p class='m-0'>".$role."</p>
-        <div class='member-list-container overflow-y'>
-        <div class='member-list-container-grid'>";
         $q_res = $conn->query("
             SELECT 
                 karyawan.name as name,
@@ -104,22 +101,27 @@
                 karyawan.role as role,
                 roles.name as role_name 
             FROM karyawan 
-            LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
-            LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
-            LEFT JOIN roles ON karyawan.role = roles.id
+                LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
+                LEFT JOIN roles ON karyawan.role = roles.id
             WHERE sub_workstations.id = ".$ws_id." AND role = $role_id
             ORDER BY name ASC");
-
+        echo "
+    <div class='w-100 pl-3 pr-3'>
+        <div class='ws-role-section'>
+            <p class='m-0'>".$role."</p>
+            <div class='member-list-container overflow-y d-flex'>
+                <div class='member-list-container-grid'>";
 
         while ($member = $q_res->fetch_assoc()) {
-            echo "<div class='w-100 h-100 d-flex justify-content-center align-items-center'>";
+            echo "  <div class='w-100 h-100 d-flex justify-content-center align-items-center'>";
             member_preview_button_chartless($member, $conn);
-            echo "</div>";
+            echo "  </div>";
         }
-        echo "</div>
-    </div>
-    </div>
+        echo "  </div>
+            </div>
+        </div>
     </div>";
     }
     }

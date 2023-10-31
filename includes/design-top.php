@@ -3,7 +3,7 @@
 		<a href="index.php" class="logo-container">
 			<img src="img/kyb-putih.png" alt="Skill Map">
 		</a>
-		<p class="h1 ml-4">SKILL MAP FOR MAN POWER</p>
+		<p class="h1 ml-4">SKILL MAP MAN POWER DASHBOARD</p>
 	</div>
 	<div class='d-flex flex-row align-items-center'>
 		<a href="index.php" class='mr-4 font-default-light'>

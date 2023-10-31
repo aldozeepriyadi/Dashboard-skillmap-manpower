@@ -62,9 +62,9 @@
                     $res = $conn->query("
                         SELECT AVG(IFNULL(mp_scores.$cat,0)) as average 
                         FROM karyawan
-                        LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
-                        LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-                        LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
+                            LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                            LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                            LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
                         WHERE sub_workstations.id = $ws_id
                     ");
                     $row = $res->fetch_assoc();
@@ -74,9 +74,9 @@
                 $query_string = "
                     SELECT AVG(IFNULL(mp_scores.kao,0)) as average 
                     FROM karyawan
-                    LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
-                    LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-                    LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
+                        LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                        LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                        LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
                     WHERE sub_workstations.id = $ws_id AND (
                 ";
                 foreach($roles_with_kao as $role) {
@@ -100,19 +100,16 @@
                         $operator_mp_categories['kao'].
                         "]";
 
-                echo
-                    "
-                    <a class='ws-stat-container' href='sub_workstation_members.php?q=$ws_id'>
-                        <div class='ws-title'>
-                            <p>$ws_name</p>
-                        </div>
-                        <div class='ws-content'>
-                    ";
+                echo "
+            <a class='ws-stat-container' href='sub_workstation_members.php?q=$ws_id'>
+                <div class='ws-title'>
+                    <p>$ws_name</p>
+                </div>
+                <div class='ws-content'>";
                     include('includes/components/sm-radarchart.php');
-                    echo  
-                        "</div>
-                    </a>
-                    ";
+                echo "
+                </div>
+            </a>";
             }
             ?>
         </div>
