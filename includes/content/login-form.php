@@ -1,5 +1,5 @@
 <div class='d-flex justify-content-center align-items-center h-100 w-100'>
-    <div id='login-form-wrapper' class="w-25 h-50 m-5 background-light">
+    <div id='login-form-wrapper' class="m-5 background-light align-items-center justify-content-center">
         <div class='w-100'>
             <img class='w-50' src="img/kyb-merah.png" alt="">
         </div>

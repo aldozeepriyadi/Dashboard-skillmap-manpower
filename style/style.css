@@ -920,13 +920,17 @@ input[value='5'] + .cu-radio-button {
     border-radius: 16px;
     display: flex;
     flex-direction: column;
+    width: 28rem;
+    height: 24rem;
+    text-align: center;
+    padding: 1rem;
 }
 
-#login-form-wrapper:first-child {
+/* #login-form-wrapper > div:first-child {
     padding-top: 1rem;
     text-align: center;
     height: 10px;
-}
+} */
 
 #login-form-wrapper > div > p {
     font-size: 1.3rem;
