@@ -30,6 +30,19 @@
         </div>
     </div>
 
+    <div class='popup hidden' id='edit-picture-popup'>
+        <div class='popup-content-wrapper h-100'>
+            <form action="actions/edit-picture.php?q=<?php echo $karyawan['npk'];?>" method="post" class='w-100 h-100 d-flex flex-column align-items-center' enctype="multipart/form-data">
+                <p>Edit Picture for <?php echo $karyawan['name']?></p>
+                <input type="file" id="ap-form-photo" name="ap-form-photo" accept="image/*" class='m-5'>
+                <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
+                    <a href="#" class="cu-cancel-btn m-1" onclick="hide('#edit-picture-popup')">Cancel</a>
+                    <input type="submit" name="update" class="cu-submit-btn"></input>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div id="profile-container">
         <div class="profile-left">
             <div id="page-title" class="w-100">
@@ -64,7 +77,7 @@
                 ?>
             </div>
             <div class="p-title">
-                <div class="p-picture-container">
+                <a href='#' onclick="show('#edit-picture-popup')" class="p-picture-container position-relative">
                     <img src="
                         <?php 
                             $img_path = "img/profile_pictures/".$karyawan['npk'].".jpg";
@@ -72,7 +85,10 @@
                             else echo "img/profile_pictures/default.jpg";
                         ?>
                     "></img>
-                </div>
+                    <div id='p-picture-edit-overlay' class='w-100 h-100 justify-content-center align-items-center'>
+                        <p>EDIT</p>
+                    </div>
+                </a>
                 <div class="p-title-container">
                     <div class='d-flex-row p-name-text'>
                         <span class='w-25'>
