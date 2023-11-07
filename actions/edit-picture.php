@@ -31,6 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!move_uploaded_file($_FILES["ap-form-photo"]["tmp_name"], $target_file)) {
         $errMsg .= "Sorry, there was an error uploading your file.\\n".$_FILES["ap-form-photo"]["tmp_name"];
+    } else {
+        clearstatcache();
     }
 
     if ($errMsg == '') 
