@@ -2,7 +2,7 @@
 include('db_config.php');
 
 // Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, $password, $db_name, $db_port);
 
 // Check connection
 if ($conn->connect_error) {
