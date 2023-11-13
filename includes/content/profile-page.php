@@ -165,6 +165,9 @@
                     }
                     ?>
                 </div>
+                <a href='update_profile.php?npk=<?php echo $karyawan['npk']?>' style='flex: 1'>
+                    <img class='edit-profile-button' src="img/edit-solid.png" alt="">
+                </a>
             </div>
             <div class="p-stats m-3 p-4 background-light" style='flex: 1;'>
                 <div class="p-radar-container">

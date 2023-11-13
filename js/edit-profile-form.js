@@ -10,11 +10,26 @@ function update_form_ws_val() {
         str = items.toString();
     }
     $('#ap-form-ws-val').attr('value', str);
+    console.log($("#ap-form-ws").val());
+}
+
+function update_form_ws_options() {
+    var selected_dept = $('#ap-form-dept').val();
+    var enabled_optgroup_class = "form-sws-d-" + selected_dept;
+    $('.form-ws-optgroup').each(function() {
+        if (! $(this).hasClass(enabled_optgroup_class))
+            $(this).attr('hidden', 'hidden');
+        else 
+            $(this).removeAttr('hidden');
+        
+    });
+    console.log(enabled_optgroup_class);
 }
 
 $(function() {
 $('document').ready(function(){
-    $("#ap-form-ws").val($("#ap-form-ws option:first").val());
+    update_form_ws_options();
+    $("#ap-form-ws").val($("#ap-form-ws").find("option:not(:hidden):eq(0)").val());
     update_form_ws_val();
 
     $('#ap-form-ws option').mousedown(function(e) {
@@ -35,13 +50,22 @@ $('document').ready(function(){
     $('select#ap-form-ws').on('change', function() {
         update_form_ws_val();
     });
+    
+    $('select#ap-form-dept').on('change', function() {
+        update_form_ws_options();
+        $("#ap-form-ws").val($("#ap-form-ws").find("option:not(:hidden):eq(0)").val());
+        update_form_ws_val();
+    });
 
     $('select#ap-form-role').on('change', function() {
-        if (this.value == 0) 
+        if (this.value == 0) {
             $('#ap-form-ws').attr('multiple', 'multiple');
-        else 
+            $("#ap-form-ws").val($("#ap-form-ws").find("option:not(:hidden):eq(0)").val());
+        }
+        else {
             $('#ap-form-ws').removeAttr('multiple');
-        $("#ap-form-ws").val($("#ap-form-ws option:first").val());
+            $("#ap-form-ws").val($("#ap-form-ws").val());
+        }
         update_form_ws_val();
       });
 })});
