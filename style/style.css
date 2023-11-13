@@ -6,6 +6,8 @@
     --secondary-color: #FFFFFF;
     --secondary-color-darken: #DDDDDD;
     --overlay-background-color: rgba(0,0,0,0.5);
+    --overlay-background-color-light: rgba(255,255,255,0.15);
+    --transparent-color: rgba(0,0,0,0);
     --delete-color: #341B2B;
     --delete-color-highlighted: #562C47;
     --font-color-light: #FFFFFF;
@@ -63,6 +65,14 @@ a {
 
 .font-default-dark {
     color: var(--font-color-dark) !important;
+}
+
+.hover-overlay-light {
+    transition: all 0.3s;
+}
+
+.hover-overlay-light:hover {
+    background-color: var(--overlay-background-color-light);
 }
 
 .popup:after {
@@ -503,6 +513,18 @@ a {
     font-weight: 650;
 }
 
+.edit-profile-button {
+    width: 3rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    background-color: var(--transparent-color);
+    transition: all 0.3s;
+} 
+
+.edit-profile-button:hover {
+    background-color: rgba(0,0,0,0.3);
+}
+
 .p-name-text {
     font-size: 1rem;
     font-weight: 500;
@@ -525,7 +547,7 @@ a {
 }
 
 .p-radar-container {
-    width: 50%;
+    width: 45%;
 }
 
 .profile-right {
