@@ -14,6 +14,7 @@ function update_form_ws_val() {
 
 $(function() {
 $('document').ready(function(){
+    document.getElementById('ap-form-date').valueAsDate = new Date();
     $("#ap-form-ws").val($("#ap-form-ws option:first").val());
     update_form_ws_val();
 

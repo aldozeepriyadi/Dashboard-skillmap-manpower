@@ -6,7 +6,7 @@
 <head>
 	<?php include("includes/head-tag-contents.php");?>
 </head>
-<body>
+<body style='margin: 0; height: 100%'>
 <?php include("includes/design-top.php");?>
 <?php
     $q_res = $conn->query("

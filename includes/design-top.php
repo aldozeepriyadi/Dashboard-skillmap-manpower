@@ -1,7 +1,7 @@
 <div class="header-bar pl-3 pr-3">
 	<div class="dashboard-title-container d-flex flex-row align-items-center h-100">
 		<a href="index.php" class="logo-container">
-			<img src="img/kyb-putih.png" alt="Skill Map">
+			<img src="img/logo-kyb.png" alt="Skill Map">
 		</a>
 		<p class="h1 ml-4">SKILL MAP MAN POWER DASHBOARD</p>
 	</div>

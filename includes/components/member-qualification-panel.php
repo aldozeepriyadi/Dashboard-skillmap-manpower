@@ -1,4 +1,4 @@
-<div class='d-flex justify-content-center w-100 mb-3' style='flex:1'>
+<div class='d-flex justify-content-center w-100' style='height: 22.5%'>
     <div class='p-process-panel d-flex flex-column align-items-center h-100 p-1'>
         <div class='p-process-panel-text d-flex flex-row justify-content-between w-100 pl-1 pr-1'>
             <p class='m-0'>Process Qualification</p>

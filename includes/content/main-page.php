@@ -21,7 +21,7 @@
             ");
 
             $operator_mp_categories = array();
-            $dept_ids = array(1, 2, 3, 4, 5);
+            $dept_ids = array(1, 2, 3, 4, 5, 6);
 
             while ($row = $q_res->fetch_assoc()) {
                 if (in_array($row['dept_id'], $dept_ids)) {

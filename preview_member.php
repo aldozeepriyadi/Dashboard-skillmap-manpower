@@ -7,7 +7,7 @@
 	<?php include("includes/head-tag-contents.php");?>
     <script src="js/profile-page.js"></script>
 </head>
-<body style='margin: 0; height: 100%; overflow: hidden'>
+<body style='margin: 0; height: 100%;'>
 
 <?php include("includes/design-top.php");?>
 
@@ -18,6 +18,7 @@
         SELECT 
             karyawan.name as name,
             karyawan.npk as npk,
+            karyawan.date_joined as date_joined,
             sub_workstations.id as sub_ws_id,
             sub_workstations.name as sub_ws_name,
             workstations.id as ws_id,

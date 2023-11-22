@@ -11,9 +11,46 @@ if(isset($_POST['update']))
         else $scores[$cat] = 1;
     }
 
+    // print_r($scores);
+
     $sql_query=
-        "
-        INSERT INTO `mp_scores` 
+        "SELECT npk, msk, kt, pssp, png, fivejq, kao
+        FROM mp_scores WHERE npk = '".$_GET['q']."'";
+    if ($result = $conn->query($sql_query)) {
+        if ($result->num_rows > 0) {
+            $q_files = 
+                "SELECT mp_category, filename
+                FROM mp_file_proof WHERE npk = '".$_GET['q']."'";
+            $temp_files = array();
+            if ($result_files = $conn->query($q_files)) {
+                if ($result_files->num_rows > 0) {
+                    while ($row = $result_files->fetch_assoc()) {
+                        $temp_files[$row['mp_category']] = $row['filename'];
+                    }
+                }
+            }
+            $row = $result->fetch_assoc();
+            foreach ($mp_categories as $cat => $cat_name) {
+                if ($scores[$cat] <> $row[$cat]) {
+                    // delete corresponding file from mp files
+                    if (isset($temp_files[$cat])) {
+                        $target_dir = "../files/";
+                        $target_file = $target_dir . $temp_files[$cat];
+                        if (file_exists($target_file))
+                            unlink($target_file);
+                        $sql_query=
+                            "DELETE FROM `mp_file_proof` " .
+                            "WHERE npk = '".$_GET['q']."' " .
+                            "AND mp_category = '".$cat."'";
+                        $conn->query($sql_query);
+                    }
+                }
+            }
+        }
+    }
+
+    $sql_query=
+        "INSERT INTO `mp_scores` 
         (npk, msk, kt, pssp, png, fivejq, kao)
         VALUES (
         '".$_GET['q']."',

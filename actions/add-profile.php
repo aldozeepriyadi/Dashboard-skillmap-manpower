@@ -55,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ws = trim($ws);
         $ws_arr = explode(" ", $ws);
         try {
-            $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, role) VALUES (?, ?, ?)");
-            $stmt->bind_param("ssi", $npk, $name, $role);
+            $stmt = $conn->prepare("INSERT INTO karyawan (npk, name, role, date_joined) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssis", $npk, $name, $role, $_POST["join-date"]);
             $stmt->execute();
             $stmt->close();
 

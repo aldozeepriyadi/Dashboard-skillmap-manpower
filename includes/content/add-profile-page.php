@@ -27,6 +27,10 @@
                     </select>
                 </div>
                 <div class="ap-form-section">
+                    <p>Join Date:</p>
+                    <input type="date" class="ap-form-input-box" id="ap-form-date" name="join-date">
+                </div>
+                <div class="ap-form-section">
                     <p>Workstation:</p>
                     <select class="ap-form-input-box" id="ap-form-ws" multiple>
                         <?php 
