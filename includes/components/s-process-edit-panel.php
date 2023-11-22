@@ -21,6 +21,10 @@
     <form action='actions/update-s-certifications.php?q=".$karyawan['npk']."' method='post' class='w-100 h-75 d-block overflow-auto'>
     ";
     echo "<div class='d-block h-100' style='overflow: auto'>";
+    if ($q_process->num_rows == 0) {
+        echo "<p class='m-0'>No process found</p>";
+    }
+    else
     while($p = $q_process->fetch_assoc()) {
         echo "<div class='d-flex flex-row align-items-center'>";
         echo "<input type='checkbox'  id='sp-".$p['process_id']."' class='edit-s-process-checkbox' value='".$p['process_id']."'";
