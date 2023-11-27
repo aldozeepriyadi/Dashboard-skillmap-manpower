@@ -12,14 +12,17 @@ if(isset($_POST['update']))
         DELETE FROM `qualifications` 
         WHERE npk = '".$_GET['q']."'
     ");
-
     foreach ($q_arr as $q) {
+        $q = explode("-", $q);
+        $q_id = $q[0];
+        $q_val = $q[1];
         $conn->query("
             INSERT INTO `qualifications` 
-            (npk, process_id)
+            (npk, process_id, value)
             VALUES (
             '".$_GET['q']."',
-            ".$q."
+            ".$q_id.",
+            ".$q_val."
             )
         ");
     }

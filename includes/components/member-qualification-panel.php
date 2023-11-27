@@ -13,7 +13,7 @@
                     SELECT process.name as name FROM karyawan
                     JOIN qualifications ON karyawan.npk = qualifications.npk
                     JOIN process ON qualifications.process_id = process.id
-                    WHERE karyawan.npk = '".$karyawan['npk']."'
+                    WHERE karyawan.npk = '".$karyawan['npk']."' AND qualifications.value >= process.min_skill
                 ");
                 while ($q_row = $q_res->fetch_assoc()) {
                     echo "

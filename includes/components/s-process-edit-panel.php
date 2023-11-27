@@ -1,4 +1,4 @@
-<script src='js/edit-qualification-form.js'></script>
+<!-- <script src='js/edit-qualification-form.js'></script> -->
 <?php
     $q_process = $conn->query(
         "SELECT DISTINCT

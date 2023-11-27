@@ -22,6 +22,11 @@
     <div class='popup hidden' id='edit-process-popup'>
         <div class='popup-content-wrapper h-100'>
             <p>Edit Process Qualification for <?php echo $karyawan['name']?></p>
+            <div class='d-flex flex-row w-100'>
+                <p class='pl-3 m-0 w-50'>Name</p>
+                <p class='m-0 ml-2'>Score</p>
+                <p class='mb-0 ml-auto mr-1'>Min Score</p>
+            </div>
             <?php include('includes/components/process-edit-panel.php');?>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
                 <a href="#" class="cu-cancel-btn m-1" onclick="hide('#edit-process-popup')">Cancel</a>
@@ -219,7 +224,7 @@
                 </div>
                 <div class='p-stats m-3 background-light d-flex flex-column' style='flex: 1; margin-right: 0px!important;'>
                     <div class='w-100 d-flex justify-content-around align-items-center p-2' style='border-bottom: dotted; height: 3rem'>
-                        <p class='m-0'>S-Process</p>    
+                        <p class='m-0' style='color: #FF1313; font-weight: 800;'>S-PROCESS</p>    
                         <a href='#' onclick='show("#edit-s-process-popup")' class='d-flex justify-content-center align-items-center'>
                             <img class='edit-profile-button' src="img/edit-solid.png" alt="" style="width: 2.5rem;">
                         </a>
