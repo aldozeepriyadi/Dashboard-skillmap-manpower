@@ -233,7 +233,7 @@
                         <ul>
                         <?php 
                         $q_res = $conn->query("
-                            SELECT s_process.name as name FROM karyawan
+                            SELECT DISTINCT s_process.name as name FROM karyawan
                             JOIN s_process_certification ON karyawan.npk = s_process_certification.npk
                             JOIN s_process ON s_process_certification.s_process_id = s_process.id
                             WHERE karyawan.npk = '".$karyawan['npk']."'");

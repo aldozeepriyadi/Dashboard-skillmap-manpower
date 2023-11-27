@@ -55,6 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
             $stmt->close();
 
+            $stmt = $conn->prepare("DELETE FROM qualifications WHERE npk = ?");
+            $stmt->bind_param("s", $npk);
+            $stmt->execute();
+            $stmt->close();
+
             foreach($ws_arr as $ws)
             {
                 $stmt = $conn->prepare("INSERT INTO karyawan_workstation (npk, workstation_id) VALUES (?, ?)");
