@@ -50,7 +50,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
             $stmt->close();
 
-            $stmt = $conn->prepare("DELETE FROM karyawan_workstation WHERE npk = ?");
+            $subquery = "SELECT ";
+            if (count($ws_arr) == 0) {
+                $subquery .= NULL;
+            } else {
+                $subquery .= join(" UNION SELECT ", $ws_arr);
+            }
+
+            $stmt = $conn->prepare("DELETE FROM karyawan_workstation WHERE npk = ? AND workstation_id NOT IN ( $subquery )");
             $stmt->bind_param("s", $npk);
             $stmt->execute();
             $stmt->close();

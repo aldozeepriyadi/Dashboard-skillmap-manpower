@@ -92,7 +92,7 @@
                 ";
                 ?>
             </div>
-            <div class="p-title">
+            <div class="p-title ml-3">
                 <a href='#' onclick="show('#edit-picture-popup')" class="p-picture-container position-relative">
                     <img src="
                         <?php 
@@ -195,7 +195,7 @@
                     ?>
                 </div>
                 <a href='update_profile.php?npk=<?php echo $karyawan['npk']?>' style='flex: 1'>
-                    <img class='edit-profile-button' src="img/edit-solid.png" alt="">
+                    <img class='edit-profile-button' src="img/edit-solid.png" alt="" style=" border-radius: 0px 16px 0px 0px">
                 </a>
             </div>
             <div class='d-flex flex-row' style='flex: 1;'>
@@ -230,7 +230,7 @@
                         </a>
                     </div>
                     <div class='mt-1'>
-                        <ul>
+                        <ul style="height: 35vh; overflow: auto;">
                         <?php 
                         $q_res = $conn->query("
                             SELECT DISTINCT s_process.name as name FROM karyawan
@@ -254,7 +254,7 @@
                 include("includes/components/member-qualification-panel.php");
             }
             ?>
-            <div class='d-flex align-items-center justify-content-center w-100' style='flex: 1 !important;'>
+            <div class='d-flex align-items-center justify-content-center w-100' style='flex: 1 1 auto !important;'>
                 <div class="profile-table background-light d-inline-flex flex-column">
                     <div id="pt-tab-buttons" class="fill-container">
                         <form id="pt-tab-radio" class="fill-container d-flex-row">
@@ -292,21 +292,33 @@
                                         WHERE relocate_history.npk = '".$karyawan['npk']."'
                                         ");
                                     while ($q_row = $q_res->fetch_assoc()) {
-                                        if ($q_row['end_time'] == '') $q_row['end_time'] = 'Present';
+                                        if ($q_row['end_time'] == '') $end_time = 'Present';
+                                        else {
+                                            $end_time = explode(" ", $q_row['end_time']);
+                                            $end_time = $end_time[0];
+                                            // format to dd-mm-yyyy
+                                            $end_time = join("-", array_reverse(explode("-", $end_time)));
+                                        }
+                                        $start_time = explode(" ", $q_row['start_time']);
+                                        $start_time = $start_time[0];
+                                        $start_time = join("-", array_reverse(explode("-", $start_time)));
                                         if ($q_row['sw_name'] == $q_row['w_name'])
-                                            $relocate_ws = $q_row['w_name']." - ".$q_row['d_name'];
+                                            $relocate_ws = $q_row['d_name']." - ".$q_row['w_name'];
                                         else
-                                            $relocate_ws = $q_row['sw_name']." - ".$q_row['w_name']." - ".$q_row['d_name'];
+                                            $relocate_ws = $q_row['d_name']." - ".$q_row['w_name']." - ".$q_row['sw_name'];
 
                                         echo "
                                         <li class='mt-1'>
                                             <p class='m-0' style='font-weight:600;'>".$relocate_ws."</p>
-                                            <p class='m-0'>".$q_row['start_time']." - ".$q_row['end_time']."</p>
+                                            <p class='m-0'>".$start_time." to ".$end_time."</p>
                                         </li>
                                         ";
                                     }
                                     ?>
                                 </ul>
+                                <div class='w-100 px-1'>
+                                    <div class='w-100' style='border-bottom: 2px dashed'></div>
+                                </div>
                             </div>
                             <div class='w-100 d-flex align-items-center justify-content-center'>
                                 <p class='m-0 mt-3' style='font-size: 1.5rem'>Current Files</p>
