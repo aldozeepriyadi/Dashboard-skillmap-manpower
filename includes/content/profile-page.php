@@ -92,7 +92,7 @@
                 ";
                 ?>
             </div>
-            <div class="p-title ml-3">
+            <div class="p-title ml-3 shadow">
                 <a href='#' onclick="show('#edit-picture-popup')" class="p-picture-container position-relative">
                     <img src="
                         <?php 
@@ -198,7 +198,7 @@
                     <img class='edit-profile-button' src="img/edit-solid.png" alt="" style=" border-radius: 0px 16px 0px 0px">
                 </a>
             </div>
-            <div class='d-flex flex-row' style='flex: 1;'>
+            <div class='d-flex flex-row' style='flex: 1; height: 50vh;'>
                 <div class="p-stats m-3 p-4 background-light align-items-center justify-content-evenly" style='flex: 2;'>
                     <div class="p-radar-container">
                         <?php
@@ -229,14 +229,15 @@
                             <img class='edit-profile-button' src="img/edit-solid.png" alt="" style="width: 2.5rem;">
                         </a>
                     </div>
-                    <div class='mt-1'>
-                        <ul style="height: 35vh; overflow: auto;">
+                    <div class='mt-1 h-100 overflow-auto'>
+                        <ul class="h-100 pr-1">
                         <?php 
-                        $q_res = $conn->query("
-                            SELECT DISTINCT s_process.name as name FROM karyawan
+                        $q_res = $conn->query(
+                            "SELECT DISTINCT s_process.name as name FROM karyawan
                             JOIN s_process_certification ON karyawan.npk = s_process_certification.npk
                             JOIN s_process ON s_process_certification.s_process_id = s_process.id
-                            WHERE karyawan.npk = '".$karyawan['npk']."'");
+                            WHERE karyawan.npk = '".$karyawan['npk']."'
+                            ORDER BY s_process.name ASC");
                         while ($q_row = $q_res->fetch_assoc()) {
                             echo "
                             <li>".$q_row['name']."</li>
@@ -254,7 +255,7 @@
                 include("includes/components/member-qualification-panel.php");
             }
             ?>
-            <div class='d-flex align-items-center justify-content-center w-100' style='flex: 1 1 auto !important;'>
+            <div class='d-flex mb-3 align-items-center justify-content-center w-100' style='flex: 1 1 auto !important;'>
                 <div class="profile-table background-light d-inline-flex flex-column">
                     <div id="pt-tab-buttons" class="fill-container">
                         <form id="pt-tab-radio" class="fill-container d-flex-row">
