@@ -1,8 +1,19 @@
 var show = function(id) {
 	$(id).removeClass('hidden');
 }
+
+var show_popup = function(id) {
+    $(id).removeClass('hidden');
+    $('#dark-overlay').removeClass('hidden');
+}
+
 var hide = function(id) {
-	$(id).addClass('hidden');
+    $(id).addClass('hidden');
+}
+
+var hide_popup = function(id) {
+    $(id).addClass('hidden');
+    $('#dark-overlay').addClass('hidden');
 }
 
 function hide_tabs() {

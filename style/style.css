@@ -75,7 +75,7 @@ a {
     background-color: var(--overlay-background-color-light);
 }
 
-.popup:after {
+/* .popup:after {
     position: fixed;
     content: "";
     top: 0;
@@ -84,6 +84,19 @@ a {
     right: 0;
     background: rgba(0,0,0,0.5);
     z-index: -2;
+    animation: popup-after 0.5s;
+} */
+
+#dark-overlay {
+    position: fixed;
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+    animation: popupafter 0.5s;
 }
 
 .popup:before {
@@ -96,6 +109,7 @@ a {
     background: var(--secondary-color);
     z-index: -1;
     border-radius: 24px;
+    /* animation: popup-after 0.5s; */
 }
 
 .popup {
@@ -109,7 +123,28 @@ a {
     background: var(--secondary-color);
     z-index: 20;
     border-radius: 24px;
+    animation: popup 0.5s;
 }
+
+@keyframes popup {
+    0%{
+      transform: translate(0, -50px);
+      opacity: 0%;
+    }
+    100%{
+      transform: translate(0, 0);
+      opacity: 100%;
+    }
+  }
+
+@keyframes popupafter {
+    0%{
+      opacity: 0%;
+    }
+    100%{
+      opacity: 100%;
+    }
+  }
 
 .popup-small {
     position: fixed;
@@ -738,12 +773,12 @@ input[type="radio"]:checked + div.pt-tab-button{
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--delete-color-highlighted); 
+  background: var(--main-color-highlighted); 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--delete-color); 
+  background: var(--main-color); 
 }
 
 .p-process-panel-list-item {
@@ -983,6 +1018,7 @@ input[value='5'] + .cu-radio-button {
     padding: 2rem;
     margin-top: 1rem;
     border-radius: 12px;
+    background-color: var(--secondary-color);
 }
 
 #add-profile-form-container {

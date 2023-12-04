@@ -2,7 +2,7 @@
     <div class='p-process-panel d-flex flex-column align-items-center p-1'>
         <div class='p-process-panel-text d-flex flex-row justify-content-between w-100 pl-1 pr-1' style='height:1.5rem;'>
             <p class='m-0'>Process Qualification</p>
-            <a href='#' onclick='show("#edit-process-popup")' id='process-edit-btn' class='d-flex justify-content-center align-items-center'>
+            <a href='#' onclick='show_popup("#edit-process-popup")' id='process-edit-btn' class='d-flex justify-content-center align-items-center'>
                 <p class='m-0'>EDIT</p>
             </a>
         </div>

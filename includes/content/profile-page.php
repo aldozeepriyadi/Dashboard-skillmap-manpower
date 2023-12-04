@@ -1,9 +1,10 @@
 <div id="content">
+    <div id='dark-overlay' class='hidden'></div>
     <div class="popup popup-small popup hidden" id="update-popup">
         <div class='popup-content-wrapper h-100'>
             <p>Are you sure you want to update <?php echo $karyawan['name']?>?</p>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
-                <a href="#" class="cu-cancel-btn m-1" onclick="hide('#update-popup')">Cancel</a>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#update-popup')">Cancel</a>
                 <label for="cu-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
             </div>
         </div>
@@ -13,7 +14,7 @@
         <div class='popup-content-wrapper h-100'>
             <p>Are you sure you want to delete <?php echo $karyawan['name']?>?</p>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
-                <a href="#" class="cu-cancel-btn m-1" onclick="hide('#delete-popup')">Cancel</a>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#delete-popup')">Cancel</a>
                 <label for="cu-delete-btn" tabindex="0" class='cu-delete-btn m-1'>Confirm</label>
             </div>
         </div>
@@ -29,7 +30,7 @@
             </div>
             <?php include('includes/components/process-edit-panel.php');?>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
-                <a href="#" class="cu-cancel-btn m-1" onclick="hide('#edit-process-popup')">Cancel</a>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-process-popup')">Cancel</a>
                 <label for="q-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
             </div>
         </div>
@@ -40,7 +41,7 @@
             <p>Edit S-Process Qualification for <?php echo $karyawan['name']?></p>
             <?php include('includes/components/s-process-edit-panel.php');?>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
-                <a href="#" class="cu-cancel-btn m-1" onclick="hide('#edit-s-process-popup')">Cancel</a>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-s-process-popup')">Cancel</a>
                 <label for="qq-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
             </div>
         </div>
@@ -52,7 +53,7 @@
                 <p>Edit Picture for <?php echo $karyawan['name']?></p>
                 <input type="file" id="ap-form-photo" name="ap-form-photo" accept="image/*" class='m-5'>
                 <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
-                    <a href="#" class="cu-cancel-btn m-1" onclick="hide('#edit-picture-popup')">Cancel</a>
+                    <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-picture-popup')">Cancel</a>
                     <input type="submit" name="update" class="cu-submit-btn"></input>
                 </div>
             </form>
@@ -93,7 +94,7 @@
                 ?>
             </div>
             <div class="p-title ml-3 shadow">
-                <a href='#' onclick="show('#edit-picture-popup')" class="p-picture-container position-relative">
+                <a href='#' onclick="show_popup('#edit-picture-popup')" class="p-picture-container position-relative">
                     <img src="
                         <?php 
                             $img_path = "img/profile_pictures/".$karyawan['npk'].".jpg";
@@ -225,12 +226,12 @@
                 <div class='p-stats m-3 background-light d-flex flex-column' style='flex: 1; margin-right: 0px!important;'>
                     <div class='w-100 d-flex justify-content-around align-items-center p-2' style='border-bottom: dotted; height: 3rem'>
                         <p class='m-0' style='color: #FF1313; font-weight: 800;'>S-PROCESS</p>    
-                        <a href='#' onclick='show("#edit-s-process-popup")' class='d-flex justify-content-center align-items-center'>
+                        <a href='#' onclick='show_popup("#edit-s-process-popup")' class='d-flex justify-content-center align-items-center'>
                             <img class='edit-profile-button' src="img/edit-solid.png" alt="" style="width: 2.5rem;">
                         </a>
                     </div>
                     <div class='mt-1 h-100 overflow-auto'>
-                        <ul class="h-100 pr-1">
+                        <ul class="h-100 pr-1 m-0">
                         <?php 
                         $q_res = $conn->query(
                             "SELECT DISTINCT s_process.name as name FROM karyawan
@@ -398,8 +399,8 @@
                                         </a>
                                     </div>
                                     <div class='ml-auto'>
-                                        <a href="#" onclick="show('#delete-popup')" class="cu-delete-btn mr-2">DELETE</a>
-                                        <a href="#" onclick="show('#update-popup')" class="cu-submit-btn">UPDATE</a>
+                                        <a href="#" onclick="show_popup('#delete-popup')" class="cu-delete-btn mr-2">DELETE</a>
+                                        <a href="#" onclick="show_popup('#update-popup')" class="cu-submit-btn">UPDATE</a>
                                         <div class="hidden">
                                             <input type="submit" name="delete" id="cu-delete-btn">DELETE</input>
                                             <input type="submit" name="update" id="cu-submit-btn">UPDATE</input>

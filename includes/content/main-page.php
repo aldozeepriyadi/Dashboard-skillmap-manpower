@@ -6,6 +6,7 @@
             </script>
             <?php
             $q_res = $conn->query("SELECT 
+            AVG(IFNULL(mp_scores.kao,0)) as kao,
             AVG(IFNULL(mp_scores.msk,0)) as msk,
             AVG(IFNULL(mp_scores.kt,0)) as kt,
             AVG(IFNULL(mp_scores.pssp,0)) as pssp,
@@ -29,21 +30,21 @@
                 }
             }
 
-            $q_res = $conn->query("SELECT
-            AVG(IFNULL(mp_scores.kao,0)) as kao,
-            workstations.dept_id
-            FROM (SELECT npk FROM karyawan WHERE karyawan.role != 2) as k
-            LEFT JOIN mp_scores ON k.npk = mp_scores.npk
-                LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = k.npk
-                LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-                LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
-            GROUP BY workstations.dept_id;");
+            // $q_res = $conn->query("SELECT
+            // AVG(IFNULL(mp_scores.kao,0)) as kao,
+            // workstations.dept_id
+            // FROM (SELECT npk FROM karyawan WHERE karyawan.role != 2) as k
+            // LEFT JOIN mp_scores ON k.npk = mp_scores.npk
+            //     LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = k.npk
+            //     LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+            //     LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
+            // GROUP BY workstations.dept_id;");
 
-            while ($row = $q_res->fetch_assoc()) {
-                if (in_array($row['dept_id'], $dept_ids)) {
-                    $operator_mp_categories[$row['dept_id']]['kao'] = $row['kao'];
-                }
-            }
+            // while ($row = $q_res->fetch_assoc()) {
+            //     if (in_array($row['dept_id'], $dept_ids)) {
+            //         $operator_mp_categories[$row['dept_id']]['kao'] = $row['kao'];
+            //     }
+            // }
             $q_res = $conn->query('SELECT id, dept_name FROM department;');
             while ($row = $q_res->fetch_assoc()) {
                 $d_id = $row['id'];
