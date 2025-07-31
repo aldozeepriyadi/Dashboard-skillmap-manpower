@@ -1,33 +1,38 @@
 <?php
-include('includes/a_config.php');
-if (!in_array($member['role'], $roles_with_kao)) $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ']";
-else $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO']";
+include ('includes/a_config.php');
+if (!in_array($member['role'], $roles_with_kao))
+    $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ']";
+else
+    $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO']";
 
-$data = "[".$member['msk'].",".
-            $member['kt'].",".
-            $member['pssp'].",".
-            $member['png'].",".
-            $member['fivejq'].",";
-if (in_array($member['role'], $roles_with_kao)) $data .= $member['kao'];
+$data = "[" . $member['msk'] . "," .
+    $member['kt'] . "," .
+    $member['pssp'] . "," .
+    $member['png'] . "," .
+    $member['fivejq'] . ",";
+if (in_array($member['role'], $roles_with_kao))
+    $data .= $member['kao'];
 $data .= ']';
 
-$chart_id = "radar_".$member['npk'];
-echo "
-<div>
-    <canvas id=".$chart_id."></canvas>
+$chart_id = "radar_" . $member['npk'];
+echo  "
+
+
+<div class= 'w-100 d-flex justify-content-around align-items-center p-2'>
+    <canvas id='" . $chart_id . "'></canvas>
 </div>
 <script>
-    ctx_".$chart_id." = document.getElementById('".$chart_id."');
+    var ctx_" . $chart_id . " = document.getElementById('" . $chart_id . "').getContext('2d');
     var style = getComputedStyle(document.body);
     var primCol = style.getPropertyValue('--secondary-color');
     var lightCol = style.getPropertyValue('--main-color');
-    new Chart(ctx_".$chart_id.", {
+    new Chart(ctx_" . $chart_id . ", {
         type: 'radar',
         data: {
-        labels: ".$labels.",
+        labels: " . $labels . ",
         datasets: [{
             label: 'score',
-            data: ".$data.",
+            data: " . $data . ",
             borderWidth: 3
         }]
         },
@@ -38,8 +43,7 @@ echo "
                         color: lightCol
                     },
                     angleLines: {
-                        color: 'rgba(255,255,255,0)',
-
+                        color: 'rgba(255,255,255,0)'
                     },
                     ticks: {
                         stepSize: 1,

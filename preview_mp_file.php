@@ -1,14 +1,16 @@
-<?php include("includes/db_connection.php"); ?>
-<?php include("includes/a_config.php");?>
-<?php include("includes/redirect_session.php");?>
+<?php include ("includes/db_connection.php"); ?>
+<?php include ("includes/a_config.php"); ?>
+<?php include ("includes/redirect_session.php"); ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-	<?php include("includes/head-tag-contents.php");?>
+    <?php include ("includes/head-tag-contents.php"); ?>
 </head>
+
 <body style='margin: 0; height: 100%'>
-<?php include("includes/design-top.php");?>
-<?php
+    <?php include ("includes/design-top.php"); ?>
+    <?php
     $q_res = $conn->query("
         SELECT 
             karyawan.name as name,
@@ -27,7 +29,7 @@
             LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
             LEFT JOIN department ON workstations.dept_id = department.id 
             LEFT JOIN roles ON karyawan.role = roles.id
-        WHERE karyawan.npk = '".$_GET['q']."'"
+        WHERE karyawan.npk = '" . $_GET['q'] . "' "
     );
 
     $num_results = $q_res->num_rows;
@@ -36,13 +38,15 @@
     } else {
         $karyawan = $q_res->fetch_assoc();
     }
-?>
+    ?>
 
-<?php 
-if ($num_results <= 0)
-	include("includes/content/not-found-page.php");
-else include("includes/content/mp-files.php")
-?>
+    <?php
+    if ($num_results <= 0)
+        include ("includes/content/not-found-page.php");
+    else
+        include ("includes/content/mp-files.php")
+            ?>
 
-</body>
-</html>
+    </body>
+
+    </html>

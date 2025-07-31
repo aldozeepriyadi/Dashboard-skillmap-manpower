@@ -1,45 +1,265 @@
 <div id="content">
+    <style>
+        /* Styling scrollbar horizontal saja */
+        .checkbox-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            overflow-x: auto;
+            /* Hanya horizontal scrollbar */
+            overflow-y: hidden;
+            /* Menyembunyikan scrollbar vertikal */
+            white-space: nowrap;
+            padding: 5px 10px;
+            /* Mengurangi padding untuk meminimalisir kebutuhan scrollbar */
+        }
+
+        .process-label {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+
+        .month-container {
+            display: flex;
+            flex-direction: column;
+            /* Susun secara vertikal */
+            align-items: center;
+            /* Pusatkan elemen */
+            margin-top: 3px;
+            width: 400px;
+            /* Pertahankan margin atas yang minimal */
+        }
+
+        .month-labels {
+            display: flex;
+            justify-content: start;
+            width: 100%;
+            /* Atur lebar sesuai container bulan */
+            /* margin-bottom: 1px; */
+            /* Pertahankan margin bawah untuk mendorong kotak bulan ke atas */
+        }
+
+        .month-label {
+            width: 30px;
+            /* Lebih kecil dari sebelumnya */
+            text-align: center;
+            /* Teks di tengah */
+            font-size: 12px;
+            /* Ukuran font lebih kecil */
+            margin-right: 1px;
+            /* Jarak antar label yang lebih sempit */
+        }
+
+        .month-boxes {
+            display: flex;
+            justify-content: start;
+            width: 100%;
+            /* Atur lebar sesuai container bulan */
+        }
+
+        .skill-req-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-left: auto;
+            margin-right: 2rem;
+        }
+
+        .skill-container,
+        .req-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .skill-text,
+        .req-text {
+            font-size: 0.7rem;
+            margin-top: 3px;
+            /* Atur margin atas untuk teks */
+        }
+
+
+        .month-box {
+            width: 30px;
+            /* Lebar kotak yang lebih kecil */
+            height: 30px;
+            /* Tinggi kotak yang lebih kecil */
+            border: 1px solid #000000;
+            margin-right: 1px;
+            /* Jarak antar kotak yang lebih sempit */
+        }
+
+        .highlighted {
+            background-color: #39FF14;
+            /* Pertahankan warna untuk kotak terpilih */
+        }
+
+        .process-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .low-skill {
+            background-color: #E8DADA;
+
+            /* Merah untuk indikasi skill yang rendah */
+        }
+
+
+        .custom-checkbox {
+            width: 24px;
+            /* Lebar checkbox */
+            height: 24px;
+            /* Tinggi checkbox */
+            background-color: #f0f0f0;
+            /* Warna latar belakang */
+            border-radius: 5px;
+            /* Membuat tepi menjadi bulat */
+            border: 1px solid #ccc;
+            /* Warna tepi */
+            transition: 0.3s;
+            /* Waktu transisi ketika di-click */
+        }
+
+        .custom-checkbox:checked {
+            background-color: #4CAF50;
+            /* Warna ketika checkbox dicentang */
+        }
+
+        /* Styling untuk memperkecil ukuran scrollbar */
+        .checkbox-container::-webkit-scrollbar {
+            height: 5px;
+            /* Mengurangi tinggi scrollbar */
+        }
+
+        .checkbox-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .checkbox-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        .checkbox-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 0.8rem;
+            /* Ukuran font diperkecil */
+        }
+
+
+        /* Styling checkbox */
+        .checkbox-container div {
+            margin-right: 10px;
+            /* Menjaga jarak antar checkbox */
+        }
+
+        .checkbox-container input[type='checkbox'] {
+            margin-right: 3px;
+            width: 20px;
+            /* Ukuran yang lebih kecil dari sebelumnya */
+            height: 20px;
+            /* Ukuran yang lebih kecil dari sebelumnya */
+            cursor: pointer;
+        }
+    </style>
+
     <div id='dark-overlay' class='hidden'></div>
     <div class="popup popup-small popup hidden" id="update-popup">
         <div class='popup-content-wrapper h-100'>
-            <p>Are you sure you want to update <?php echo $karyawan['name']?>?</p>
+            <p>Are you sure you want to update <?php echo $karyawan['name'] ?>?</p>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
-                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#update-popup')">Cancel</a>
+                <a href="#" class="cu-cancel-btn m-1"
+                    onclick="hide_popup('#update-popup'); show_popup('#edit-assessment-popup')">Cancel</a>
                 <label for="cu-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
             </div>
         </div>
     </div>
-
     <div class="popup popup-small hidden" id="delete-popup">
         <div class='popup-content-wrapper h-100'>
-            <p>Are you sure you want to delete <?php echo $karyawan['name']?>?</p>
+            <p>Are you sure you want to delete <?php echo $karyawan['name'] ?>?</p>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
-                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#delete-popup')">Cancel</a>
+                <a href="#" class="cu-cancel-btn m-1"
+                    onclick="hide_popup('#delete-popup'); show_popup('#edit-assessment-popup')">Cancel</a>
                 <label for="cu-delete-btn" tabindex="0" class='cu-delete-btn m-1'>Confirm</label>
             </div>
         </div>
     </div>
-
-    <div class='popup hidden' id='edit-process-popup'>
-        <div class='popup-content-wrapper h-100'>
-            <p>Edit Process Qualification for <?php echo $karyawan['name']?></p>
-            <div class='d-flex flex-row w-100'>
-                <p class='pl-3 m-0 w-50'>Name</p>
-                <p class='m-0 ml-2'>Score</p>
-                <p class='mb-0 ml-auto mr-1'>Min Score</p>
+    <div class="popup hidden" id="edit-process-popup">
+        <div class="popup-content-wrapper h-100">
+            <p>Edit Process Qualification for <?php echo $karyawan['name'] ?></p>
+            <div class="d-flex flex-row w-100">
+                <p class="pl-3 m-0 w-25">Name</p>
+                <p class="m-0 m-1">Score</p>
+                <p class="mb-1 ml-auto mr-1">Min Score</p>
+                <p class="mb-2 ml-auto mr-2">Jadwal Training</p>
+                <p class="mb-3 ml-auto mr-3">Status</p>
             </div>
-            <?php include('includes/components/process-edit-panel.php');?>
+            <?php include ('includes/components/process-edit-panel.php'); ?>
+            <div class="d-flex flex-row justify-content-between w-100">
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-process-popup');">Back</a>
+                <label for="q-submit-btn" tabindex="0" class="cu-submit-btn m-1">Confirm</label>
+            </div>
+        </div>
+    </div>
+    <div class='popup hidden' id='edit-ehs-popup'>
+        <div class='popup-content-wrapper h-100'>
+            <p>Edit EHS Qualification for <?php echo $karyawan['name'] ?></p>
+            <div class='d-flex flex-row w-100'>
+                <p class="pl-3 m-0 w-25">Name</p>
+                <p class="m-0 m-1">Score</p>
+                <p class="mb-1 ml-auto mr-1">Min Score</p>
+                <p class="mb-2 ml-auto mr-2">Jadwal Training</p>
+                <p class="mb-3 ml-auto mr-3">Status</p>
+            </div>
+            <?php include ('includes/components/ehs-edit-panel.php'); ?>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
-                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-process-popup')">Cancel</a>
-                <label for="q-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-ehs-popup');">Back</a>
+                <label for="q2-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
+            </div>
+        </div>
+    </div>
+    <div class='popup hidden' id='edit-quality-popup'>
+        <div class='popup-content-wrapper h-100'>
+            <p>Edit Quality Qualification for <?php echo $karyawan['name'] ?></p>
+            <div class='d-flex flex-row w-100'>
+                <p class="pl-3 m-0 w-25">Name</p>
+                <p class="m-0 m-1">Score</p>
+                <p class="mb-1 ml-auto mr-1">Min Score</p>
+                <p class="mb-2 ml-auto mr-2">Jadwal Training</p>
+                <p class="mb-3 ml-auto mr-3">Status</p>
+            </div>`
+            <?php include ('includes/components/quality-edit-panel.php'); ?>
+            <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-quality-popup');">Back</a>
+                <label for="q3-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class='popup hidden' id='edit-assessment-popup'>
+        <div class='popup-content-wrapper h-100'>
+            <p>Edit Assessment <?php echo $karyawan['name'] ?></p>
+            <?php include ('includes/components/update-assesment-panel.php'); ?>
+            <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
+                <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-assessment-popup')">Cancel</a>
             </div>
         </div>
     </div>
 
     <div class='popup hidden' id='edit-s-process-popup'>
         <div class='popup-content-wrapper h-100'>
-            <p>Edit S-Process Qualification for <?php echo $karyawan['name']?></p>
-            <?php include('includes/components/s-process-edit-panel.php');?>
+            <p>Edit S-Process Qualification for <?php echo $karyawan['name'] ?></p>
+            <?php include ('includes/components/s-process-edit-panel.php'); ?>
             <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
                 <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-s-process-popup')">Cancel</a>
                 <label for="qq-submit-btn" tabindex="0" class='cu-submit-btn m-1'>Confirm</label>
@@ -47,11 +267,15 @@
         </div>
     </div>
 
+
     <div class='popup hidden' id='edit-picture-popup'>
         <div class='popup-content-wrapper h-100'>
-            <form action="actions/edit-picture.php?q=<?php echo $karyawan['npk'];?>" method="post" class='w-100 h-100 d-flex flex-column align-items-center' enctype="multipart/form-data">
-                <p>Edit Picture for <?php echo $karyawan['name']?></p>
+
+            <form action="actions/edit-picture.php?q=<?php echo $karyawan['npk']; ?>" method="post"
+                class='w-100 h-100 d-flex flex-column align-items-center' enctype="multipart/form-data">
+                <p>Edit Picture for <?php echo $karyawan['name'] ?></p>
                 <input type="file" id="ap-form-photo" name="ap-form-photo" accept="image/*" class='m-5'>
+
                 <div class='d-flex-row justify-content-between w-100 flex-float-bottom'>
                     <a href="#" class="cu-cancel-btn m-1" onclick="hide_popup('#edit-picture-popup')">Cancel</a>
                     <input type="submit" name="update" class="cu-submit-btn"></input>
@@ -66,46 +290,76 @@
                 <p>Assessment Production MP</p>
             </div>
             <div class="w-100 pl-3 mb-1">
-                <?php 
+                <?php
                 echo "
                 <span>
                     <a href='index.php'>Home</a>
                 </span>
                 <span> / </span>
                 <span>
-                    <a href='department_workstations.php?q=".$karyawan['dept_id']."'>".$karyawan['dept_name']."</a>
+                    <a href='department_workstations.php?q=" . $karyawan['dept_id'] . "'>" . $karyawan['dept_name'] . "</a>
                 </span>";
                 if ($karyawan['ws_name'] != $karyawan['sub_ws_name'])
-                echo "
+                    echo "
                 <span> / </span>
                 <span>
-                    <a href='workstation_members.php?q=".$karyawan['ws_id']."'>".$karyawan['ws_name']."</a>
+                    <a href='workstation_members.php?q=" . $karyawan['ws_id'] . "'>" . $karyawan['ws_name'] . "</a>
                 </span>";
                 echo "
                 <span> / </span>
                 <span>
-                    <a href='sub_workstation_members.php?q=".$karyawan['sub_ws_id']."'>".$karyawan['sub_ws_name']."</a>
+                    <a href='sub_workstation_members.php?q=" . $karyawan['sub_ws_id'] . "'>" . $karyawan['sub_ws_name'] . "</a>
                 </span>
                 <span> / </span>
                 <span>
-                    ".$karyawan['name']."
+                    " . $karyawan['name'] . "
                 </span>
                 ";
                 ?>
             </div>
             <div class="p-title ml-3 shadow">
-                <a href='#' onclick="show_popup('#edit-picture-popup')" class="p-picture-container position-relative">
-                    <img src="
-                        <?php 
-                            $img_path = "img/profile_pictures/".$karyawan['npk'].".jpg";
-                            if(file_exists($img_path)) echo $img_path;
-                            else echo "img/profile_pictures/default.jpg";
+                <?php
+                if ($is_admin) {
+                    ?>
+                    <a href='#' onclick="show_popup('#edit-picture-popup')"
+                        class="p-picture-container position-relative h-100  ">
+                        <img src="
+                        <?php
+                        $img_path = "img/profile_pictures/" . $karyawan['npk'] . ".jpg";
+                        if (file_exists($img_path))
+                            echo $img_path;
+                        else
+                            echo "img/profile_pictures/default.jpg";
                         ?>
                     "></img>
-                    <div id='p-picture-edit-overlay' class='w-100 h-100 justify-content-center align-items-center'>
-                        <p>EDIT</p>
-                    </div>
-                </a>
+                        <?php
+                        ?>
+                        <div id='p-picture-edit-overlay' class='w-100 h-100 justify-content-center align-items-center'>
+                            <p>EDIT</p>
+                        </div>
+                    </a>
+                    <?php
+                } else {
+
+
+                    ?>
+                    <a class="p-picture-container position-relative  h-100">
+                        <img src="
+                        <?php
+                        $img_path = "img/profile_pictures/" . $karyawan['npk'] . ".jpg";
+                        if (file_exists($img_path))
+                            echo $img_path;
+                        else
+                            echo "img/profile_pictures/default.jpg";
+                        ?>
+                    "></img>
+                        <?php
+                        ?>
+
+                    </a>
+                    <?php
+                }
+                ?>
                 <div class="p-title-container">
                     <div class='d-flex-row p-name-text'>
                         <span class='w-25'>
@@ -115,7 +369,7 @@
                             <p>:</p>
                         </span>
                         <span class='w-75 pl-1'>
-                            <p><?php echo $karyawan['name']?></p>
+                            <p><?php echo $karyawan['name'] ?></p>
                         </span>
                     </div>
                     <div class='d-flex-row p-name-text'>
@@ -126,7 +380,7 @@
                             <p>:</p>
                         </span>
                         <span class='w-75 pl-1'>
-                            <p><?php echo $karyawan['npk']?></p>
+                            <p><?php echo $karyawan['npk'] ?></p>
                         </span>
                     </div>
                     <div class='d-flex-row p-name-text'>
@@ -137,7 +391,7 @@
                             <p>:</p>
                         </span>
                         <span class='w-75 pl-1'>
-                            <p><?php echo $karyawan['dept_name']?></p>
+                            <p><?php echo $karyawan['dept_name'] ?></p>
                         </span>
                     </div>
                     <div class='d-flex-row p-name-text'>
@@ -148,7 +402,7 @@
                             <p>:</p>
                         </span>
                         <span class='w-75 pl-1'>
-                            <p><?php 
+                            <p><?php
                             echo $karyawan['role_name'];
                             ?></p>
                         </span>
@@ -161,7 +415,7 @@
                             <p>:</p>
                         </span>
                         <span class='w-75 pl-1'>
-                            <p><?php 
+                            <p><?php
                             // YYYY-MM-DD TO DD-MM-YYYY
                             echo join("-", array_reverse(explode("-", $karyawan['date_joined'])));
                             ?></p>
@@ -173,11 +427,11 @@
                             SELECT sub_workstations.name as name 
                             FROM karyawan_workstation
                             JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-                            WHERE karyawan_workstation.npk = '".$karyawan['npk']."'
+                            WHERE karyawan_workstation.npk = '" . $karyawan['npk'] . "'
                         ");
                         $workstations_string = '';
                         while ($workstations_row = $workstations_query->fetch_assoc()) {
-                            $workstations_string .= $workstations_row['name'].', ';
+                            $workstations_string .= $workstations_row['name'] . ', ';
                         }
                         echo "
                     <div class='d-flex-row p-name-text'>
@@ -188,149 +442,248 @@
                             <p>:</p>
                         </span>
                         <span class='w-75 pl-1'>
-                            <p>".substr($workstations_string, 0, -2)."</p>
+                            <p>" . substr($workstations_string, 0, -2) . "</p>
                         </span>
                     </div>
                             ";
                     }
                     ?>
-                </div>
-                <a href='update_profile.php?npk=<?php echo $karyawan['npk']?>' style='flex: 1'>
-                    <img class='edit-profile-button' src="img/edit-solid.png" alt="" style=" border-radius: 0px 16px 0px 0px">
-                </a>
-            </div>
-            <div class='d-flex flex-row' style='flex: 1; height: 50vh;'>
-                <div class="p-stats m-3 p-4 background-light align-items-center justify-content-evenly" style='flex: 2;'>
-                    <div class="p-radar-container">
-                        <?php
-                        $member = $karyawan;
-                        include('includes/components/personal-radarchart.php');
-                        ?>
-                    </div>
-                    <div id="p-stats-numeric">
-                        <?php
-                            foreach($mp_categories as $mp_name => $mp_label) {
-                                echo "
-                                <div class='d-flex-row p-name-text m-1'>
-                                    <span class='w-75'>
-                                        <p class='m-0'>$mp_label</p>
-                                    </span>
-                                    <span class='w-25'>
-                                        <p class='m-0'>: ".$karyawan[$mp_name]."</p>
-                                    </span>
-                                </div>";
+                    <div class='d-flex-row p-name-text'>
+                        <span class='w-25'>
+                            <p>Last Updated</p>
+                        </span>
+                        <span>
+                            <p>:</p>
+                        </span>
+                        <span class='w-75 pl-1'>
+                            <p><?php
+                            // YYYY-MM-DD TO DD-MM-YYYY
+                            $last_updated_query = $conn->query("
+                            SELECT 
+                    karyawan.npk,
+                    karyawan.name,
+                    CASE
+                        WHEN qualifications.created_at >= qualifications_ehs.created_at 
+                             AND qualifications.created_at >= qualifications_quality.created_at THEN qualifications.created_at
+                        WHEN qualifications_ehs.created_at >= qualifications.created_at 
+                             AND qualifications_ehs.created_at >= qualifications_quality.created_at THEN qualifications_ehs.created_at
+                        WHEN qualifications_quality.created_at >= qualifications.created_at 
+                             AND qualifications_quality.created_at >= qualifications_ehs.created_at THEN qualifications_quality.created_at
+                        ELSE '0000-00-00 00:00:00'
+                    END AS last_created_at
+                FROM karyawan 
+                LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
+                LEFT JOIN roles ON karyawan.role = roles.id
+                LEFT JOIN qualifications ON karyawan.npk = qualifications.npk
+                LEFT JOIN qualifications_ehs ON karyawan.npk = qualifications_ehs.npk
+                LEFT JOIN qualifications_quality ON karyawan.npk = qualifications_quality.npk
+                LEFT JOIN process AS process_value ON process_value.id = qualifications.process_id
+                LEFT JOIN ehs AS ehs_value ON ehs_value.id = qualifications_ehs.ehs_id
+                LEFT JOIN quality AS quality_value ON quality_value.id = qualifications_quality.quality_id
+                WHERE karyawan.npk = '" . $karyawan['npk'] . "'
+                ORDER BY last_created_at DESC
+                LIMIT 1
+                        ");
+
+                            while ($last_updated__row = $last_updated_query->fetch_assoc()) {
+
+                                $date = new DateTime($last_updated__row['last_created_at']);
+
+                                // Format tanggal ke format yang formal
+                                $formattedDate = $date->format('d-m-Y H:i');
+                                echo $formattedDate;
                             }
-                        ?>
+                            ?></p>
+                        </span>
                     </div>
                 </div>
-                <div class='p-stats m-3 background-light d-flex flex-column' style='flex: 1; margin-right: 0px!important;'>
-                    <div class='w-100 d-flex justify-content-around align-items-center p-2' style='border-bottom: dotted; height: 3rem'>
-                        <p class='m-0' style='color: #FF1313; font-weight: 800;'>S-PROCESS</p>    
-                        <a href='#' onclick='show_popup("#edit-s-process-popup")' class='d-flex justify-content-center align-items-center'>
-                            <img class='edit-profile-button' src="img/edit-solid.png" alt="" style="width: 2.5rem;">
-                        </a>
-                    </div>
-                    <div class='mt-1 h-100 overflow-auto'>
-                        <ul class="h-100 pr-1 m-0">
-                        <?php 
-                        $q_res = $conn->query(
-                            "SELECT DISTINCT s_process.name as name FROM karyawan
-                            JOIN s_process_certification ON karyawan.npk = s_process_certification.npk
-                            JOIN s_process ON s_process_certification.s_process_id = s_process.id
-                            WHERE karyawan.npk = '".$karyawan['npk']."'
-                            ORDER BY s_process.name ASC");
-                        while ($q_row = $q_res->fetch_assoc()) {
-                            echo "
-                            <li>".$q_row['name']."</li>
-                            ";
-                        }
-                        ?>
-                        </ul>
-                    </div>
-                </div>
+                <?php
+                if ($is_admin) {
+                    ?>
+                    <a href='update_profile.php?npk=<?php echo $karyawan['npk']; ?>&dept_id=<?php echo $karyawan['dept_id']; ?>'
+                        style='flex: 1'>
+                        <img class='edit-profile-button' src="img/edit-solid.png" alt=""
+                            style="border-radius: 0px 0px 0px 0px">
+                    </a>
+                    <?php
+                }
+                ?>
             </div>
-        </div>
-        <div class="profile-right">
-            <?php
-            if (!$is_foreman) {
-                include("includes/components/member-qualification-panel.php");
-            }
-            ?>
-            <div class='d-flex mb-3 align-items-center justify-content-center w-100' style='flex: 1 1 auto !important;'>
-                <div class="profile-table background-light d-inline-flex flex-column">
-                    <div id="pt-tab-buttons" class="fill-container">
-                        <form id="pt-tab-radio" class="fill-container d-flex-row">
-                        <input type="radio" id="chart-info" name="pt-tab" value="chart-info" checked>
-                        <div class="pt-tab-button pt-tab-left">
-                            <label for="chart-info">
-                                <p>INFO</p>
-                            </label>
+
+            <div class='d-flex flex-row' style='flex: 1 ; height: 50vh; width: 45rem'>
+                <div class="p-stats m-3 p-3 background-light align-items-top justify-content-center d-flex flex-row"
+                    style='flex: 1; margin-right: 0px!important;'>
+                    <div class='p-stats m-2 background-light d-flex flex-column'
+                        style='flex: 1; margin-right: 0px!important;'>
+
+
+                        <div class='w-100 d-flex flex-row justify-content-around align-items-center p-1'
+                            style='border-bottom: dotted; height: 2rem'>
+                            <p class='m-0' style='color: #FF1313; font-weight: 800; font-size: 1rem;'>KPQ</p>
+                            <a href='#' onclick='show_popup("#edit-assessment-popup")'
+                                class='d-flex justify-content-center align-items-center'>
+                                <img class='edit-profile-button' src='img/edit-solid.png' alt='' style='width: 2.5rem;'>
+                            </a>
                         </div>
-                        <input type="radio" id="update-assessment" name="pt-tab" value="update-assessment">
-                        <div class="pt-tab-button pt-tab-right">
-                            <label for="update-assessment">
-                                <p>UPDATE ASSESSMENT</p>
-                            </label>
+
+                        <div class="p-radar-container">
+                            <?php
+                            $member = $karyawan;
+                            include ('includes/components/personal-radarchart.php');
+                            ?>
                         </div>
-                        </form>
+                        <div id="p-stats-numeric">
+                            <?php
+                            foreach ($mp_categories as $mp_name => $mp_label) {
+                                echo "
+                <div class='d-flex-row p-name-text m-0'>
+                    <span class='w-100'>
+                        <p class='m-0' style='font-size: 0.8rem;'>$mp_label</p>
+                    </span>
+                    <span class='w-100'>
+                        <p class='m-0' style='font-size: 0.8rem;'>: " . $karyawan[$mp_name] . "</p>
+                    </span>
+                </div>";
+                            }
+                            ?>
+                        </div>
                     </div>
+                    <div class='vertical-divider'></div>
+                    <div class='p-stats m-2 background-light d-flex flex-column'
+                        style='flex: 1; margin-right: 0px!important;'>
+                        <div class='w-100 d-flex justify-content-around align-items-center p-1'
+                            style='border-bottom: dotted; height: 2rem'>
+                            <p class='m-0' style='color: #FF1313; font-weight: 800; font-size: 1rem;'>S-PROCESS</p>
+                            <a href='#' onclick='show_popup("#edit-s-process-popup")'
+                                class='d-flex justify-content-center align-items-center'>
+                                <img class='edit-profile-button' src="img/edit-solid.png" alt="" style="width: 2.5rem;">
+                            </a>
+                        </div>
+                        <div class='mt-1 h-100 overflow-auto'>
+                            <ul class="h-100 pr-1 m-0" style='font-size: 0.85rem;'>
+                                <?php
+                                $q_res = $conn->query(
+                                    "SELECT DISTINCT s_process.name as name FROM karyawan
+                    JOIN s_process_certification ON karyawan.npk = s_process_certification.npk
+                    JOIN s_process ON s_process_certification.s_process_id = s_process.id
+                    WHERE karyawan.npk = '" . $karyawan['npk'] . "'
+                    ORDER BY s_process.name ASC"
+                                );
+                                while ($q_row = $q_res->fetch_assoc()) {
+                                    echo "
+                    <li>" . $q_row['name'] . "</li>
+                    ";
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class='d-flex mb-2 align-items-center justify-content-center col-md-auto'
+                style=' width: 50rem; height: 10rem ; margin-left: -33px; margin-bottom: 100px '>
+                <div class="profile-table background-light d-inline-flex flex-column">
                     <div class="pt-tab pt-chart-info hidden">
-                        <div class='w-100 h-100 background-light' style='flex-grow: 1; flex-shrink: 1; flex-basis: 0px; overflow: auto; border-radius: 0px 0px 12px 12px'>
+                        <div class='w-100 h-100 background-light'
+                            style='flex-grow: 1; flex-shrink: 1; flex-basis: 0px; overflow: auto; border-radius: 20px;'>
+
+
                             <div class='w-100 d-flex flex-column align-items-center'>
                                 <p class='m-0 mt-3' style='font-size: 1.5rem'>Manpower History</p>
-                                <ul class='w-100 ps-1'>
-                                    <?php 
-                                    $q_res = $conn->query(
-                                        "SELECT
-                                            start_time,
-                                            end_time,
-                                            sub_workstations.name as sw_name,
-                                            workstations.name as w_name,
-                                            department.dept_name as d_name
-                                        FROM relocate_history
-                                        LEFT JOIN sub_workstations ON relocate_history.subworkstation_id = sub_workstations.id
-                                        LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
-                                        LEFT JOIN department ON workstations.dept_id = department.id
-                                        WHERE relocate_history.npk = '".$karyawan['npk']."'
-                                        ");
+                                <ul class='w-100 ps-1' id="manpowerList">
+                                    <?php
+                                    $query = "SELECT
+                start_time,
+                end_time,
+                sub_workstations.name as sw_name,
+                workstations.name as w_name,
+                department.dept_name as d_name
+            FROM relocate_history
+            LEFT JOIN sub_workstations ON relocate_history.subworkstation_id = sub_workstations.id
+            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id
+            LEFT JOIN department ON workstations.dept_id = department.id
+            WHERE relocate_history.npk = '" . $karyawan['npk'] . "' ORDER BY start_time DESC";
+                                    $q_res = $conn->query($query);
+                                    $total_count = $q_res->num_rows;  // Get total number of results
+                                    $count = 0; // Counter for items displayed
                                     while ($q_row = $q_res->fetch_assoc()) {
-                                        if ($q_row['end_time'] == '') $end_time = 'Present';
-                                        else {
-                                            $end_time = explode(" ", $q_row['end_time']);
-                                            $end_time = $end_time[0];
-                                            // format to dd-mm-yyyy
-                                            $end_time = join("-", array_reverse(explode("-", $end_time)));
-                                        }
-                                        $start_time = explode(" ", $q_row['start_time']);
-                                        $start_time = $start_time[0];
-                                        $start_time = join("-", array_reverse(explode("-", $start_time)));
-                                        if ($q_row['sw_name'] == $q_row['w_name'])
-                                            $relocate_ws = $q_row['d_name']." - ".$q_row['w_name'];
-                                        else
-                                            $relocate_ws = $q_row['d_name']." - ".$q_row['w_name']." - ".$q_row['sw_name'];
+                                        $count++;
+                                        $end_time = $q_row['end_time'] == '' ? 'Present' : date("d-m-Y", strtotime($q_row['end_time']));
+                                        $start_time = date("d-m-Y", strtotime($q_row['start_time']));
+                                        $relocate_ws = $q_row['d_name'] . " - " . ($q_row['sw_name'] == $q_row['w_name'] ? $q_row['w_name'] : $q_row['w_name'] . " - " . $q_row['sw_name']);
 
                                         echo "
-                                        <li class='mt-1'>
-                                            <p class='m-0' style='font-weight:600;'>".$relocate_ws."</p>
-                                            <p class='m-0'>".$start_time." to ".$end_time."</p>
-                                        </li>
-                                        ";
+            <li class='mt-1 manpower-item' style='" . ($count > 5 ? "display: none;" : "") . "'>
+                <p class='m-0' style='font-weight:600;'>" . $relocate_ws . "</p>
+                <p class='m-0'>" . $start_time . " to " . $end_time . "</p>
+            </li>
+            ";
                                     }
                                     ?>
                                 </ul>
+                                <div style='margin-top: 10px;'>
+                                    <?php if ($total_count > 5): ?>
+                                        <button id='showMoreBtn' onclick='showMore()' class="btn btn-link"
+                                            style='margin-right: 10px;'>Show
+                                            More<i class="bi bi-chevron-down"></i></button>
+                                        <button id='showLessBtn' onclick='showLess()' class="btn btn-link"
+                                            style='display: none;'>Show
+                                            Less <i class="bi bi-chevron-up"></i></button>
+                                    <?php endif; ?>
+                                </div>
                                 <div class='w-100 px-1'>
                                     <div class='w-100' style='border-bottom: 2px dashed'></div>
                                 </div>
                             </div>
+
+                            <script>
+                                let currentShown = 5; // Start by showing 5 items
+                                function showMore() {
+                                    let items = document.querySelectorAll('.manpower-item');
+                                    let maxToShow = currentShown + 5; // Increase the number of items to show by 5
+                                    for (let i = currentShown; i < maxToShow && i < items.length; i++) {
+                                        items[i].style.display = 'block'; // Change display style to block to show items
+                                    }
+                                    currentShown = maxToShow; // Update the currentShown counter
+                                    document.getElementById('showLessBtn').style.display = 'inline'; // Show the Show Less button
+                                    if (currentShown >= items.length) {
+                                        document.getElementById('showMoreBtn').style.display = 'none'; // Hide the button if all items are shown
+                                    }
+                                }
+
+                                function showLess() {
+                                    let items = document.querySelectorAll('.manpower-item');
+                                    for (let i = items.length - 1; i >= 5; i--) {
+                                        items[i].style.display = 'none'; // Hide items beyond the first 5
+                                    }
+                                    currentShown = 5; // Reset the count to the initial 5 items
+                                    document.getElementById('showMoreBtn').style.display = 'inline'; // Show the Show More button again
+                                    document.getElementById('showLessBtn').style.display = 'none'; // Hide the Show Less button since we're back to the initial state
+                                }
+                            </script>
                             <div class='w-100 d-flex align-items-center justify-content-center'>
                                 <p class='m-0 mt-3' style='font-size: 1.5rem'>Current Files</p>
                             </div>
-                            <?php 
+                            <?php if ($is_qa) { ?>
+                                <div class="float-right">
+                                    <a href='preview_mp_file.php?q=<?php echo $karyawan['npk']; ?>'
+                                        class='cu-cancel-btn mp-file-img-container small-link d-flex flex-column align-items-center'>
+                                        <img class="ml-1 align-items-center" src='img/file-import-solid-white.png'></img>
+                                    </a>
+                                </div>
+                                <?php
+                            }
+                            ?>
+
+                            <?php
                             $q_res = $conn->query("
                                 SELECT id, filename, name, description, posted_time, mp_category
                                 FROM mp_file_proof
-                                WHERE npk = '".$_GET['q']."'
-                                ");
+                                WHERE npk = '" . $_GET['q'] . "'AND posted_time > DATE_SUB(CURDATE(), INTERVAL 1 YEAR)");
                             $num_results = $q_res->num_rows;
                             if ($num_results == 0) {
                                 echo "
@@ -343,75 +696,262 @@
                                         $mp_eval = 'OTHER';
                                     echo "
                             <div class='file-preview-container w-100 p-3'>
-                                <p>".$file_row['posted_time']."</p>
-                                <p class='font-weight-bold'>MP Evaluation: ".$mp_eval."</p>
-                                <a href='files/".$filename."' target='_blank'>
-                                    <p>".$file_row['name']."</p>
+                                <p>" . $file_row['posted_time'] . "</p>
+                                <p class='font-weight-bold'>MP Evaluation: " . $mp_eval . "</p>
+                                <a href='files/" . $filename . "' target='_blank'>
+                                    <p>" . $file_row['name'] . "</p>
                                 </a>
-                                <p>Description: ".$file_row['description']."</p>
-                                <a href='actions/delete-file.php?q=".$file_row['id']."'>
+                                <p>Description: " . $file_row['description'] . "</p>
+                                <a href='actions/delete-file.php?q=" . $file_row['id'] . "'>
                                     <button class='cu-submit-btn'>Delete</button>
                                 </a>
+                                
                             </div>
                                     ";
                                 }
                             }
                             ?>
+
                         </div>
                     </div>
-                    <div class="pt-tab pt-update-assessment">
-                        <div id="update-assessment" class='h-100'>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="profile-right ">
+            <?php
+            // if (!$is_foreman) {
+            //     include ("includes/components/member-qualification-panel.php");
+            // }
+            ?>
+
+
+            <div class='d-flex justify-content-center w-100' style='height: 35%; width: 100rem;'>
+                <div class='p-process-panel d-flex flex-column align-items-center p-1'>
+                    <div class='p-process-panel-text d-flex flex-row justify-content-between w-100 pl-1 pr-1'
+                        style='height:1.5rem;'>
+                        <p class='m-0'>Process Qualification</p>
+                        <a href='#' onclick='show_popup("#edit-process-popup")' id='process-edit-btn'
+                            class='d-flex justify-content-center align-items-center'>
+                            <p class='m-0'>EDIT</p>
+                        </a>
+                    </div>
+                    <div class="w-100 p-1" style='height: calc(100% - 1.5rem); overflow-x: auto;'>
+                        <div class='p-process-panel-list w-100'>
                             <?php
-                            echo
-                            "<form id='update-assessment-form' class='d-flex flex-column h-100' action='actions/update-assessment.php?q=".$karyawan['npk']."' method='post'>";
-                                if (!in_array($karyawan['role'], $roles_with_kao)) unset($mp_categories['kao']);
-                                foreach ($mp_categories as $cat => $cat_name) {
-                                    echo "
-                                <div class='cat-update-container'>
-                                    <div class='cu-name'>
-                                        <p>$cat_name:</p>
-                                    </div>
-                                    <div class='cu-radiogroup'>";
-                                    for ($i = 1; $i <=5 ; $i++) {
-                                        echo "
-                                        <input type='radio' id='$cat-value-$i' class='update-assessment-button' name='$cat' value='$i'";
-                                        if ($karyawan[$cat] == $i) echo "checked";
-                                        echo
-                                        ">
-                                        <div class='cu-radio-button'>
-                                            <label for='$cat-value-$i'>
-                                                <div>
-                                                    <p>$i</p>
-                                                </div>
-                                            </label>
-                                        </div>";
-                                    }
-                                    echo"
-                                    </div>
-                                </div>";
+
+                            $q_res = $conn->query(
+                                "SELECT 
+                                    process.name AS name, 
+                                    process.min_skill AS min_skill, 
+                                    qualifications.value AS skill, 
+                                    MONTH(qualifications.jadwal_training_process) AS training_month,
+                                    sub_workstations.name AS sub_workstation_name
+                                FROM 
+                                    process
+                                JOIN 
+                                    sub_workstations ON process.workstation_id = sub_workstations.id
+                                JOIN 
+                                    karyawan_workstation ON sub_workstations.id = karyawan_workstation.workstation_id
+                                JOIN 
+                                    karyawan ON karyawan_workstation.npk = karyawan.npk
+                                JOIN 
+                                    qualifications ON karyawan.npk = qualifications.npk AND process.id = qualifications.process_id
+                                WHERE 
+                                    karyawan.npk =  '" . $karyawan['npk'] . "'
+                                    AND qualifications.status = 1
+                                ORDER BY 
+                                    sub_workstations.name, process.name
+                                 "
+                            );
+
+                            while ($q_row = $q_res->fetch_assoc()) {
+                                $training_months = array();
+                                $training_months[] = $q_row['training_month'];
+                                $class = ($q_row['skill'] < $q_row['min_skill']) ? 'low-skill' : '';
+                                $fontBold = ($q_row['skill'] < $q_row['min_skill']) ? 'font-weight: bolder;' : '';
+                                $fontMargin = ($q_row['skill'] >= $q_row['min_skill']) ? 'margin-right: 40px;' : '';
+
+                                echo "<div class='p-process-panel-list-item p-1 mb-1 d-flex flex-row $class'>";
+                                echo "<p class='m-0 w-75' style='$fontBold'>" . $q_row['name'] . "</p>";
+
+                                echo "<div class='d-flex flex-row align-items-center'>";
+                                echo "<p class='m-0 mt-auto mr-1' style='font-size:0.7rem; $fontBold '>Skill: </p>";
+                                echo "<img style='width: 3rem; height: 3rem' src='img/C{$q_row['skill']}.png'/>";
+                                echo "<p class='m-0 ml-3 mt-auto mr-1' style='font-size:0.7rem; $fontBold'>Req: </p>";
+                                echo "<img style='width: 3rem; height: 3rem' src='img/C{$q_row['min_skill']}.png'/>";
+                                echo "</div>";
+
+                                echo "<p class='m-0 ml-3 mt-auto mr-1' style='font-size:0.7rem;$fontBold'>Bulan Training: </p>";
+                                echo "<div class='month-container'>";
+                                echo "<div class='month-labels'>";
+                                for ($i = 1; $i <= 12; $i++) {
+                                    echo "<span class='month-label' style='$fontBold'>$i</span>";
                                 }
+                                echo "</div>";
+                                echo "<div class='month-boxes'>";
+                                for ($i = 1; $i <= 12; $i++) {
+                                    $class = ($i == $q_row['training_month'] && $q_row['skill'] < $q_row['min_skill']) ? 'month-box highlighted' : 'month-box';
+                                    echo "<div class='$class'></div>";
+                                }
+                                echo "</div>"; // Tutup div month-boxes
+                                echo "</div>"; // Tutup div month-container
+                                echo "</div>"; // Tutup div p-process-panel-list-item
+                            }
                             ?>
-                                <div class="d-flex w-100 flex-float-bottom d-flex-row mb-1">
-                                    <div>
-                                        <a href='preview_mp_file.php?q=<?php echo $karyawan['npk'];?>' class='cu-cancel-btn mp-file-img-container d-flex flex-row align-items-center'>
-                                            <p>UPLOAD FILE</p>
-                                            <img class="ml-1" src='img/file-import-solid-white.png'></img>
-                                        </a>
-                                    </div>
-                                    <div class='ml-auto'>
-                                        <a href="#" onclick="show_popup('#delete-popup')" class="cu-delete-btn mr-2">DELETE</a>
-                                        <a href="#" onclick="show_popup('#update-popup')" class="cu-submit-btn">UPDATE</a>
-                                        <div class="hidden">
-                                            <input type="submit" name="delete" id="cu-delete-btn">DELETE</input>
-                                            <input type="submit" name="update" id="cu-submit-btn">UPDATE</input>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class='d-flex justify-content-center w-100' style='height: 35%; width: 100rem;'>
+                <div class='p-process-panel d-flex flex-column align-items-center p-1'>
+                    <div class='p-process-panel-text d-flex flex-row justify-content-between w-100 pl-1 pr-1'
+                        style='height:1.5rem;'>
+                        <p class='m-0'>Quality</p>
+                        <a href='#' onclick='show_popup("#edit-quality-popup");' id='quality-edit-btn'
+                            class='d-flex justify-content-center align-items-center'>
+                            <p class='m-0'>EDIT</p>
+                        </a>
+                    </div>
+                    <div class="w-100 p-1" style='height: calc(100% - 1.5rem);'>
+                        <div class='p-process-panel-list w-100'>
+                            <?php
+                            $q_res2 = $conn->query(
+                                "SELECT quality.name AS name, quality.min_skill AS min_skill, qualifications_quality.value AS skill,
+                                MONTH(qualifications_quality.jadwal_training_quality) as training_month
+                                                 FROM 
+                            quality
+                        JOIN 
+                            sub_workstations ON quality.workstation_id = sub_workstations.id
+                        JOIN 
+                            karyawan_workstation ON sub_workstations.id = karyawan_workstation.workstation_id
+                        JOIN 
+                            karyawan ON karyawan_workstation.npk = karyawan.npk
+                        JOIN 
+                            qualifications_quality ON karyawan.npk = qualifications_quality.npk AND quality.id = qualifications_quality.quality_id
+                        WHERE 
+                            karyawan.npk = '" . $karyawan['npk'] . "'
+                            AND qualifications_quality.status = 1
+                        ORDER BY 
+                            sub_workstations.name, quality.name"
+                            );
+                            while ($q_row2 = $q_res2->fetch_assoc()) {
+                                $class = ($q_row2['skill'] < $q_row2['min_skill']) ? 'low-skill' : '';
+                                $fontBold = ($q_row2['skill'] < $q_row2['min_skill']) ? 'font-weight: bolder;' : '';
+                                $fontMargin = ($q_row2['skill'] >= $q_row2['min_skill']) ? 'margin-right: 40px;' : '';
+                                echo "<div class='p-process-panel-list-item p-1 mb-1 d-flex flex-row $class'>
+                                <p class='m-0 w-75' style='$fontBold'>" . $q_row2['name'] . "</p>
+                                <div class='d-flex flex-row align-items-center'>
+                                    <p class='m-0 mt-auto mr-1' style='font-size:0.7rem; $fontBold'>Skill: </p>
+                                    <img style='width: 3rem; height: 3rem' src='img/C{$q_row2['skill']}.png'/>
+                                    <p class='m-0 ml-3 mt-auto mr-1' style='font-size:0.7rem; $fontBold'>Req: </p>
+                                    <img style='width: 3rem; height: 3rem' src='img/C{$q_row2['min_skill']}.png'/>
+                                </div>";
+                                echo "<p class='m-0 ml-3 mt-auto mr-1' style='font-size:0.7rem; $fontBold'>Bulan Training: </p>";
+                                echo "<div class='month-container'>";
+                                echo "<div class='month-labels'>";
+                                for ($i = 1; $i <= 12; $i++) {
+                                    echo "<span class='month-label'style='$fontBold'>$i</span>";
+                                }
+                                echo "</div>";
+                                echo "<div class='month-boxes'>";
+                                for ($i = 1; $i <= 12; $i++) {
+                                    $class = ($i == $q_row2['training_month'] && $q_row2['skill'] < $q_row2['min_skill']) ? 'month-box highlighted' : 'month-box';
+                                    echo "<div class='$class'></div>";
+                                }
+                                echo "</div>"; // Tutup div month-boxes
+                                echo "</div>"; // Tutup div month-container
+                                echo "</div>";
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='d-flex justify-content-center w-100' style='height: 50%'>
+                <div class='p-process-panel d-flex flex-column align-items-center p-1'>
+                    <div class='p-process-panel-text d-flex flex-row justify-content-between w-100 pl-1 pr-1'
+                        style='height:1.5rem;'>
+                        <p class='m-0'>EHS</p>
+                        <a href='#' onclick='show_popup("#edit-ehs-popup");' id='ehs-edit-btn'
+                            class='d-flex justify-content-center align-items-center'>
+                            <p class='m-0'>EDIT</p>
+                        </a>
+                    </div>
+                    <div class="w-100 p-1" style='height: calc(100% - 1.5rem);'>
+                        <div class='p-process-panel-list w-100'>
+                            <?php
+                            $q_res2 = $conn->query(
+                                "SELECT ehs.name AS name, ehs.min_skill AS min_skill, qualifications_ehs.value AS skill,
+                                        MONTH(qualifications_ehs.jadwal_training_ehs) as training_month
+                                        FROM 
+                            ehs
+                        JOIN 
+                            sub_workstations ON ehs.workstation_id = sub_workstations.id
+                        JOIN 
+                            karyawan_workstation ON sub_workstations.id = karyawan_workstation.workstation_id
+                        JOIN 
+                            karyawan ON karyawan_workstation.npk = karyawan.npk
+                        JOIN 
+                            qualifications_ehs ON karyawan.npk = qualifications_ehs.npk AND ehs.id = qualifications_ehs.ehs_id
+                        WHERE 
+                            karyawan.npk = '" . $karyawan['npk'] . "'
+                            AND qualifications_ehs.status = 1
+                        ORDER BY 
+                            sub_workstations.name, ehs.name"
+                            );
+                            while ($q_row2 = $q_res2->fetch_assoc()) {
+                                $training_months[] = $q_row2['training_month'];
+                                $class = ($q_row2['skill'] < $q_row2['min_skill']) ? 'low-skill' : '';
+                                $fontBold = ($q_row2['skill'] < $q_row2['min_skill']) ? 'font-weight: bolder;' : '';
+                                $fontMargin = ($q_row2['skill'] >= $q_row2['min_skill']) ? 'margin-right: 40px;' : '';
+                                echo "
+                            <div class='p-process-panel-list-item p-1 mb-1 d-flex flex-row $class'>
+                                <p class='m-0 w-75' style='$fontBold'>" . $q_row2['name'] . "</p>
+                                <div class='d-flex flex-row ml-auto mr-2'>
+                                   
+                                    <p class='m-0 mt-auto mr-1' style='font-size:0.7rem; $fontBold'>Skill: </p>
+                                    <img style='width: 3rem; height: 3rem' src='img/C{$q_row2['skill']}.png'/>
+                                    <p class='m-0 ml-3 mt-auto mr-1' style='font-size:0.7rem; $fontBold'>Req: </p>
+                                    <img style='width: 3rem; height: 3rem' src='img/C{$q_row2['min_skill']}.png'/>
+                                   
+                                    
+                                </div>";
+                                echo "<p class='m-0 ml-3 mt-auto mr-1' style='font-size:0.7rem; $fontBold'>Bulan Training: </p>";
+                                echo "<div class='month-container'>";
+                                echo "<div class='month-labels'>";
+                                for ($i = 1; $i <= 12; $i++) {
+                                    echo "<span class='month-label' style ='$fontBold'>$i</span>";
+                                }
+                                echo "</div>";
+                                echo "<div class='month-boxes'>";
+                                for ($i = 1; $i <= 12; $i++) {
+                                    $class = ($i == $q_row2['training_month'] && $q_row2['skill'] < $q_row2['min_skill']) ? 'month-box highlighted' : 'month-box';
+                                    echo "<div class='$class'></div>";
+                                }
+                                echo "</div>"; // Tutup div month-boxes
+                                echo "</div>"; // Tutup div month-container
+                                echo "</div>
+                            ";
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+        <script>
+            function showSection(sectionId) {
+                // Sembunyikan semua section
+                document.querySelectorAll('.qualification-section').forEach(function (section) {
+                    section.classList.add('hidden');
+                });
+                // Tampilkan section yang dipilih
+                document.getElementById(sectionId).classList.remove('hidden');
+            }
+        </script>
+
     </div>
 </div>

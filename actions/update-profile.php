@@ -1,22 +1,29 @@
 <?php
-include("../includes/a_config.php");
-include("../includes/db_connection.php");
-include("../includes/redirect_session.php");
+include ("../includes/a_config.php");
+include ("../includes/db_connection.php");
+include ("../includes/redirect_session.php");
 // error_reporting(0);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errMsg = "";
-    $name = $npk = $dept = $role = $ws = "";
+    $name = $npk = $dept_id = $role = $ws = "";
 
     if (empty($_POST["npk"])) {
         $errMsg .= "NPK is required\\n";
     } else {
         $npk = $_POST["npk"];
     }
+    // Pengambilan Department
+    if (empty($_POST["dept"])) {
+        $errMsg .= "Department is required\\n";
+    } else {
+        $dept_id = $_POST['dept'];  // Mengambil data departemen
+    }
+
 
     if ($errMsg != "") {
-        echo "<script>alert('".$errMsg."');</script>";
-        if(isset($_SERVER["HTTP_REFERER"])) {
-            echo "<script>window.location.replace('".$_SERVER["HTTP_REFERER"]."');</script>";
+        echo "<script>alert('" . $errMsg . "');</script>";
+        if (isset($_SERVER["HTTP_REFERER"])) {
+            echo "<script>window.location.replace('" . $_SERVER["HTTP_REFERER"] . "');</script>";
         } else {
             echo "<script>window.location.replace('../index.php');</script>";
         }
@@ -37,11 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     if (isset($res) === false) {
-        $errMsg .= "NPK does not exists.\\n";   
+        $errMsg .= "NPK does not exists.\\n";
     }
 
-    if ($errMsg == '') 
-    {
+    if ($errMsg == '') {
         $ws = trim($ws);
         $ws_arr = explode(" ", $ws);
         try {
@@ -49,41 +55,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("is", $role, $npk);
             $stmt->execute();
             $stmt->close();
+            $dept_id = $_POST['dept'];
+            $before_dept_id = $_GET['dept_id'];
 
-            $subquery = "SELECT ";
-            if (count($ws_arr) == 0) {
-                $subquery .= NULL;
-            } else {
-                $subquery .= join(" UNION SELECT ", $ws_arr);
+
+
+            if ($dept_id != $before_dept_id) {
+                // Jika departemen berubah, update data terkait
+                $subquery = "SELECT sw.workstation_id FROM sub_workstations sw JOIN workstations w ON w.id = sw.workstation_id WHERE w.dept_id = ?";
+                $stmt = $conn->prepare("DELETE FROM karyawan_workstation WHERE npk = ? AND workstation_id NOT IN ($subquery)");
+                $stmt->bind_param("ss", $npk, $dept_id);
+                $stmt->execute();
+                $stmt->close();
+            } else if($role != 0){
+                $stmt = $conn->prepare("DELETE FROM karyawan_workstation WHERE npk = ? ");
+                $stmt->bind_param("s", $npk);
+                $stmt->execute();
+                $stmt->close();
             }
 
-            $stmt = $conn->prepare("DELETE FROM karyawan_workstation WHERE npk = ? AND workstation_id NOT IN ( $subquery )");
-            $stmt->bind_param("s", $npk);
-            $stmt->execute();
-            $stmt->close();
+
 
             $stmt = $conn->prepare("DELETE FROM qualifications WHERE npk = ?");
             $stmt->bind_param("s", $npk);
             $stmt->execute();
             $stmt->close();
 
-            foreach($ws_arr as $ws)
-            {
+            foreach ($ws_arr as $ws) {
                 $stmt = $conn->prepare("INSERT INTO karyawan_workstation (npk, workstation_id) VALUES (?, ?)");
                 $stmt->bind_param("si", $npk, $ws);
                 $stmt->execute();
                 $stmt->close();
             }
-            echo "<script>window.location.replace('../preview_member.php?q=$npk');</script>";  
-        } catch(Exception $e) {
-    
+            echo "<script>window.location.replace('../preview_member.php?q=$npk');</script>";
+        } catch (Exception $e) {
+
         }
     }
-    echo "<script>alert('".$errMsg."');</script>";
-    if(isset($_SERVER["HTTP_REFERER"])) {
-    echo "<script>window.location.replace('".$_SERVER["HTTP_REFERER"]."');</script>";
+    echo "<script>alert('" . $errMsg . "');</script>";
+    if (isset($_SERVER["HTTP_REFERER"])) {
+        echo "<script>window.location.replace('" . $_SERVER["HTTP_REFERER"] . "');</script>";
     } else {
-    echo "<script>window.location.replace('index.php');</script>";
+        echo "<script>window.location.replace('index.php');</script>";
     }
 }
 ?>

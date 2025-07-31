@@ -1,7 +1,6 @@
 <!-- <script src='js/edit-qualification-form.js'></script> -->
 <?php
-    $q_process = $conn->query(
-        "SELECT DISTINCT
+    $q_process = $conn->query("SELECT DISTINCT
         s_process.id as process_id,
         s_process.name as process_name,
         IF(
@@ -14,8 +13,7 @@
         LEFT JOIN sub_workstations ON sub_workstations.workstation_id = workstations.id
         LEFT JOIN karyawan_workstation ON karyawan_workstation.workstation_id = sub_workstations.id
         WHERE karyawan_workstation.npk = '{$karyawan['npk']}' AND s_process.name != ''
-        ORDER BY s_process.name ASC, sub_workstations.name ASC"
-    );
+        ORDER BY s_process.name ASC, sub_workstations.name ASC");
 
     echo "
     <form action='actions/update-s-certifications.php?q=".$karyawan['npk']."' method='post' class='w-100 h-75 d-block overflow-auto'>
@@ -36,7 +34,7 @@
         echo "</div>";
     }
     echo "</div>";
-    echo "<input type='text' name='s-certifications' id='ap-form-s-certification-val' value='' hidden>";
+    echo "<input type='text' name='s-certifications' class='ap-form-s-certification-val' value='' hidden>";
     echo "<div class='hidden'> <input type='submit' name='update' id='qq-submit-btn'>CONFIRM</input> </div>";
     echo "
     </form>

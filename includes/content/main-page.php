@@ -64,8 +64,10 @@
                 <div class='ds-title'>
                     <p>$d_name</p>
                 </div>
-                <div class='ds-content'>";
-                    include('includes/components/sm-radarchart.php');
+                <div class='ds-content'>
+                <img src='./img/Radar2_prev_ui.png' class='col-lg-12'>";
+                    //include('includes/components/sm-radarchart.php');
+                    
                 echo "
                 </div>
             </a>";

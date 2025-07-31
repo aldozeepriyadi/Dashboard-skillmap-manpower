@@ -11,5 +11,12 @@
         "kao"=>"KAO"
 	);
 
+
+	$mp_category_skillmap = array(
+		"process" => "PROCESS",
+		"ehs" => "EHS",
+		"quality" => "QUALITY"
+	);
+
 	$roles_with_kao = array(0, 1, 2)
 ?>

@@ -9,11 +9,31 @@
 		<a href="index.php" class='font-default-light hover-overlay-light p-2'>
 			Home
 		</a>
-		<a href="actions/logout.php" class='font-default-light hover-overlay-light p-2'>
+		<a href="#" id="logoutButton" class='font-default-light hover-overlay-light p-2'>
 			Logout
 		</a>
 		<div>
-			<?php include('includes/components/npk-search-bar.php'); ?>
+			<?php include ('includes/components/npk-search-bar.php'); ?>
 		</div>
 	</div>
 </div>
+
+<script>
+	document.getElementById('logoutButton').addEventListener('click', function (event) {
+		event.preventDefault(); // Mencegah aksi default dari link
+
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You will be logged out!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, logout!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				window.location.href = 'actions/logout.php';
+			}
+		});
+	});
+</script>

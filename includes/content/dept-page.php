@@ -5,136 +5,254 @@
                 <p>Workstations for <?php echo $current_dept ?></p>
             </div>
             <div class="pl-3">
-                <?php 
+                <?php
                 echo "
-                <span>
-                    <a href='index.php'>Home</a>
-                </span>
-                <span> / </span>
-                <span>
-                    ".$current_dept."
-                </span>";
+                    <span>
+                        <a href='index.php'>Home</a>
+                    </span>
+                    <span> / </span>
+                    <span>
+                        " . $current_dept . "
+                    </span>";
                 ?>
             </div>
         </div>
         <div class="d-flex align-items-center justify-content-center pr-3">
-            <a href='add_profile.php?dept=<?php echo $dept_id?>' class='dp-create-btn-container'>
-                <div id='ao-create-btn' class='h-100 w-100'>
-                    <p class='m-0'>Add Profile</p>
+            <a href='add_profile.php?dept=<?php echo $dept_id ?>' class='dp-create-btn-container'>
+                <div id='ao-create-btn' class='h-200 w-200'>
+                    Add Profile
+                </div>
+            </a>
+            <a href="#" id="downloadTemplate" class='dp-create-btn-container ml-2'>
+                <div id='ao-create-btn' class='h-200 w-200'>
+                    Download Template
+                </div>
+            </a>
+            <a href="#" id="downloadTemplate" class='dp-create-btn-container ml-2' data-toggle="modal"
+                data-target="#uploadModal">
+                <div id='ao-create-btn' class='h-200 w-200'>
+                    Upload Kualifikasi
                 </div>
             </a>
         </div>
     </div>
-    <div class='w-100 pl-3 pr-3 mb-2 d-flex align-content-center justify-content-center'>
-        <div class='ws-role-section'>
-            <p class='m-0'>Foreman</p>
-            <div class='member-list-container overflow-x'>
-            <?php
-            $q_res = $conn->query("
-            SELECT
-                karyawan.name as name,	
-                karyawan.npk as npk,
-                karyawan.role as role,
-                IFNULL(mp_scores.msk,0) as msk,
-                IFNULL(mp_scores.kt,0) as kt,
-                IFNULL(mp_scores.pssp,0) as pssp,
-                IFNULL(mp_scores.png,0) as png,
-                IFNULL(mp_scores.fivejq,0) as fivejq,
-                IFNULL(mp_scores.kao,0) as kao,
-                roles.name as role_name 
-            FROM karyawan
-                LEFT JOIN roles ON karyawan.role = roles.id
-                LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
-            WHERE karyawan.npk in (
-                SELECT karyawan_workstation.npk FROM karyawan_workstation
-                LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-                LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
-                WHERE workstations.dept_id = $dept_id )
-            AND role = 0
-            ORDER BY name ASC");
-            include('includes/components/member-preview-button.php');
-            while ($member = $q_res->fetch_assoc()) {
-                member_preview_button($member, $conn);
-            }
-            ?>
-            </div>
-        </div>
-    </div>
+
     <div class='w-100'>
         <div id="ws-overall-stats">
             <script>
                 var ctx_list = {}
             </script>
             <?php
-            $q_res = $conn->query("SELECT * FROM workstations WHERE dept_id = ".$dept_id);
+            $q_res = $conn->query("SELECT * FROM workstations WHERE dept_id = " . $dept_id);
             while ($ws_row = $q_res->fetch_assoc()) {
                 $ws_name = $ws_row['name'];
                 $ws_id = $ws_row['id'];
                 $chart_id = str_replace(" ", "-", $ws_name);
 
                 $operator_mp_categories = array(
-                    "msk"=>0.0,
-                    "kt"=>0.0,
-                    "pssp"=>0.0,
-                    "png"=>0.0,
-                    "fivejq"=>0.0
+                    "qualifications.value" => 0.0,
+                    "qualifications_ehs.value" => 0.0,
+                    "qualifications_quality.value" => 0.0
                 );
-                foreach($operator_mp_categories as $cat => $val) {
+                foreach ($operator_mp_categories as $cat => $val) {
                     $res = $conn->query("
-                        SELECT AVG(IFNULL(mp_scores.$cat,0)) as average 
-                        FROM karyawan
-                            LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
-                            LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-                            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
-                            LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
-                        WHERE workstations.id = $ws_id
-                    ");
+                            SELECT AVG(IFNULL($cat,0)) as average
+                            FROM karyawan
+                                LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                                LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                                LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
+                                LEFT JOIN qualifications ON karyawan.npk = qualifications.npk
+                                LEFT JOIN qualifications_ehs ON karyawan.npk = qualifications_ehs.npk
+                                LEFT JOIN qualifications_quality ON karyawan.npk = qualifications_quality.npk
+                            WHERE workstations.id = $ws_id
+                        ");
                     $row = $res->fetch_assoc();
                     $avg_val = $row['average'];
                     $operator_mp_categories[$cat] = $avg_val;
                 }
                 $query_string = "
-                    SELECT AVG(IFNULL(mp_scores.kao,0)) as average 
-                    FROM karyawan
-                        LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
-                        LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
-                        LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
-                        LEFT JOIN mp_scores ON karyawan.npk = mp_scores.npk
-                    WHERE workstations.id = $ws_id AND (
-                ";
-                foreach($roles_with_kao as $role) {
+                        SELECT AVG(IFNULL(qualifications_quality.value,0)) as average 
+                        FROM karyawan
+                            LEFT JOIN karyawan_workstation ON karyawan_workstation.npk = karyawan.npk
+                            LEFT JOIN sub_workstations ON karyawan_workstation.workstation_id = sub_workstations.id
+                            LEFT JOIN workstations ON sub_workstations.workstation_id = workstations.id 
+                            LEFT JOIN qualifications_quality ON karyawan.npk = qualifications_quality.npk
+                        WHERE workstations.id = $ws_id AND (
+                    ";
+                foreach ($roles_with_kao as $role) {
                     $query_string .= "role = $role OR ";
                 }
-                if (count($roles_with_kao) > 0) $query_string = substr($query_string, 0, -4);
+                if (count($roles_with_kao) > 0)
+                    $query_string = substr($query_string, 0, -4);
                 $query_string .= ")";
 
                 $res = $conn->query($query_string);
                 $row = $res->fetch_assoc();
                 $avg_val = $row['average'];
-                $operator_mp_categories["kao"] = $avg_val;
+                $operator_mp_categories["qualifications_quality.value"] = $avg_val;
 
-                $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO']";
-                $datas = "[".
-                        $operator_mp_categories['msk'].",".
-                        $operator_mp_categories['kt'].",".
-                        $operator_mp_categories['pssp'].",".
-                        $operator_mp_categories['png'].",".
-                        $operator_mp_categories['fivejq'].",".
-                        $operator_mp_categories['kao'].
-                        "]";
+                $labels = "['Process', 'EHS', 'Quality']";
+                $datas = "[" .
+                    $operator_mp_categories['qualifications.value'] . "," .
+                    $operator_mp_categories['qualifications_ehs.value'] . "," .
+                    $operator_mp_categories['qualifications_quality.value'] . "," .
+                    "]";
 
                 echo "
-            <a class='ws-stat-container' href='workstation_members.php?q=$ws_id'>
-                <div class='ws-title'>
-                    <p>$ws_name</p>
-                </div>
-                <div class='ws-content'>";
-                    include('includes/components/sm-radarchart.php');
+                <a class='ws-stat-container' href='workstation_members.php?q=$ws_id'>
+                    <div class='ws-title'>
+                        <p>$ws_name</p>
+                    </div>
+                    <div class='ws-content'>
+                 
+                    <img src='./img/Radar2_prev_ui.png' class='col-lg-12'>";
+
                 echo "
-                </div>
-            </a>";
+                    </div>
+                </a>";
             }
             ?>
         </div>
+        <!-- Modal untuk Unggah File -->
+
+    </div>
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">Upload Penilaian Kualifikasi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="uploadForm" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="custom-file mb-3">
+                            <label for="fileToUpload">Pilih file penilaian berupa excel:</label>
+                            <input type="file" name="fileToUpload" id="fileToUpload" class="form-control-file" required>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#downloadTemplate').on('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan mendownload template penilaian kualifikasi.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, download!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Mengunduh...',
+                        html: 'Tunggu sebentar, file sedang diunduh.',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        willOpen: () => {
+                            Swal.showLoading()
+                        }
+                    });
+                    var dept_id = <?php echo $dept_id; ?>;
+                    $.ajax({
+                        url: 'actions/download_template.php',
+                        type: 'GET',
+                        data: { dept: dept_id },
+                        xhrFields: {
+                            responseType: 'blob'
+                        },
+                        success: function (data) {
+                            var a = document.createElement('a');
+                            var url = window.URL.createObjectURL(data);
+                            a.href = url;
+                            a.download = 'Template\t<?php echo $current_dept ?>.xlsx';
+                            document.body.append(a);
+                            a.click();
+                            a.remove();
+                            window.URL.revokeObjectURL(url);
+                            Swal.close();
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                text: 'Gagal mengunduh template.'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('#uploadForm').on('submit', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Mengunggah...',
+                html: 'Tunggu sebentar, file sedang diunggah.',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                willOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+
+            var formData = new FormData(this);
+            $.ajax({
+                url: 'actions/upload_qualifications.php?dept=<?php echo $dept_id; ?>',
+                type: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    response = JSON.parse(response);
+                    Swal.close();
+                    if (response.error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: response.error
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: response.success
+                        });
+                        if (response.results) {
+                            var resultHtml = '<ul>';
+                            for (var i = 0; i < response.results.length; i++) {
+                                resultHtml += '<li>' + response.results[i] + '</li>';
+                            }
+                            resultHtml += '</ul>';
+                            $('#uploadResults').html(resultHtml);
+                        }
+                    }
+                    $('#uploadModal').modal('hide');
+                },
+                error: function () {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Terjadi kesalahan saat mengunggah file.'
+                    });
+                }
+            });
+        });
+    });
+</script>

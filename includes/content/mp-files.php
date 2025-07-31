@@ -44,8 +44,7 @@
                 $q_res = $conn->query("
                     SELECT id, filename, name, description, posted_time, mp_category
                     FROM mp_file_proof
-                    WHERE npk = '".$_GET['q']."'
-                    ");
+                    WHERE npk = '".$_GET['q']."'AND posted_time > DATE_SUB(CURDATE(), INTERVAL 1 YEAR)");
                 $num_results = $q_res->num_rows;
                 if ($num_results == 0) {
                     echo "

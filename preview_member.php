@@ -14,8 +14,7 @@
 <?php
     $npk = $_REQUEST['q'];
     
-    $q_res = $conn->query("
-        SELECT 
+    $q_res = $conn->query("SELECT 
             karyawan.name as name,
             karyawan.npk as npk,
             karyawan.date_joined as date_joined,
@@ -40,14 +39,16 @@
             LEFT JOIN department ON workstations.dept_id = department.id 
             LEFT JOIN roles ON karyawan.role = roles.id
             LEFT JOIN mp_scores on karyawan.npk = mp_scores.npk
-        WHERE karyawan.npk = '".$npk."'"
-    );
+        WHERE karyawan.npk = '".$npk."'");
 	$num_results = $q_res->num_rows;
     if ($num_results == 0) {
         echo "<script>alert('NPK tidak ditemukan');</script>";
     } else {
         $karyawan = $q_res->fetch_assoc();
         $is_foreman = ($karyawan['role_name'] == 'Foreman');
+        $is_admin = ($_SESSION['role'] == 'Admin Produksi');
+        $is_produksi = ($_SESSION['role'] == 'Produksi');
+        $is_qa = ($_SESSION['role'] == 'Quality Assurance');
     }
 ?>
 

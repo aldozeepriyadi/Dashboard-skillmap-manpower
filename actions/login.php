@@ -1,38 +1,37 @@
 <?php
-include("../includes/a_config.php");
-include("../includes/db_connection.php");
+include ("../includes/a_config.php");
+include ("../includes/db_connection.php");
+include "../lib/phpPasswordHashingLib-master/passwordLib.php";
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $status = '';
-    if (isset($_POST['captcha']) || ($_POST['captcha']!="") ) {
-        if(strcasecmp($_SESSION['captcha'], $_POST['captcha']) != 0) {
+    if (isset($_POST['captcha']) || ($_POST['captcha'] != "")) {
+        if (strcasecmp($_SESSION['captcha'], $_POST['captcha']) != 0) {
             echo "<script>alert('Captcha salah. Silakan coba lagi!')</script>";
-            echo "<script>window.location.replace('../login_page.php');</script>";  
+            echo "<script>window.location.replace('../login_page.php');</script>";
+            exit();
         }
     }
 
     $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = hash('sha256', $_POST['password']); // Hash the input password using SHA-256
-    
-    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-    $result = mysqli_query($conn, $sql);
+    $password = $_POST['password']; // Input password
 
-    $stmt = $conn->prepare("SELECT username FROM users WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
+    $stmt = $conn->prepare("SELECT username, password, role FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
-    $stmt->bind_result($res);
+    $stmt->bind_result($res_username, $hashed_password, $res_role);
     $stmt->fetch();
     $stmt->close();
 
-    if ((isset($res) === false)) {
+    if ($res_username && password_verify($password, $hashed_password)) {
+        $_SESSION['username'] = $res_username;
+        $_SESSION['role'] = $res_role;
+        echo "<script>window.location.replace('../index.php');</script>";
+    } else {
         echo "<script>alert('User atau password Anda salah. Silakan coba lagi!')</script>";
-        echo "<script>window.location.replace('../login_page.php');</script>";  
+        echo "<script>window.location.replace('../login_page.php');</script>";
     }
-    
-    $_SESSION['username'] = $res;
-    echo "<script>window.location.replace('../index.php');</script>";  
-    
 }
 ?>

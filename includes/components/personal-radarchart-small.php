@@ -1,74 +1,66 @@
 <?php
 include('includes/a_config.php');
-if (!in_array($member['role'], $roles_with_kao)) $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ']";
-else $labels = "['MSK', 'KT', 'PSSP', 'PNG', '5JQ', 'KAO']";
 
-$data = "[".$member['msk'].",".
-            $member['kt'].",".
-            $member['pssp'].",".
-            $member['png'].",".
-            $member['fivejq'].",";
-if (in_array($member['role'], $roles_with_kao)) $data .= $member['kao'];
-$data .= ']';
+// Jika tidak ada dalam peran dengan KAO, maka gunakan label standar.
+if (!in_array($member['role'], $roles_with_kao)) {
+    $labels = "['Process', 'EHS', 'Quality']";
+} else {
+    $labels = "['Process', 'EHS', 'Quality']"; // Memastikan semua label dalam tanda kutip dan dipisahkan dengan koma
+}
 
-$chart_id = "radar_".$member['npk'];
-echo "
+// Data untuk radar chart
+$data = "[" . $member['process'] . "," . $member['ehs'] . "," . $member['quality'] . "]";
+
+// Membuat ID unik untuk canvas berdasarkan NPK karyawan
+$chart_id = "radar_" . $member['npk'];
+?>
+
 <div>
-    <canvas id=".$chart_id."></canvas>
+    <canvas id="<?php echo $chart_id; ?>"></canvas> <!-- Menyesuaikan ukuran -->
 </div>
+
 <script>
-    ctx_".$chart_id." = document.getElementById('".$chart_id."');
-    var style = getComputedStyle(document.body);
-    var primCol = style.getPropertyValue('--secondary-color');
-    var lightCol = style.getPropertyValue('--main-color');
-    new Chart(ctx_".$chart_id.", {
+    var ctx = document.getElementById('<?php echo $chart_id; ?>').getContext('2d');
+
+    new Chart(ctx, {
         type: 'radar',
         data: {
-        labels: ".$labels.",
-        datasets: [{
-            label: 'score',
-            data: ".$data.",
-            borderWidth: 3
-        }]
+            labels: <?php echo $labels; ?>,
+            datasets: [{
+                label: '', // Menghilangkan label score
+                data: <?php echo $data; ?>,
+                borderWidth: 1,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Warna biru dengan transparansi
+                borderColor: 'rgba(54, 162, 235, 1)', // Warna biru
+                pointBackgroundColor: 'rgba(54, 162, 235, 1)', // Warna biru
+                pointBorderColor: '#fff',
+                pointRadius: 4 // Membesarkan radius titik
+            }]
         },
         options: {
             scales: {
                 r: {
-                    grid: {
-                        color: lightCol
-                    },
                     angleLines: {
-                        color: 'rgba(255,255,255,0)',
-
-                    },
-                    ticks: {
-                        stepSize: 1,
-                        backdropColor: primCol,
-                        color: lightCol,
-                        padding: 0,
                         display: false
                     },
-                    pointLabels: {
-                        color: lightCol,
-                        font: {
-                            size: 7
-                        }
-                    },
                     min: 0,
-                    max: 5
+                    max: 4,
+                    ticks: {
+                        stepSize: 1
+                    }
                 }
             },
             elements: {
                 point: {
-                    radius: 1.5
+                    radius: 2 // Memperbesar radius titik
                 }
             },
             plugins: {
                 legend: {
-                    display: false
+                    display: false // Menyembunyikan legend
                 }
-            }
+            },
+            maintainAspectRatio: false // Menjaga aspek rasio saat mengubah ukuran
         }
     });
-</script>";
-?>
+</script>
